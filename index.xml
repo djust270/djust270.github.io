@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>David Just</title>
+    
+    
+    
+    <link>/</link>
+    <description>Recent content on David Just</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About the author</title>
+      <link>/about/</link>
+      <pubDate>Sun, 17 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Hi there#My name is David Just. I am a technology enthusiast, nerd, father, and and husband. Welcome to my personal blog.
+I have a passion for learning and sharing what I have learned. As a Systems Adminsitrator, I have found a passion for automation and coding, particularly with PowerShell. This blog is a place for me to jot down my thoughts and share interesting things along this journey of life.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Remove Document Redirection Policies over VPN</title>
+      <link>/post/removedocred/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/removedocred/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Document Redirection can be a serious PITA#In today&amp;rsquo;s world of COVID with so many people working from home, more and more organizations are moving to cloud services for file storage. It used to be quite a common practice, at least in my experience to enable folder redirection for users on-prem. Trying to dismantle folder redirection, especially when our users are working remotely can prove to be a challenge.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Sync SharePoint Libraries with PowerShell</title>
+      <link>/post/syncsharepointlib/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/syncsharepointlib/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          The Problem#So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
+There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

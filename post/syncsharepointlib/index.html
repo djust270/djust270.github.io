@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Sync SharePoint Libraries with PowerShell ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="The Problem#So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
+There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/syncsharepointlib/" />
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sync SharePoint Libraries with PowerShell"/>
+<meta name="twitter:description" content="The Problem#So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
+There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit."/>
+
+
+
+<meta property="og:title" content="Sync SharePoint Libraries with PowerShell" />
+<meta property="og:description" content="The Problem#So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
+There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/syncsharepointlib/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-01T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\DavidJust></span>
+    <span class="logo__text"
+      >Invoke-Blog</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Sync SharePoint Libraries with PowerShell</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2021-04-01
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+
+    
+
+    <div class="post-content">
+      
+      <h2 id="the-problem">
+  The Problem
+  <a href="#the-problem" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.</p>
+<p>There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit. We could also try and provide instructions to have our users sync it themselves or we can remote in and do it for them. But say you just have a few users that need a library. Can we just make a simple PS script to sync the library without going through a GPO? Sure we can!</p>
+<h3 id="lets-automate">
+  Lets Automate
+  <a href="#lets-automate" class="h-anchor" aria-hidden="true">#</a>
+</h3>
+<p>First, we need to get the sync link. To do that go to the SharePoint document library you want to sync, and fire up your browser developer tools. Go to Network, Select All. Click the Sync button and grab the URL</p>
+
+  <img src="/img/SP-URL.png"  alt="SP-URL"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Now fire up your favorite script editor.</p>
+<p>We need to set some variables. First we need to get the users email address. We can do this by looking at the OneDrive for Business registry key.</p>
+<p>Then specify the SharePoint Site Name</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$onedrivepath = <span style="color:#e6db74">&#34;registry::HKCU\SOFTWARE\Microsoft\OneDrive\Accounts\Business1&#34;</span>
+</span></span><span style="display:flex;"><span>$email = (Get-itemproperty $onedrivepath).useremail
+</span></span><span style="display:flex;"><span>$email = $email.replace(<span style="color:#e6db74">&#39;@&#39;</span>,<span style="color:#e6db74">&#39;%40&#39;</span>)
+</span></span><span style="display:flex;"><span>$email = $email.replace(<span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;%2E&#39;</span>)
+</span></span><span style="display:flex;"><span>$TenantName = (Get-itemproperty $onedrivepath).displayname
+</span></span><span style="display:flex;"><span>$ODParentFolder = (get-itemproperty $onedrivepath).userfolder | split-path
+</span></span><span style="display:flex;"><span>$site = <span style="color:#75715e">#Name of Sharpoint Site</span>
+</span></span></code></pre></div><p>Next, take the URL you copied earlier. Remove the string starting after sync? up to &amp;siteid. Replace with userEmail=$email store as $URL variable. It should look like this when you are done</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$url = <span style="color:#e6db74">&#34;odopen://sync?userEmail=$email&amp;siteId=%7Bae1e23cf%2Ddf19%2D4812%2D9950%2Debb6df6c782e%7D&amp;webId=%7B60c35ac0%2Db7e0%2D40ae%2D8a4f%2D31cf7f0aea48%7D&amp;webTitle=Carol%20Barnes%20Memorial&amp;webTemplate=64&amp;webLogoUrl=%2Fsites%2FCarolBarnesMemorial%2F%5Fapi%2FGroupService%2FGetGroupImage%3Fid%3D%276bd4e65d%2D3445%2D4738%2Dac3f%2Df18836d977a5%27%26hash%3D637528692054184638&amp;webUrl=https%3A%2F%2Fjustgeeks%2Esharepoint%2Ecom%2Fsites%2FCarolBarnesMemorial&amp;onPrem=0&amp;libraryType=3&amp;listId=%7BF024B7B4%2DD3AA%2D422E%2D85B8%2DC3FE2AEA9F02%7D&amp;listTitle=Documents&amp;scope=OPENLIST&#34;</span>
+</span></span></code></pre></div><p>Last lets just add a little logic to prevent adding the document library if it is already synced.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$TestSyncedLibrary = GCI $ODParentFolder\$tenantname -directory | where name <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;$site*&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($TestSyncedLibrary.Count <span style="color:#f92672">-lt</span> 1)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Start-Process $url
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now just upload the script to Intune and set to run as user, or use your favorite RMM tool. You could also deploy this with a login script or use a scheduled task to run at user login.</p>
+<p>Just a shell of an idea.</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/post/removedocred/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Remove Document Redirection Policies over VPN</span>
+                </a>
+              </span>
+            
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "disqus_s809siVdvF" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+          
+      <div class="copyright">
+        <span>© 2022 Powered by
+          <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a></span>        
+        </div>
+             
+  </div>
+  <div class="footer__right">         
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>
+</svg>
+    </a>
+  </div>   
+</footer>
+ 
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>
