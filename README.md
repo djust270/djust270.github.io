@@ -1,1 +1,1 @@
-# djust270.github.io
+# The repo for davidjust.com
