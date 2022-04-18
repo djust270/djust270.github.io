@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Intune Deploy Software with WinGet ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/intune-install-software-with-winget/" />
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Intune Deploy Software with WinGet"/>
+<meta name="twitter:description" content="Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind."/>
+
+
+
+<meta property="og:title" content="Intune Deploy Software with WinGet" />
+<meta property="og:description" content="Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/intune-install-software-with-winget/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-03-08T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text"
+      >Invoke-Blog</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Intune Deploy Software with WinGet</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          March 8, 2022
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/o365/">#O365</a>&nbsp;
+        
+          <a href="/tags/intune/">#Intune</a>&nbsp;
+        
+          <a href="/tags/winget/">#WinGet</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind. There was a crafty user on Github however that found that WinGet.exe is a proxy application for &ldquo;AppInstallerCLI.exe&rdquo; which can be ran as system. The executable is found under C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_1.17.10271.0_x64__8wekyb3d8bbwe</p>
+
+<p>EDIT: As of writing this, it seems for the latest version of WinGet, WinGet.exe is now located in the DesktopAppInstaller folder, AppInstallerCLI.exe is no longer here. You can call WinGet.exe directly. In my script, I check for both WinGet.exe and AppInstallerCLI.exe</p>
+
+<p>Running this executable directly works just fine under SYSTEM. I created a simple script which when packaged as a Win32App, can be used to deploy any package located in the WinGet public repository automatically to Intune enrolled endpoints.</p>
+
+<p>The script can be found on my Github page here. I also have this prepackaged as an IntuneWin package here. Here is the script:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e">&lt;#	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	</span><span style="color:#e6db74">.NOTES</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	===========================================================================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Created with: 	SAPIEN Technologies, Inc., PowerShell Studio 2021 v5.8.195
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Created on:   	3/7/2022 2:14 PM
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Created by:   	Dave Just
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Organization: 	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Filename: Winget-InstallPackage.ps1   	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	===========================================================================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">.DESCRIPTION</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	Installs any package within the WinGet public repository running as SYSTEM. Can be packaged and deployed as a Win32App in Intune
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	Use as base for any install with WinGet. Simply specify the PackageID and log variables. 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">.PARAMETER</span><span style="color:#75715e"> PackageID
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Specify the WinGet ID. Use WinGet Search &#34;SoftwareName&#34; to locate the PackageID
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    </span><span style="color:#e6db74">.EXAMPLE</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">powershell.exe -exectuionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID &#34;Google.Chrome&#34; -Log &#34;ChromeWingetInstall.log&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	</span><span style="color:#e6db74">.EXAMPLE</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">powershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID &#34;Notepad++.Notepad++&#34; -Log &#34;NotepadPlusPlus.log&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>	$PackageID,
+</span></span><span style="display:flex;"><span>	$Log
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Re-launch as 64bit process (source: https://z-nerd.com/blog/2020/03/31-intune-win32-apps-powershell-script-installer/)</span>
+</span></span><span style="display:flex;"><span>$argsString = <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">If</span> ($ENV:PROCESSOR_ARCHITEW6432 <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;AMD64&#34;</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">Try</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">foreach</span> ($k <span style="color:#66d9ef">in</span> $MyInvocation.BoundParameters.keys)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">switch</span> ($MyInvocation.BoundParameters[$k].GetType().Name)
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				<span style="color:#e6db74">&#34;SwitchParameter&#34;</span> { <span style="color:#66d9ef">if</span> ($MyInvocation.BoundParameters[$k].IsPresent) { $argsString += <span style="color:#e6db74">&#34;-$k &#34;</span> } }
+</span></span><span style="display:flex;"><span>				<span style="color:#e6db74">&#34;String&#34;</span>          { $argsString += <span style="color:#e6db74">&#34;-$k </span><span style="color:#ae81ff">`&#34;</span>$($MyInvocation.BoundParameters[$k])<span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74"> &#34;</span> }
+</span></span><span style="display:flex;"><span>				<span style="color:#e6db74">&#34;Int32&#34;</span>           { $argsString += <span style="color:#e6db74">&#34;-$k </span>$($MyInvocation.BoundParameters[$k])<span style="color:#e6db74"> &#34;</span> }
+</span></span><span style="display:flex;"><span>				<span style="color:#e6db74">&#34;Boolean&#34;</span>         { $argsString += <span style="color:#e6db74">&#34;-$k </span><span style="color:#ae81ff">`$</span>$($MyInvocation.BoundParameters[$k])<span style="color:#e6db74"> &#34;</span> }
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		Start-Process -FilePath <span style="color:#e6db74">&#34;$ENV:WINDIR\SysNative\WindowsPowershell\v1.0\PowerShell.exe&#34;</span> -ArgumentList <span style="color:#e6db74">&#34;-File </span><span style="color:#ae81ff">`&#34;</span>$($PSScriptRoot)<span style="color:#e6db74">\Winget-InstallPackage.ps1</span><span style="color:#ae81ff">`&#34;</span><span style="color:#e6db74"> </span>$($argsString)<span style="color:#e6db74">&#34;</span> -Wait -NoNewWindow
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">Catch</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">Throw</span> <span style="color:#e6db74">&#34;Failed to start 64-bit PowerShell&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	Exit
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#region HelperFunctions</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> InstallWingetAsSystem <span style="color:#75715e"># Install WinGet as logged on user by creating a scheduled task</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	$script = <span style="color:#e6db74">@&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">$releases_url = &#34;https://api.github.com/repos/microsoft/winget-cli/releases/latest&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">$releases = Invoke-RestMethod -uri &#34;$($releases_url)&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">$latestRelease = $releases.assets | Where { $_.browser_download_url.EndsWith(&#34;msixbundle&#34;) } | Select -First 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Add-AppxPackage -Path &#39;https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Add-AppxPackage -Path $latestRelease.browser_download_url
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;@</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (!(test-path <span style="color:#e6db74">&#34;$env:systemdrive\automation&#34;</span>)) { mkdir <span style="color:#e6db74">&#34;$env:systemdrive\automation&#34;</span> }
+</span></span><span style="display:flex;"><span>	$script | out-file <span style="color:#e6db74">&#34;$env:systemdrive\automation\script.ps1&#34;</span>
+</span></span><span style="display:flex;"><span>	$action = New-ScheduledTaskAction -Execute <span style="color:#e6db74">&#34;powershell.exe&#34;</span> -Argument <span style="color:#e6db74">&#34;-executionpolicy bypass -WindowStyle minimized -file %HOMEDRIVE%\automation\script.ps1&#34;</span>
+</span></span><span style="display:flex;"><span>	$trigger = New-ScheduledTaskTrigger -AtLogOn
+</span></span><span style="display:flex;"><span>	$principal = New-ScheduledTaskPrincipal -UserId (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -expand UserName)
+</span></span><span style="display:flex;"><span>	$task = New-ScheduledTask -Action $action -Trigger $trigger -Principal $principal
+</span></span><span style="display:flex;"><span>	Register-ScheduledTask RunScript -InputObject $task
+</span></span><span style="display:flex;"><span>	Start-ScheduledTask -TaskName RunScript
+</span></span><span style="display:flex;"><span>	Start-Sleep -Seconds 120
+</span></span><span style="display:flex;"><span>	Unregister-ScheduledTask -TaskName RunScript -Confirm<span style="color:#960050;background-color:#1e0010">:</span>$false
+</span></span><span style="display:flex;"><span>	Remove-Item C:\automation\script.ps1
+</span></span><span style="display:flex;"><span>    $Global:Winget = gci <span style="color:#e6db74">&#34;$env:programfiles\WindowsApps&#34;</span> -Recurse <span style="color:#f92672">-File</span> | where { $_.name <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;AppInstallerCLI.exe&#34;</span> <span style="color:#f92672">-or</span> $_.name <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;Winget.exe&#34;</span> } | select -ExpandProperty fullname
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Write-Log($message) <span style="color:#75715e">#Log script messages to temp directory</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	$LogMessage = ((Get-Date -Format <span style="color:#e6db74">&#34;MM-dd-yy HH:MM:ss &#34;</span>) + $message)
+</span></span><span style="display:flex;"><span>	Out-File -InputObject $LogMessage -FilePath <span style="color:#e6db74">&#34;$Env:Temp\$Log&#34;</span> -Append -Encoding utf8
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> WingetTempDownload <span style="color:#75715e"># Download WinGet from blob storage if unable to install</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	$WebClient = New-Object System.Net.WebClient
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$WebClient.DownloadFile(<span style="color:#e6db74">&#39;https://djstorage2.blob.core.windows.net/scriptsupport/WinGet.zip&#39;</span>, <span style="color:#e6db74">&#34;$env:Temp\WinGet.zip&#34;</span>)
+</span></span><span style="display:flex;"><span>		$WebClient.Dispose()
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">Catch</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		Write-Log $error
+</span></span><span style="display:flex;"><span>		exit 1
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		mkdir <span style="color:#e6db74">&#34;$env:TEMP\WingetTemp&#34;</span> -Force
+</span></span><span style="display:flex;"><span>		Expand-Archive <span style="color:#e6db74">&#34;$env:TEMP\WinGet.zip&#34;</span> -destination <span style="color:#e6db74">&#34;$Env:Temp\WingetTemp&#34;</span> -Force -ErrorAction <span style="color:#e6db74">&#39;Stop&#39;</span>
+</span></span><span style="display:flex;"><span>		$global:Winget = <span style="color:#e6db74">&#34;$Env:TEMP\WinGetTemp\Winget\AppInstallerCLI.exe&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">Catch</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		Write-Log $Error
+</span></span><span style="display:flex;"><span>		exit 1
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>	$WebClient.Dispose()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> WingetRun {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>	$PackageID,
+</span></span><span style="display:flex;"><span>	$RunType
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>	&amp; $Winget $RunType --id $PackageID --source Winget --silent --accept-package-agreements --accept-source-agreements 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Install-VisualC {
+</span></span><span style="display:flex;"><span>$url = <span style="color:#e6db74">&#39;https://aka.ms/vs/17/release/vc_redist.x64.exe&#39;</span>
+</span></span><span style="display:flex;"><span>$WebClient = New-Object System.Net.WebClient
+</span></span><span style="display:flex;"><span>$WebClient.DownloadFile(<span style="color:#e6db74">&#39;https://aka.ms/vs/17/release/vc_redist.x64.exe&#39;</span>, <span style="color:#e6db74">&#34;$env:Temp\vc_redist.x64.exe&#34;</span>)
+</span></span><span style="display:flex;"><span>$WebClient.Dispose()
+</span></span><span style="display:flex;"><span>start-process <span style="color:#e6db74">&#34;$env:temp\vc_redist.x64.exe&#34;</span> -argumentlist <span style="color:#e6db74">&#34;/q /norestart&#34;</span> -Wait
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-RegUninstallKey
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">[string]</span>$DisplayName
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>	$ErrorActionPreference = <span style="color:#e6db74">&#39;Continue&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">#$UserSID = (New-Object -ComObject Microsoft.DiskQuota).TranslateLogonNameToSID((Get-CimInstance -Class Win32_ComputerSystem).Username)</span>
+</span></span><span style="display:flex;"><span>	$uninstallKeys = <span style="color:#e6db74">&#34;registry::HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall&#34;</span>, <span style="color:#e6db74">&#34;registry::HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall&#34;</span>
+</span></span><span style="display:flex;"><span>	$softwareTable = @()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">foreach</span> ($key <span style="color:#66d9ef">in</span> $uninstallKeys)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable += Get-Childitem $key | Get-ItemProperty | where displayname | Sort-Object -Property displayname
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ($DisplayName)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable | where displayname <span style="color:#f92672">-Like</span> <span style="color:#e6db74">&#34;*$DisplayName*&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable | Sort-Object -Property displayname -Unique
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endregion HelperFunctions</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#region Script</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$VisualC = Get-RegUninstallKey -DisplayName <span style="color:#e6db74">&#34;Microsoft Visual C++ 2015-2022 Redistributable (x64)&#34;</span>
+</span></span><span style="display:flex;"><span>$loggedOnUser = (gcim win32_computersystem).username
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get path for Winget executible</span>
+</span></span><span style="display:flex;"><span>$Winget = gci <span style="color:#e6db74">&#34;$env:ProgramFiles\WindowsApps&#34;</span> -Recurse <span style="color:#f92672">-File</span> | where { $_.name <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;AppInstallerCLI.exe&#34;</span> <span style="color:#f92672">-or</span> $_.name <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;Winget.exe&#34;</span> } | select -ExpandProperty fullname
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If there are multiple versions, select latest</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($Winget.count <span style="color:#f92672">-gt</span> 1) { $Winget = $Winget[-1] }
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If Visual C++ Redist. not installed, install it</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (!$VisualC){ 
+</span></span><span style="display:flex;"><span>Write-Log -message <span style="color:#e6db74">&#34;Visual C++ X64 not found. Attempting to install&#34;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>	Install-VisualC
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Catch</span> <span style="color:#66d9ef">[System.InvalidOperationException]</span>{
+</span></span><span style="display:flex;"><span>Write-Log -message <span style="color:#e6db74">&#34;Error installing visual c++ redistributable. Attempting install once more&#34;</span>
+</span></span><span style="display:flex;"><span>Start-Sleep -Seconds 5
+</span></span><span style="display:flex;"><span>Install-VisualC
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Catch</span> {
+</span></span><span style="display:flex;"><span>Write-Log -message <span style="color:#e6db74">&#34;Failed to install visual c++ redistributable!&#34;</span>
+</span></span><span style="display:flex;"><span>Write-Log -message $_
+</span></span><span style="display:flex;"><span>exit 1
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$VisualC = Get-RegUninstallKey -DisplayName <span style="color:#e6db74">&#34;Microsoft Visual C++ 2015-2022 Redistributable (x64)&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (!$VisualC){Write-Log -message <span style="color:#e6db74">&#34;Visual C++ Redistributable not found!&#34;</span> ; exit 1}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {Write-Log -message <span style="color:#e6db74">&#34;Successfully installed Microsoft Visual C++ 2015-2022 Redistributable (x64)&#34;</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If Winget is not found, attempt to install it, or download copy from baselob storage</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (!$Winget)
+</span></span><span style="display:flex;"><span>{ 
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ($loggedOnUser)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		Write-Log -message <span style="color:#e6db74">&#34;Attempting to install Winget as System under </span>$($loggedOnUser)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>		InstallWingetAsSystem
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># If more than one version of Winget, select the latest</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> ($Winget.count <span style="color:#f92672">-gt</span> 1) { $Winget = $Winget[-1] }
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># If WinGet is not found, download copy from Blob storage</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> (!$Winget){Write-Log -message <span style="color:#e6db74">&#34;Downloading winget from blob storage&#34;</span> ;  WingetTempDownload }
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			Write-Log -message <span style="color:#e6db74">&#34;Winget varibale </span>$($winget)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>            $Install = WingetRun -RunType install -PackageID $PackageID
+</span></span><span style="display:flex;"><span>			Write-Log $Install
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">Catch</span>
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			Write-Log $error[0]
+</span></span><span style="display:flex;"><span>			exit 1
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>			Write-Log <span style="color:#e6db74">&#34;Winget not found, attempting to download now to </span>$($env:TEMP)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>			WingetTempDownload
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				$Install = WingetRun -RunType install -PackageID $PackageID
+</span></span><span style="display:flex;"><span>				Write-Log $Install
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">Catch</span>
+</span></span><span style="display:flex;"><span>			{
+</span></span><span style="display:flex;"><span>				Write-Log $error
+</span></span><span style="display:flex;"><span>				exit 1
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">Catch</span>
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			Write-Log <span style="color:#e6db74">&#34;Unable to initialize Winget. Exiting&#34;</span>
+</span></span><span style="display:flex;"><span>			Write-Output $Error
+</span></span><span style="display:flex;"><span>			exit 1
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Write-Log <span style="color:#e6db74">&#34;Winget found at </span>$($Winget)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>	$Install = WingetRun -RunType install -PackageID $PackageID
+</span></span><span style="display:flex;"><span>	Write-Log $Install
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endregion</span></span></span></code></pre></div>
+<p>Upload the package to Intune as a Win32App. For the install command, enter the following. Edit the PackageID and Log parameters as needed. Use the exact WinGet package ID.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>powershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID <span style="color:#e6db74">&#34;Google.Chrome&#34;</span> -Log <span style="color:#e6db74">&#34;ChromeWingetInstall.log&#34;</span></span></span></code></pre></div>
+<p>To find the ID, open PowerShell or CMD and run &ldquo;Winget Search SoftwareName&rdquo;. In the output you will see the ID field.</p>
+
+
+  <img src="/img/winget1.png"  class="center"  style="border-radius: 8px;"  />
+
+
+
+<p>The uninstall command is going to be dependent on the particular software. You can usually find the uninstall command in the uninstall registry key. You can use this PowerShell function I wrote to grab the uninstall string. Look for a quiet uninstall parameter, you may need to do some searching.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-RegUninstallKey
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">[string]</span>$DisplayName
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>	$ErrorActionPreference = <span style="color:#e6db74">&#39;Continue&#39;</span>
+</span></span><span style="display:flex;"><span>	$uninstallKeys = <span style="color:#e6db74">&#34;registry::HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall&#34;</span>, <span style="color:#e6db74">&#34;registry::HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall&#34;</span>
+</span></span><span style="display:flex;"><span>	$softwareTable =@()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">foreach</span> ($key <span style="color:#66d9ef">in</span> $uninstallKeys)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable += Get-Childitem $key | Get-ItemProperty | where displayname | Sort-Object -Property displayname
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ($DisplayName)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable | where displayname <span style="color:#f92672">-Like</span> <span style="color:#e6db74">&#34;*$DisplayName*&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable | Sort-Object -Property displayname -Unique
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>And running this for Google Chrome we get the Msiexec uninstall command. Simply add /qn /norestart at the end of the command and enter that into Intune as the Uninstall command.</p>
+
+<p>Or if you don&rsquo;t care really about uninstalling, you can just type anything like &ldquo;Uninstall&rdquo;.</p>
+
+
+  <img src="/img/winget2.png"  class="center"  style="border-radius: 8px;"  />
+
+
+
+<p>Finally for the detection script, I like to use the same Get-RegUinstallKey function to look for the presence of an uninstall key for the software to determine if it is installed. You can find the detection script here and Ill also include it below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e">&lt;#	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	</span><span style="color:#e6db74">.NOTES</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	===========================================================================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Created with: 	SAPIEN Technologies, Inc., PowerShell Studio 2021 v5.8.195
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Created on:   	3/7/2022 2:14 PM
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Created by:   	Dave Just
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Organization: 	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	 Filename: WingetInstallDetection.ps1   	
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	===========================================================================
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">.DESCRIPTION</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	Simple Win32App detection script. Detects the presence of an uninstall key matching the displayname of the variable $SoftwareName. 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	If a key is matched, return to Intune that the software is installed. 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">.EXAMPLE</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">$SoftwareName = &#39;Chrome&#39; # Search for an uninstall key with Displayname &#39;Chrome&#39; for Google Chrome
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Edit the software displayname below</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$SoftwareName = <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-RegUninstallKey
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">[string]</span>$DisplayName
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>	$ErrorActionPreference = <span style="color:#e6db74">&#39;Continue&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">#$UserSID = (New-Object -ComObject Microsoft.DiskQuota).TranslateLogonNameToSID((Get-CimInstance -Class Win32_ComputerSystem).Username)</span>
+</span></span><span style="display:flex;"><span>	$uninstallKeys = <span style="color:#e6db74">&#34;registry::HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall&#34;</span>, <span style="color:#e6db74">&#34;registry::HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall&#34;</span>
+</span></span><span style="display:flex;"><span>	$softwareTable = @()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">foreach</span> ($key <span style="color:#66d9ef">in</span> $uninstallKeys)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable += Get-Childitem $key | Get-ItemProperty | where displayname | Sort-Object -Property displayname
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ($DisplayName)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable | where displayname <span style="color:#f92672">-Like</span> <span style="color:#e6db74">&#34;*$DisplayName*&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable | Sort-Object -Property displayname -Unique
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$UninstallKey = Get-RegUninstallKey -DisplayName $SoftwareName
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($UninstallKey)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Write-Output <span style="color:#e6db74">&#34;</span>$($SoftwareName)<span style="color:#e6db74"> is installed&#34;</span>
+</span></span><span style="display:flex;"><span>	exit 0
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	exit 1
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>And that&rsquo;s it! Now you don&rsquo;t need to worry about uploading the latest installer for commonly installed software. WinGet will always install the latest version.</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/post/intune-for-macos-configure-macos-vm/">
+                  <span class="button__text">Configuring Intune for macOS part 1 - Setup a macOS VM</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+          
+      <div class="copyright">
+        <span>© 2022 
+        </div>
+             
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

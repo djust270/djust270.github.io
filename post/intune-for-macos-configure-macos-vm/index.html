@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Configuring Intune for macOS part 1 - Setup a macOS VM ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Premise
+One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing?"
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/intune-for-macos-configure-macos-vm/" />
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Configuring Intune for macOS part 1 - Setup a macOS VM"/>
+<meta name="twitter:description" content="Premise
+One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing?"/>
+
+
+
+<meta property="og:title" content="Configuring Intune for macOS part 1 - Setup a macOS VM" />
+<meta property="og:description" content="Premise
+One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/intune-for-macos-configure-macos-vm/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-02T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text"
+      >Invoke-Blog</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Configuring Intune for macOS part 1 - Setup a macOS VM</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          January 2, 2022
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/o365/">#O365</a>&nbsp;
+        
+          <a href="/tags/intune/">#Intune</a>&nbsp;
+        
+          <a href="/tags/macos/">#macOS</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>Premise</p>
+
+<p>One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing? I feel Intune has matured enough to fully manage the MDM needs for Apple devices so lets dive into getting started!</p>
+
+<p>Getting Started - Setup a macOS VM</p>
+
+<p>My first hurdle to overcome was the need for a test environment. I like to fully test configuration scenarios before deploying anything to production. I however do not own any Apple hardware, and I did not want to shell out ~$600 for a current mac mini. In comes the OSX-KVM project on Github. This project makes it super simple to setup a macOS VM. All you will need is a PC with either an Intel or AMD processor that supports AVX2 and a compatible Linux distribution. I have personally tested this on both Pop!_OS 21.10 on my PC and Ubuntu 21.10 on my home ESXi server with Ubuntu 21.10 using nested virtualization. You could even set this up inside the live boot environment of Ubuntu/pop!_OS without even needing to install the OS on your system, though you would want a large enough flash drive to store all the files, at least 64GB.</p>
+
+<p>If you only have one PC and you don&rsquo;t want to do a traditional dual boot, I recommend just picking up an additional 120GB SATA SSD. Install your Linux distro to that and simply use your EFI&rsquo;s boot menu to select which hard drive to boot off of, either Windows or Linux. Just be careful when installing your Linux distro to not overwrite your Windows installation! To be on the safe side, just unplug your current boot hard drive with Windows before installing Linux.</p>
+
+<p>For this demo, I will be installing Ubuntu 21.10 os ESXi. Create a new VM, Select Linux as the guest OS and Ubuntu Linux 64bit as the OS version. Doing this will automate the vmware tools installation.</p>
+
+<p>First, download the Ubuntu installation ISO. Once downloaded, go ahead and upload the ISO to your ESXi datastore. Select storage, the data store, click &ldquo;Datastore Browser&rdquo;, then select upload.</p>
+
+
+  <img src="/img/macosvm1.png"  class="center"  style="border-radius: 8px;"  />
+
+
+
+<p>On the settings page, I recommend giving the VM at 6 cpus and 12GB of ram and 120GB of storage. You could probably skirt by with less but just be aware your macOS VM will be very slow. Expand the CD/DVD options, and connect your Ubuntu ISO</p>
+
+
+  <img src="/img/macosvm1.png"  class="center"  style="border-radius: 8px;"  />
+
+
+
+<p>Before you power on the VM, edit the settings. Expand CPU, and enable Hardware virtualization</p>
+
+<p>Under VM Options, expand Boot Options. Change the firmware setting to EFI. Now, go ahead and boot the VM. Select Install Ubuntu, and just continue through the prompts with default settings. The installation is fairly quick.</p>
+
+<p>Once you are logged into the desktop, right click on the desktop and select desktop settings. Change the resolution to 1920x1080 (or whatever you prefer).</p>
+
+<p>Go ahead and install any OS updates and reboot. Open up the OSX-KVM project on GitHub and follow the instructions there for setting up your VM.</p>
+
+<p>Here are a few tips that are not explained in the github readme:</p>
+
+<ul>
+<li><p>The virtual machine defaults to 3GB of ram which really is not enough for macOS. You can add additonal ram by editing the. Run the following command to open the OpenCore-Boot script in gedit</p>
+<pre tabindex="0"><code>gedit ~/OSX-KVM/OpenCore-Boot.sh</code></pre></li>
+
+<li><p>Edit the line ALLOCATED_RAM. I recommend setting this to 8GB (8192 MiB)</p></li>
+
+<li><p>Once you have the VM booted and and logged in, I strongly suggest disabling the sleep / screen blank option in macOS power settings.</p></li>
+</ul>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/post/intune-install-software-with-winget/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Intune Deploy Software with WinGet</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="/post/use-powershell-to-get-the-weather-report/">
+                  <span class="button__text">PowerShell Project - Get the Weather report</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+          
+      <div class="copyright">
+        <span>© 2022 
+        </div>
+             
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

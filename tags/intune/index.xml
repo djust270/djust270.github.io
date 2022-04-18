@@ -1,39 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>David Just</title>
+    <title>Intune on David Just</title>
     
     
     
-    <link>/</link>
-    <description>Recent content on David Just</description>
+    <link>/tags/intune/</link>
+    <description>Recent content in Intune on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 08 Mar 2022 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/intune/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>About the author</title>
-      <link>/about/</link>
-      <pubDate>Sun, 17 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          Hi there My name is David Just. I am a technology enthusiast, nerd, father, and and husband. Welcome to my personal blog.
-I have a passion for learning and sharing what I have learned. As a Systems Adminsitrator, I have found a passion for automation and coding, particularly with PowerShell. This blog is a place for me to jot down my thoughts and share interesting things along this journey of life.
-          
-        
-        </description>
-    </item>
     
     <item>
       <title>Intune Deploy Software with WinGet</title>
@@ -71,27 +50,6 @@ I have a passion for learning and sharing what I have learned. As a Systems Admi
         
           Premise
 One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing?
-          
-        
-        </description>
-    </item>
-    
-    <item>
-      <title>PowerShell Project - Get the Weather report</title>
-      <link>/post/use-powershell-to-get-the-weather-report/</link>
-      <pubDate>Tue, 26 Oct 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/post/use-powershell-to-get-the-weather-report/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
-I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast.
           
         
         </description>

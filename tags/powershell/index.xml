@@ -1,80 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>David Just</title>
+    <title>PowerShell on David Just</title>
     
     
     
-    <link>/</link>
-    <description>Recent content on David Just</description>
+    <link>/tags/powershell/</link>
+    <description>Recent content in PowerShell on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Oct 2021 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>About the author</title>
-      <link>/about/</link>
-      <pubDate>Sun, 17 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          Hi there My name is David Just. I am a technology enthusiast, nerd, father, and and husband. Welcome to my personal blog.
-I have a passion for learning and sharing what I have learned. As a Systems Adminsitrator, I have found a passion for automation and coding, particularly with PowerShell. This blog is a place for me to jot down my thoughts and share interesting things along this journey of life.
-          
-        
-        </description>
-    </item>
-    
-    <item>
-      <title>Intune Deploy Software with WinGet</title>
-      <link>/post/intune-install-software-with-winget/</link>
-      <pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/post/intune-install-software-with-winget/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind.
-          
-        
-        </description>
-    </item>
-    
-    <item>
-      <title>Configuring Intune for macOS part 1 - Setup a macOS VM</title>
-      <link>/post/intune-for-macos-configure-macos-vm/</link>
-      <pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/post/intune-for-macos-configure-macos-vm/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          Premise
-One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing?
-          
-        
-        </description>
-    </item>
     
     <item>
       <title>PowerShell Project - Get the Weather report</title>

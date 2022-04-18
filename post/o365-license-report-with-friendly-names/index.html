@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Export O365 User License Report with friendly names ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="I was recently tasked with exporting a report for a client that detailed all users, their location and license assignment in Office 365. I knew the best way to get the job done was by writing a PowerShell script.
+I did a quick search online and found lots of examples, however all the examples I found were using the deprecated &amp;ldquo;Microsoft Online&amp;rdquo; / MSOL PS module. I wanted to use the Azure AD module instead so I played around a bit to get the output I wanted."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/o365-license-report-with-friendly-names/" />
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Export O365 User License Report with friendly names"/>
+<meta name="twitter:description" content="I was recently tasked with exporting a report for a client that detailed all users, their location and license assignment in Office 365. I knew the best way to get the job done was by writing a PowerShell script.
+I did a quick search online and found lots of examples, however all the examples I found were using the deprecated &ldquo;Microsoft Online&rdquo; / MSOL PS module. I wanted to use the Azure AD module instead so I played around a bit to get the output I wanted."/>
+
+
+
+<meta property="og:title" content="Export O365 User License Report with friendly names" />
+<meta property="og:description" content="I was recently tasked with exporting a report for a client that detailed all users, their location and license assignment in Office 365. I knew the best way to get the job done was by writing a PowerShell script.
+I did a quick search online and found lots of examples, however all the examples I found were using the deprecated &ldquo;Microsoft Online&rdquo; / MSOL PS module. I wanted to use the Azure AD module instead so I played around a bit to get the output I wanted." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/o365-license-report-with-friendly-names/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-11T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text"
+      >Invoke-Blog</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Export O365 User License Report with friendly names</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          April 11, 2021
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/powershell/">#PowerShell</a>&nbsp;
+        
+          <a href="/tags/intune/">#Intune</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>I was recently tasked with exporting a report for a client that detailed all users, their location and license assignment in Office 365. I knew the best way to get the job done was by writing a PowerShell script.</p>
+
+<p>I did a quick search online and found lots of examples, however all the examples I found were using the deprecated &ldquo;Microsoft Online&rdquo; / MSOL PS module. I wanted to use the Azure AD module instead so I played around a bit to get the output I wanted.</p>
+
+<p>The boss also wanted the export to have the &ldquo;Friendly&rdquo; license names not the esoteric sku names that Microsoft uses on the backed. I found this handy article here that lists sku names with their current product names. So a quick hashtable will take care of that for us.</p>
+
+<p>First problem, how do we come up with what licenses are assigned to each user? First I connected to AzureAD then ran</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-AzureADUser | Get-Member -membertype Properties</span></span></code></pre></div>
+<p>One of the first properties I noticed was &ldquo;Assigned Licenses&rdquo;, so I thought great! Lets try outputting that. Next command I ran:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-AzureADUser -objectid dave@justgeeks.co | select userprincipalname,assignedlicenses | Format-Table -AutoSize -Wrap</span></span></code></pre></div>
+<p>To my dismay, this was the output:</p>
+
+
+  <img src="/img/Az-Lic1.png"  class="center"  style="border-radius: 8px;"  />
+
+
+
+<p>Not exactly what I had in mind. Ok, we need to do a little conversion. I found this cmdlet &ldquo;Get-AzureADSubscribedSku&rdquo; which gives this output:</p>
+
+
+  <img src="/img/Az-Lic2.png"  class="center"  style="border-radius: 8px;"  />
+
+
+
+<p>Ok cool, I can work with that. Looks like the ObjectID is TenantID_SkuID. SkuPartNumber is the actual Sku name.</p>
+
+<p>Here is the script I came up with</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Get Tenant ID</span>
+</span></span><span style="display:flex;"><span>$TenantID = Get-AzureADTenantDetail | select -ExpandProperty ObjectID
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get list of licensed users</span>
+</span></span><span style="display:flex;"><span>$users = Get-AzureADUser -all $true | where assignedlicenses <span style="color:#f92672">-ne</span> $null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Hash table to convert sku names to freindly license names</span>
+</span></span><span style="display:flex;"><span>$skus = @{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;AAD_PREMIUM&#34;</span> 						= <span style="color:#e6db74">&#34;AZURE ACTIVE DIRECTORY PREMIUM P1&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;AAD_PREMIUM_P2&#34;</span>		    		= <span style="color:#e6db74">&#34;Azure Active Directory Premium P2&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;INTUNE_A&#34;</span>				    		= <span style="color:#e6db74">&#34;Intune&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;O365_BUSINESS_ESSENTIALS&#34;</span>  		= <span style="color:#e6db74">&#34;Microsoft 365 Business Basic&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;SPE_E3&#34;</span>				    		= <span style="color:#e6db74">&#34;Microsoft 365 E3&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;SPE_E5&#34;</span>				    		= <span style="color:#e6db74">&#34;Microsoft 365 E5&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;THREAT_INTELLIGENCE&#34;</span>	    		= <span style="color:#e6db74">&#34;Microsoft Defender for Office 365 (Plan 2)&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;POWERAPPS_VIRAL&#34;</span>		    		= <span style="color:#e6db74">&#34;Microsoft Power Apps Plan 2 Trial&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;FLOW_FREE&#34;</span>				    		= <span style="color:#e6db74">&#34;Microsoft Power Automate Free&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;TEAMS_EXPLORATORY&#34;</span>		    		= <span style="color:#e6db74">&#34;Microsoft Teams Exploratory&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;DESKLESSPACK&#34;</span>			    		= <span style="color:#e6db74">&#34;Office 365 F3&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;POWER_BI_STANDARD&#34;</span>		    		= <span style="color:#e6db74">&#34;Power BI (free)&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;PROJECTPROFESSIONAL&#34;</span>	    		= <span style="color:#e6db74">&#34;Project Plan 3&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;VISIOCLIENT&#34;</span>			    		= <span style="color:#e6db74">&#34;Visio Plan 2&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;WINDOWS_STORE&#34;</span>			    		= <span style="color:#e6db74">&#34;WINDOWS STORE FOR BUSINESS&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;SHAREPOINTSTORAGE&#34;</span>		    		= <span style="color:#e6db74">&#34;SharePoint Online Storage&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;RIGHTSMANAGEMENT&#34;</span> 					= <span style="color:#e6db74">&#34;AZURE INFORMATION PROTECTION PLAN 1&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;RMSBASIC&#34;</span>				   		 	= <span style="color:#e6db74">&#34;Rights Management Basic&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;MICROSOFT_BUSINESS_CENTER&#34;</span> 		= <span style="color:#e6db74">&#34;Microsoft Business Center&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;MICROSOFT 365 APPS FOR BUSINESS&#34;</span> 	= <span style="color:#e6db74">&#34;SMB_BUSINESS&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$i = 1
+</span></span><span style="display:flex;"><span>$UserLicenseList = <span style="color:#66d9ef">[System.Collections.Generic.List[PsObject]]</span>::new()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($user <span style="color:#66d9ef">in</span> $users)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Write-progress -activity <span style="color:#e6db74">&#34;Processing&#34;</span> -Status <span style="color:#e6db74">&#34;Working on: </span>$($user.displayname)<span style="color:#e6db74">&#34;</span> -PercentComplete (($i / $users.count) * 100)
+</span></span><span style="display:flex;"><span>	$licenses = ($user).assignedlicenses.skuid | <span style="color:#66d9ef">foreach</span> { (Get-AzureADSubscribedSku -ObjectID ($($TenantID) + <span style="color:#e6db74">&#39;_&#39;</span> + $_)).skupartnumber } | <span style="color:#66d9ef">foreach</span> {
+</span></span><span style="display:flex;"><span>		$skus[$_]
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	$UserLicenseList.add(<span style="color:#66d9ef">[PSCustomObject]</span>@{
+</span></span><span style="display:flex;"><span>			DisplayName = $user.displayname
+</span></span><span style="display:flex;"><span>			UserPrincipalName = $user.UserPrincipalName
+</span></span><span style="display:flex;"><span>			StreetAddress = $user.StreetAddress
+</span></span><span style="display:flex;"><span>			licenses    = $licenses -join <span style="color:#e6db74">&#39;,&#39;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>		})
+</span></span><span style="display:flex;"><span>	$i++
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Let&rsquo;s break it down.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Get Tenant ID</span>
+</span></span><span style="display:flex;"><span>$TenantID = Get-AzureADTenantDetail | select -ExpandProperty ObjectID
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Get list of licensed users</span>
+</span></span><span style="display:flex;"><span>$users = Get-AzureADUser -all $true | where assignedlicenses <span style="color:#f92672">-ne</span> $null</span></span></code></pre></div>
+<p>First, I get the tenant ID since I know that the tenant ID is part of the AzureADSubscribedSku object ID. Then I get the list of licensed users.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Hash table to convert sku names to freindly license names</span>
+</span></span><span style="display:flex;"><span>$skus = @{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;AAD_PREMIUM&#34;</span> 						= <span style="color:#e6db74">&#34;AZURE ACTIVE DIRECTORY PREMIUM P1&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;AAD_PREMIUM_P2&#34;</span>		    		= <span style="color:#e6db74">&#34;Azure Active Directory Premium P2&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;INTUNE_A&#34;</span>				    		= <span style="color:#e6db74">&#34;Intune&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;O365_BUSINESS_ESSENTIALS&#34;</span>  		= <span style="color:#e6db74">&#34;Microsoft 365 Business Basic&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;SPE_E3&#34;</span>				    		= <span style="color:#e6db74">&#34;Microsoft 365 E3&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;SPE_E5&#34;</span>				    		= <span style="color:#e6db74">&#34;Microsoft 365 E5&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;THREAT_INTELLIGENCE&#34;</span>	    		= <span style="color:#e6db74">&#34;Microsoft Defender for Office 365 (Plan 2)&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;POWERAPPS_VIRAL&#34;</span>		    		= <span style="color:#e6db74">&#34;Microsoft Power Apps Plan 2 Trial&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;FLOW_FREE&#34;</span>				    		= <span style="color:#e6db74">&#34;Microsoft Power Automate Free&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;TEAMS_EXPLORATORY&#34;</span>		    		= <span style="color:#e6db74">&#34;Microsoft Teams Exploratory&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;DESKLESSPACK&#34;</span>			    		= <span style="color:#e6db74">&#34;Office 365 F3&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;POWER_BI_STANDARD&#34;</span>		    		= <span style="color:#e6db74">&#34;Power BI (free)&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;PROJECTPROFESSIONAL&#34;</span>	    		= <span style="color:#e6db74">&#34;Project Plan 3&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;VISIOCLIENT&#34;</span>			    		= <span style="color:#e6db74">&#34;Visio Plan 2&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;WINDOWS_STORE&#34;</span>			    		= <span style="color:#e6db74">&#34;WINDOWS STORE FOR BUSINESS&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;SHAREPOINTSTORAGE&#34;</span>		    		= <span style="color:#e6db74">&#34;SharePoint Online Storage&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;RIGHTSMANAGEMENT&#34;</span> 					= <span style="color:#e6db74">&#34;AZURE INFORMATION PROTECTION PLAN 1&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;RMSBASIC&#34;</span>				   		 	= <span style="color:#e6db74">&#34;Rights Management Basic&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;MICROSOFT_BUSINESS_CENTER&#34;</span> 		= <span style="color:#e6db74">&#34;Microsoft Business Center&#34;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;MICROSOFT 365 APPS FOR BUSINESS&#34;</span> 	= <span style="color:#e6db74">&#34;SMB_BUSINESS&#34;</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+<p>Then I created a hashtable to map the sku names to their friendly names.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$i = 1
+</span></span><span style="display:flex;"><span>$UserLicenseList = <span style="color:#66d9ef">[System.Collections.Generic.List[PsObject]]</span>::new()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($user <span style="color:#66d9ef">in</span> $users)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Write-progress -activity <span style="color:#e6db74">&#34;Processing&#34;</span> -Status <span style="color:#e6db74">&#34;Working on: </span>$($user.displayname)<span style="color:#e6db74">&#34;</span> -PercentComplete (($i / $users.count) * 100)
+</span></span><span style="display:flex;"><span>	$licenses = ($user).assignedlicenses.skuid | <span style="color:#66d9ef">foreach</span> { (Get-AzureADSubscribedSku -ObjectID ($($TenantID) + <span style="color:#e6db74">&#39;_&#39;</span> + $_)).skupartnumber } | <span style="color:#66d9ef">foreach</span> {
+</span></span><span style="display:flex;"><span>		$skus[$_]
+</span></span><span style="display:flex;"><span>	}</span></span></code></pre></div>
+<p>Then the fun part, create a foreach loop.</p>
+
+<p>For each user, create a progress bar to display the progress for processing each users licenses.</p>
+
+<p>For each user, Transform the users Assigned Licenses / SkuID into the actual Sku name by feeding it in Get-AzureADSubscribedSku.</p>
+
+<p>For each skuid, add the tenantID as Get-AzureADSubscribedSku is expecting &ldquo;TenantID_SkuID&rdquo;, then putll out the SkuPartNumber which was the sku name.</p>
+
+<p>Then take the Sku name and transform it to the friendly name by using the corresponding index of the hashtable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$licenses = ($user).assignedlicenses.skuid | <span style="color:#66d9ef">foreach</span> { (Get-AzureADSubscribedSku -ObjectID ($($TenantID) + <span style="color:#e6db74">&#39;_&#39;</span> + $_)).skupartnumber } | <span style="color:#66d9ef">foreach</span> {
+</span></span><span style="display:flex;"><span>$skus[$_]
+</span></span><span style="display:flex;"><span>$UserLicenseList.add(<span style="color:#66d9ef">[PSCustomObject]</span>@{
+</span></span><span style="display:flex;"><span>			DisplayName = $user.displayname
+</span></span><span style="display:flex;"><span>			UserPrincipalName = $user.UserPrincipalName
+</span></span><span style="display:flex;"><span>			StreetAddress = $user.StreetAddress
+</span></span><span style="display:flex;"><span>			licenses    = $licenses -join <span style="color:#e6db74">&#39;,&#39;</span>
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>		})
+</span></span><span style="display:flex;"><span>	$i++</span></span></code></pre></div>
+<p>Finally, fill a list with the properties I want for the report. Notice I join the licenses for each user into a single string so that when I go to export the report the licenses will display correctly if the user has multiple assigned. Otherwise the output would just show [System.Object] as the output would be an array rather than a single string.</p>
+
+<p>Then increment our counter by 1, $i being the counter.</p>
+
+<p>Just to be extra diligent, lets get the total license list and count for the tenant:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$TotalLicenses = Get-AzureADSubscribedSku | Select -Property SkuPartNumber, @{ n = <span style="color:#e6db74">&#34;Sku&#34;</span>; e = { $skus[$_.SkuPartNumber] } }, @{ n = <span style="color:#e6db74">&#34;Used&#34;</span>; e = { $_.ConsumedUnits } }, @{ n = <span style="color:#e6db74">&#34;Total&#34;</span>; e = { $_.prepaidunits.enabled } }</span></span></code></pre></div>
+<p>Now to export everything to an excel spreadsheet cause we are fancy, no simple csv here! Using the module ImportExcel:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Export to Excel Spreadsheet</span>
+</span></span><span style="display:flex;"><span>$TotalLicenses | Export-Excel -Autosize .\UserLicenseReport.xlsx -TableName <span style="color:#e6db74">&#34;TotalLicenses&#34;</span> -Worksheetname <span style="color:#e6db74">&#34;TotalLicenses&#34;</span>
+</span></span><span style="display:flex;"><span>$UserLicenseList | Export-Excel -Autosize \UserLicenseReport.xlsx -TableName <span style="color:#e6db74">&#34;UserLicenseDetails&#34;</span> -Worksheetname <span style="color:#e6db74">&#34;UserLicenseReport&#34;</span></span></span></code></pre></div>
+<p>Here we create one excel spreadsheet &ldquo;UserLicensesReport.xlsx&rdquo; with two worksheets &ldquo;TotalLicenses&rdquo; and &ldquo;UserLicenseDetails&rdquo;. Each report being an autosized table on each worksheet.</p>
+
+<p>And that&rsquo;s it! In the next article, I will show how to automate these type of reports using certificate based authentication.</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/post/use-powershell-to-get-the-weather-report/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">PowerShell Project - Get the Weather report</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="/post/remove-document-redirection-vpn/">
+                  <span class="button__text">Remove Document Redirection Policies over VPN</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+          
+      <div class="copyright">
+        <span>© 2022 
+        </div>
+             
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

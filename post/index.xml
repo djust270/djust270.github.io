@@ -9,17 +9,17 @@
     <description>Recent content in Posts on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Mar 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Remove Document Redirection Policies over VPN</title>
-      <link>/post/removedocred/</link>
-      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      <title>Intune Deploy Software with WinGet</title>
+      <link>/post/intune-install-software-with-winget/</link>
+      <pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>/post/removedocred/</guid>
+      <guid>/post/intune-install-software-with-winget/</guid>
       <description>
         
           
@@ -28,7 +28,90 @@
         
         
         
-          Document Redirection can be a serious PITA#In today&amp;rsquo;s world of COVID with so many people working from home, more and more organizations are moving to cloud services for file storage. It used to be quite a common practice, at least in my experience to enable folder redirection for users on-prem. Trying to dismantle folder redirection, especially when our users are working remotely can prove to be a challenge.
+          Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Configuring Intune for macOS part 1 - Setup a macOS VM</title>
+      <link>/post/intune-for-macos-configure-macos-vm/</link>
+      <pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/intune-for-macos-configure-macos-vm/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Premise
+One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing?
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>PowerShell Project - Get the Weather report</title>
+      <link>/post/use-powershell-to-get-the-weather-report/</link>
+      <pubDate>Tue, 26 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/use-powershell-to-get-the-weather-report/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
+I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Export O365 User License Report with friendly names</title>
+      <link>/post/o365-license-report-with-friendly-names/</link>
+      <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/o365-license-report-with-friendly-names/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          I was recently tasked with exporting a report for a client that detailed all users, their location and license assignment in Office 365. I knew the best way to get the job done was by writing a PowerShell script.
+I did a quick search online and found lots of examples, however all the examples I found were using the deprecated &amp;ldquo;Microsoft Online&amp;rdquo; / MSOL PS module. I wanted to use the Azure AD module instead so I played around a bit to get the output I wanted.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Remove Document Redirection Policies over VPN</title>
+      <link>/post/remove-document-redirection-vpn/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/remove-document-redirection-vpn/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          In today&amp;rsquo;s world of COVID with so many people working from home, more and more organizations are moving to cloud services for file storage. It used to be quite a common practice, at least in my experience to enable folder redirection for users on-prem. Trying to dismantle folder redirection, especially when our users are working remotely can prove to be a challenge. If you have ever attempted to remove a folder redirection GPO, you have undoubtedly discovered folder redirection policies only apply (and remove) at startup/user logon.
           
         
         </description>
@@ -36,10 +119,10 @@
     
     <item>
       <title>Sync SharePoint Libraries with PowerShell</title>
-      <link>/post/syncsharepointlib/</link>
+      <link>/post/sync-sharepoint-libraries-powershell/index/</link>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>/post/syncsharepointlib/</guid>
+      <guid>/post/sync-sharepoint-libraries-powershell/index/</guid>
       <description>
         
           
@@ -48,7 +131,7 @@
         
         
         
-          The Problem#So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
+          The Problem So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
 There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit.
           
         

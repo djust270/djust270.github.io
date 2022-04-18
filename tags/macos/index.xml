@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>macOS on David Just</title>
+    
+    
+    
+    <link>/tags/macos/</link>
+    <description>Recent content in macOS on David Just</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 02 Jan 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Configuring Intune for macOS part 1 - Setup a macOS VM</title>
+      <link>/post/intune-for-macos-configure-macos-vm/</link>
+      <pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/intune-for-macos-configure-macos-vm/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Premise
+One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing?
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

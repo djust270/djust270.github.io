@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>restAPI on David Just</title>
+    
+    
+    
+    <link>/tags/restapi/</link>
+    <description>Recent content in restAPI on David Just</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 26 Oct 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/restapi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PowerShell Project - Get the Weather report</title>
+      <link>/post/use-powershell-to-get-the-weather-report/</link>
+      <pubDate>Tue, 26 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/use-powershell-to-get-the-weather-report/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
+I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

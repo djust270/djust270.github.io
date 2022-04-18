@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WinGet on David Just</title>
+    
+    
+    
+    <link>/tags/winget/</link>
+    <description>Recent content in WinGet on David Just</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Mar 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/winget/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Intune Deploy Software with WinGet</title>
+      <link>/post/intune-install-software-with-winget/</link>
+      <pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/intune-install-software-with-winget/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>
