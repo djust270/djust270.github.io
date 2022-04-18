@@ -209,12 +209,12 @@ a.read-more,a.read-more:active,a.read-more:hover{
     stroke-width:8px
 }
 .logo__text{
-    font-size:1.125rem
+    font-size:1.0rem
 }
 .logo__cursor{
     -webkit-animation:cursor 1s infinite;
     animation:cursor 1s infinite;
-    background:#fe5186;
+    background:#066e03;
     border-radius:1px;
     display:inline-block;
     height:1rem;
@@ -625,7 +625,7 @@ h1:hover a,h2:hover a,h3:hover a,h4:hover a{
 }
 .post{
     margin:20px auto;
-    max-width:800px;
+    max-width:1000px;
     padding:20px;
     text-align:left;
     width:100%
@@ -1164,7 +1164,4 @@ div.code-toolbar>.toolbar a:focus,div.code-toolbar>.toolbar a:hover,div.code-too
 }
 .collapsable-code .code-toolbar{
     margin:0
-}
-.top-link svg {
-    filter: drop-shadow(0px 0px 0px var(--theme));
 }
