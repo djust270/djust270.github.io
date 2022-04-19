@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+ Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/intune-for-macos-configure-profiles/" />
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles"/>
+<meta name="twitter:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate."/>
+
+
+
+<meta property="og:title" content="Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles" />
+<meta property="og:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/intune-for-macos-configure-profiles/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-04-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-04-19T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text">Invoke-Blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          April 19, 2022
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/o365/">#O365</a>&nbsp;
+        
+          <a href="/tags/intune/">#Intune</a>&nbsp;
+        
+          <a href="/tags/macos/">#macOS</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <h3 id="setup-byod-enrollment">Setup BYOD Enrollment <a href="#setup-byod-enrollment">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h3><p><a href="/post/intune-for-macos-configure-macos-vm/">In part 1</a>, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune.
+The first thing we need to do is get an Apple MDM push certificate.</p>
+<ul>
+<li>Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment.</li>
+<li>Download the CSR.</li>
+<li>Follow the link “Create your MDM Push Certificate”</li>
+<li>Sign into your Apple ID (or create one if you do not have one)</li>
+<li>Click create certificate. Accept the terms of service.</li>
+<li>Upload the CSR you downloaded from Intune.</li>
+<li>Download the newly created MDM push certificate and upload to Intune.</li>
+</ul>
+<p>At this point BYOD enrollment using the company portal app will work, but we need to setup some policies.</p>
+<p><a href="https://docs.microsoft.com/en-us/mem/intune/user-help/enroll-your-device-in-intune-macos-cp#install-company-portal-app">See the official Microsoft doc for the BYOD enrollment flow</a></p>
+<h3 id="configuration-profiles">Configuration Profiles <a href="#configuration-profiles">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h3><p>The official policies supported out of the box in Intune are a bit limited currently.</p>
+<h4 id="currently-available-configuration-policies-in-intune">Currently available configuration policies in Intune: <a href="#currently-available-configuration-policies-in-intune">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h4><ul>
+<li>Device Features</li>
+<li>Device Restrictions</li>
+<li>Endpoint Protection</li>
+<li>Extensions</li>
+<li>VPN</li>
+<li>Wi-Fi</li>
+<li>Wired networks</li>
+</ul>
+<p>For a full listing of including settings, see the official documentation macOS device settings in Microsoft Intune | Microsoft Docs</p>
+<h3 id="create-custom-configuration-profiles">Create Custom Configuration Profiles <a href="#create-custom-configuration-profiles">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h3><p>For settings not available in the included policies, we can upload custom config profiles to Intune. To do this officially, you would need Apple server with Apple Profile Manager. I do not have the luxury of having access to apple server, so instead I recommend using Profile Creator over on GitHub. Simply download the latest release version and run on your test VM with macOS.</p>
+<ul>
+<li>When you open Profile Creator for the first time, you will get a warning about the app being from an unidentified developer</li>
+</ul>
+
+  <img src="./profilecreatorwarn.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<ul>
+<li>Open System preferences, under general, select “Open Anyway”</li>
+</ul>
+
+  <img src="./openanyway.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<ul>
+<li>
+<p>Once you have profile creator open, click the + icon to start a new payload.</p>
+</li>
+<li>
+<p>On the general page, enter a name for the profile, a payload description and organization name. 
+For this example, we will create a profile for software update settings.</p>
+</li>
+</ul>
+
+  <img src="./profilecreatorsettings.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<ul>
+<li>
+<p>Now, click the settings gear at the top right and under platform, uncheck iOS and tvOS.</p>
+</li>
+<li>
+<p>The lefthand pane displays a list of all avaliable profiles. Select the profile you wish to create, in this case &ldquo;Software Update&rdquo;</p>
+</li>
+<li>
+<p>Click + next to the settings you would like to add to the profile. Once you are done, click the add button at the top right.</p>
+</li>
+<li>
+<p>Save and export the file. The default save location is the documents folder.</p>
+</li>
+</ul>
+
+  <img src="./ProfileCreation.gif"  class="center"  style="border-radius: 8px;"  />
+
+
+<h3 id="upload-custom-profile-to-intune">Upload custom profile to Intune <a href="#upload-custom-profile-to-intune">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h3><p>Now that we have the profile settings saved to an xml file, we can upload it to Intune.</p>
+<ul>
+<li>
+<p>Go to Device &lt; Configuration Profiles &lt; Create Profile &lt; macOS &lt; Templates &lt; Custom</p>
+</li>
+<li>
+<p>Create a profile name, select the appropriate deployment channel, upload the exported profile, then assign to the appropriate user group.</p>
+</li>
+</ul>
+<p>You can find the custom profiles I have created here <a href="https://github.com/djust270/macOS-Intune-Profiles">https://github.com/djust270/macOS-Intune-Profiles</a></p>
+<p>In the next part, I will cover software deployment using shell scripts.</p>
+<p><a href="/macosresources">Helpful macOS Resources</a></p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/post/intune-install-software-with-winget/">
+                  <span class="button__text">Intune Deploy Software with WinGet</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  davidjust.com © 2022     
+  <div class="footer__inner">    
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

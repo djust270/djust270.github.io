@@ -2,34 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/</loc>
+    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/macosresources/</loc>
+    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/intune/</loc>
+    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/intune-for-macos-configure-profiles/</loc>
+    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/macos/</loc>
+    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/o365/</loc>
+    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/</loc>
+    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/about/</loc>
     <lastmod>2022-04-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/</loc>
-    <lastmod>2022-03-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/intune/</loc>
-    <lastmod>2022-03-08T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/post/intune-install-software-with-winget/</loc>
-    <lastmod>2022-03-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/o365/</loc>
-    <lastmod>2022-03-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/post/</loc>
-    <lastmod>2022-03-08T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
     <lastmod>2022-03-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/winget/</loc>
     <lastmod>2022-03-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/intune-for-macos-configure-macos-vm/</loc>
-    <lastmod>2022-01-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/macos/</loc>
     <lastmod>2022-01-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/powershell/</loc>

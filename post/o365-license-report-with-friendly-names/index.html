@@ -78,9 +78,7 @@ I did a quick search online and found lots of examples, however all the examples
 >
   
     <span class="logo__mark">PS C:\Users\Dave></span>
-    <span class="logo__text"
-      >Invoke-Blog</span
-    >
+    <span class="logo__text">Invoke-Blog</span>
     <span class="logo__cursor"></span>
   
 </a>
@@ -201,31 +199,23 @@ I did a quick search online and found lots of examples, however all the examples
     <div class="post-content">
       
       <p>I was recently tasked with exporting a report for a client that detailed all users, their location and license assignment in Office 365. I knew the best way to get the job done was by writing a PowerShell script.</p>
-
 <p>I did a quick search online and found lots of examples, however all the examples I found were using the deprecated &ldquo;Microsoft Online&rdquo; / MSOL PS module. I wanted to use the Azure AD module instead so I played around a bit to get the output I wanted.</p>
-
 <p>The boss also wanted the export to have the &ldquo;Friendly&rdquo; license names not the esoteric sku names that Microsoft uses on the backed. I found this handy article here that lists sku names with their current product names. So a quick hashtable will take care of that for us.</p>
-
 <p>First problem, how do we come up with what licenses are assigned to each user? First I connected to AzureAD then ran</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-AzureADUser | Get-Member -membertype Properties</span></span></code></pre></div>
-<p>One of the first properties I noticed was &ldquo;Assigned Licenses&rdquo;, so I thought great! Lets try outputting that. Next command I ran:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-AzureADUser -objectid dave@justgeeks.co | select userprincipalname,assignedlicenses | Format-Table -AutoSize -Wrap</span></span></code></pre></div>
-<p>To my dismay, this was the output:</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-AzureADUser | Get-Member -membertype Properties
+</span></span></code></pre></div><p>One of the first properties I noticed was &ldquo;Assigned Licenses&rdquo;, so I thought great! Lets try outputting that. Next command I ran:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-AzureADUser -objectid dave@justgeeks.co | select userprincipalname,assignedlicenses | Format-Table -AutoSize -Wrap
+</span></span></code></pre></div><p>To my dismay, this was the output:</p>
 
   <img src="./Az-Lic1.png"  class="center"  style="border-radius: 8px;"  />
 
 
-
 <p>Not exactly what I had in mind. Ok, we need to do a little conversion. I found this cmdlet &ldquo;Get-AzureADSubscribedSku&rdquo; which gives this output:</p>
-
 
   <img src="./Az-Lic2.png"  class="center"  style="border-radius: 8px;"  />
 
 
-
 <p>Ok cool, I can work with that. Looks like the ObjectID is TenantID_SkuID. SkuPartNumber is the actual Sku name.</p>
-
 <p>Here is the script I came up with</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Get Tenant ID</span>
 </span></span><span style="display:flex;"><span>$TenantID = Get-AzureADTenantDetail | select -ExpandProperty ObjectID
@@ -276,14 +266,14 @@ I did a quick search online and found lots of examples, however all the examples
 </span></span><span style="display:flex;"><span>		})
 </span></span><span style="display:flex;"><span>	$i++
 </span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>Let&rsquo;s break it down.</p>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Let&rsquo;s break it down.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Get Tenant ID</span>
 </span></span><span style="display:flex;"><span>$TenantID = Get-AzureADTenantDetail | select -ExpandProperty ObjectID
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Get list of licensed users</span>
-</span></span><span style="display:flex;"><span>$users = Get-AzureADUser -all $true | where assignedlicenses <span style="color:#f92672">-ne</span> $null</span></span></code></pre></div>
-<p>First, I get the tenant ID since I know that the tenant ID is part of the AzureADSubscribedSku object ID. Then I get the list of licensed users.</p>
+</span></span><span style="display:flex;"><span>$users = Get-AzureADUser -all $true | where assignedlicenses <span style="color:#f92672">-ne</span> $null
+</span></span></code></pre></div><p>First, I get the tenant ID since I know that the tenant ID is part of the AzureADSubscribedSku object ID. Then I get the list of licensed users.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Hash table to convert sku names to freindly license names</span>
 </span></span><span style="display:flex;"><span>$skus = @{
 </span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;AAD_PREMIUM&#34;</span> 						= <span style="color:#e6db74">&#34;AZURE ACTIVE DIRECTORY PREMIUM P1&#34;</span>
@@ -306,8 +296,8 @@ I did a quick search online and found lots of examples, however all the examples
 </span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;RMSBASIC&#34;</span>				   		 	= <span style="color:#e6db74">&#34;Rights Management Basic&#34;</span>;
 </span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;MICROSOFT_BUSINESS_CENTER&#34;</span> 		= <span style="color:#e6db74">&#34;Microsoft Business Center&#34;</span>;
 </span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;MICROSOFT 365 APPS FOR BUSINESS&#34;</span> 	= <span style="color:#e6db74">&#34;SMB_BUSINESS&#34;</span>
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>Then I created a hashtable to map the sku names to their friendly names.</p>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Then I created a hashtable to map the sku names to their friendly names.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$i = 1
 </span></span><span style="display:flex;"><span>$UserLicenseList = <span style="color:#66d9ef">[System.Collections.Generic.List[PsObject]]</span>::new()
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($user <span style="color:#66d9ef">in</span> $users)
@@ -315,15 +305,11 @@ I did a quick search online and found lots of examples, however all the examples
 </span></span><span style="display:flex;"><span>	Write-progress -activity <span style="color:#e6db74">&#34;Processing&#34;</span> -Status <span style="color:#e6db74">&#34;Working on: </span>$($user.displayname)<span style="color:#e6db74">&#34;</span> -PercentComplete (($i / $users.count) * 100)
 </span></span><span style="display:flex;"><span>	$licenses = ($user).assignedlicenses.skuid | <span style="color:#66d9ef">foreach</span> { (Get-AzureADSubscribedSku -ObjectID ($($TenantID) + <span style="color:#e6db74">&#39;_&#39;</span> + $_)).skupartnumber } | <span style="color:#66d9ef">foreach</span> {
 </span></span><span style="display:flex;"><span>		$skus[$_]
-</span></span><span style="display:flex;"><span>	}</span></span></code></pre></div>
-<p>Then the fun part, create a foreach loop.</p>
-
+</span></span><span style="display:flex;"><span>	}
+</span></span></code></pre></div><p>Then the fun part, create a foreach loop.</p>
 <p>For each user, create a progress bar to display the progress for processing each users licenses.</p>
-
 <p>For each user, Transform the users Assigned Licenses / SkuID into the actual Sku name by feeding it in Get-AzureADSubscribedSku.</p>
-
 <p>For each skuid, add the tenantID as Get-AzureADSubscribedSku is expecting &ldquo;TenantID_SkuID&rdquo;, then putll out the SkuPartNumber which was the sku name.</p>
-
 <p>Then take the Sku name and transform it to the friendly name by using the corresponding index of the hashtable.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$licenses = ($user).assignedlicenses.skuid | <span style="color:#66d9ef">foreach</span> { (Get-AzureADSubscribedSku -ObjectID ($($TenantID) + <span style="color:#e6db74">&#39;_&#39;</span> + $_)).skupartnumber } | <span style="color:#66d9ef">foreach</span> {
 </span></span><span style="display:flex;"><span>$skus[$_]
@@ -334,19 +320,16 @@ I did a quick search online and found lots of examples, however all the examples
 </span></span><span style="display:flex;"><span>			licenses    = $licenses -join <span style="color:#e6db74">&#39;,&#39;</span>
 </span></span><span style="display:flex;"><span>			
 </span></span><span style="display:flex;"><span>		})
-</span></span><span style="display:flex;"><span>	$i++</span></span></code></pre></div>
-<p>Finally, fill a list with the properties I want for the report. Notice I join the licenses for each user into a single string so that when I go to export the report the licenses will display correctly if the user has multiple assigned. Otherwise the output would just show [System.Object] as the output would be an array rather than a single string.</p>
-
+</span></span><span style="display:flex;"><span>	$i++
+</span></span></code></pre></div><p>Finally, fill a list with the properties I want for the report. Notice I join the licenses for each user into a single string so that when I go to export the report the licenses will display correctly if the user has multiple assigned. Otherwise the output would just show [System.Object] as the output would be an array rather than a single string.</p>
 <p>Then increment our counter by 1, $i being the counter.</p>
-
 <p>Just to be extra diligent, lets get the total license list and count for the tenant:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$TotalLicenses = Get-AzureADSubscribedSku | Select -Property SkuPartNumber, @{ n = <span style="color:#e6db74">&#34;Sku&#34;</span>; e = { $skus[$_.SkuPartNumber] } }, @{ n = <span style="color:#e6db74">&#34;Used&#34;</span>; e = { $_.ConsumedUnits } }, @{ n = <span style="color:#e6db74">&#34;Total&#34;</span>; e = { $_.prepaidunits.enabled } }</span></span></code></pre></div>
-<p>Now to export everything to an excel spreadsheet cause we are fancy, no simple csv here! Using the module ImportExcel:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$TotalLicenses = Get-AzureADSubscribedSku | Select -Property SkuPartNumber, @{ n = <span style="color:#e6db74">&#34;Sku&#34;</span>; e = { $skus[$_.SkuPartNumber] } }, @{ n = <span style="color:#e6db74">&#34;Used&#34;</span>; e = { $_.ConsumedUnits } }, @{ n = <span style="color:#e6db74">&#34;Total&#34;</span>; e = { $_.prepaidunits.enabled } }
+</span></span></code></pre></div><p>Now to export everything to an excel spreadsheet cause we are fancy, no simple csv here! Using the module ImportExcel:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Export to Excel Spreadsheet</span>
 </span></span><span style="display:flex;"><span>$TotalLicenses | Export-Excel -Autosize .\UserLicenseReport.xlsx -TableName <span style="color:#e6db74">&#34;TotalLicenses&#34;</span> -Worksheetname <span style="color:#e6db74">&#34;TotalLicenses&#34;</span>
-</span></span><span style="display:flex;"><span>$UserLicenseList | Export-Excel -Autosize \UserLicenseReport.xlsx -TableName <span style="color:#e6db74">&#34;UserLicenseDetails&#34;</span> -Worksheetname <span style="color:#e6db74">&#34;UserLicenseReport&#34;</span></span></span></code></pre></div>
-<p>Here we create one excel spreadsheet &ldquo;UserLicensesReport.xlsx&rdquo; with two worksheets &ldquo;TotalLicenses&rdquo; and &ldquo;UserLicenseDetails&rdquo;. Each report being an autosized table on each worksheet.</p>
-
+</span></span><span style="display:flex;"><span>$UserLicenseList | Export-Excel -Autosize \UserLicenseReport.xlsx -TableName <span style="color:#e6db74">&#34;UserLicenseDetails&#34;</span> -Worksheetname <span style="color:#e6db74">&#34;UserLicenseReport&#34;</span>
+</span></span></code></pre></div><p>Here we create one excel spreadsheet &ldquo;UserLicensesReport.xlsx&rdquo; with two worksheets &ldquo;TotalLicenses&rdquo; and &ldquo;UserLicenseDetails&rdquo;. Each report being an autosized table on each worksheet.</p>
 <p>And that&rsquo;s it! In the next article, I will show how to automate these type of reports using certificate based authentication.</p>
 
     </div>

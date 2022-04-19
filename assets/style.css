@@ -1165,3 +1165,15 @@ div.code-toolbar>.toolbar a:focus,div.code-toolbar>.toolbar a:hover,div.code-too
 .collapsable-code .code-toolbar{
     margin:0
 }
+.hash-link {
+    -webkit-transform: translateX(-100%);
+    color:#fff;
+    color:var(--background);
+    left: 0;
+    opacity: 0;
+    padding: 0 5px;
+    position: absolute;
+    transform: translateX(-100%);
+    transition: opacity .1s ease-in;
+    will-change: transform, opacity;
+}

@@ -75,9 +75,7 @@
 >
   
     <span class="logo__mark">PS C:\Users\Dave></span>
-    <span class="logo__text"
-      >Invoke-Blog</span
-    >
+    <span class="logo__text">Invoke-Blog</span>
     <span class="logo__cursor"></span>
   
 </a>
@@ -198,16 +196,12 @@
     <div class="post-content">
       
       <p>In today&rsquo;s world of COVID with so many people working from home, more and more organizations are moving to cloud services for file storage. It used to be quite a common practice, at least in my experience to enable folder redirection for users on-prem. Trying to dismantle folder redirection, especially when our users are working remotely can prove to be a challenge. If you have ever attempted to remove a folder redirection GPO, you have undoubtedly discovered folder redirection policies only apply (and remove) at startup/user logon. This can throw a wrench in the works if our users are working remotely. In comes a little PowerShell to the rescue.</p>
-
 <p>First, go into your group policy management editor. Open up the folder redirection policy. Edit the properties for every folder that is being redirected by right clicking on the folder and selecting &ldquo;Properties&rdquo;. Make sure under &ldquo;Policy Removal&rdquo;, &ldquo;Leave the folder in the new location when policy is removed&rdquo; is checked. This way, we have full control over when the folders are redirected back to the user.</p>
-
 
   <img src="/img/DocRedGP.png"  alt="Document Redirection Group Policy"  class="center"  style="border-radius: 8px;"  />
 
 
-
 <p>Go ahead and remove your users from the folder redirection policy.</p>
-
 <p>Next, its time for a little PowerShell magic. We can simply delete the folder redirection registry keys to remove the redirection policy.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$ErrorActionPreference = <span style="color:#e6db74">&#39;Stop&#39;</span>
 </span></span><span style="display:flex;"><span>$UserSID = (New-Object -ComObject Microsoft.DiskQuota).TranslateLogonNameToSID((Get-CimInstance -Class Win32_ComputerSystem).Username)
@@ -228,12 +222,12 @@
 </span></span><span style="display:flex;"><span>        $error | Select-Object * | out-file c:\windows\temp\redscript.log
 </span></span><span style="display:flex;"><span>        Notepad c:\windows\temp\redscript.log
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>Now that the policy is removed you have a couple options to move the folders back locally.</p>
-<pre tabindex="0"><code>Remote into the users computer. In file explorer right click on each redirected folder and select &#34;Properties&#34;. Under the location tab, select &#34;Move&#34;. Select the local folder and click ok. The files will be moved from the redirected location to the local location. Depending on the size this can take sometime over VPN.</code></pre>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now that the policy is removed you have a couple options to move the folders back locally.</p>
+<pre><code>Remote into the users computer. In file explorer right click on each redirected folder and select &quot;Properties&quot;. Under the location tab, select &quot;Move&quot;. Select the local folder and click ok. The files will be moved from the redirected location to the local location. Depending on the size this can take sometime over VPN.
+</code></pre>
 
   <img src="./DocLoc.png"  alt="Documents Folder Location "  class="center"  style="border-radius: 8px;"  />
-
 
 
 <p>If the folder is quite large, or the user has not connected to VPN for sometime to sync their offline files, we can simply move the local cache. You can do this manually or with a little PowerShell</p>
@@ -249,11 +243,9 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#Move the contents of the redirected folders. </span>
 </span></span><span style="display:flex;"><span>$cscdocuments = (GCI <span style="color:#e6db74">&#34;C:\Windows\CSC&#34;</span> -Directory -Recurse | where name <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;*Documents*&#34;</span>)
-</span></span><span style="display:flex;"><span>Move-Item <span style="color:#e6db74">&#34;</span>$($cscdocuments)<span style="color:#e6db74">.fullname\*&#34;</span> -Destination <span style="color:#e6db74">&#34;C:\users\$Username\Documents\&#34;</span> -Exclude <span style="color:#e6db74">&#34;$Recycle.bin&#34;</span> -Force</span></span></code></pre></div>
-<p>Here we take ownership of the client side caching folder then take the ACL of the users Desktop and apply that to the CSC folder so they will have full access. Then we move the contents of the cached My Documents folder to C:\Users\Username\Documents excluding the recycle bin.</p>
-
+</span></span><span style="display:flex;"><span>Move-Item <span style="color:#e6db74">&#34;</span>$($cscdocuments)<span style="color:#e6db74">.fullname\*&#34;</span> -Destination <span style="color:#e6db74">&#34;C:\users\$Username\Documents\&#34;</span> -Exclude <span style="color:#e6db74">&#34;$Recycle.bin&#34;</span> -Force
+</span></span></code></pre></div><p>Here we take ownership of the client side caching folder then take the ACL of the users Desktop and apply that to the CSC folder so they will have full access. Then we move the contents of the cached My Documents folder to C:\Users\Username\Documents excluding the recycle bin.</p>
 <p>Do this process for each redirected folder. Be careful and make sure the cached folders are up to date and the user knows you are moving these folders.</p>
-
 <p>And that&rsquo;s it! Tame folder redirection with a little PS.</p>
 
     </div>

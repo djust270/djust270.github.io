@@ -75,9 +75,7 @@
 >
   
     <span class="logo__mark">PS C:\Users\Dave></span>
-    <span class="logo__text"
-      >Invoke-Blog</span
-    >
+    <span class="logo__text">Invoke-Blog</span>
     <span class="logo__cursor"></span>
   
 </a>
@@ -200,11 +198,8 @@
     <div class="post-content">
       
       <p>Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind. There was a crafty user on Github however that found that WinGet.exe is a proxy application for &ldquo;AppInstallerCLI.exe&rdquo; which can be ran as system. The executable is found under C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_1.17.10271.0_x64__8wekyb3d8bbwe</p>
-
 <p>EDIT: As of writing this, it seems for the latest version of WinGet, WinGet.exe is now located in the DesktopAppInstaller folder, AppInstallerCLI.exe is no longer here. You can call WinGet.exe directly. In my script, I check for both WinGet.exe and AppInstallerCLI.exe</p>
-
 <p>Running this executable directly works just fine under SYSTEM. I created a simple script which when packaged as a Win32App, can be used to deploy any package located in the WinGet public repository automatically to Intune enrolled endpoints.</p>
-
 <p>The script can be found on my Github page here. I also have this prepackaged as an IntuneWin package here. Here is the script:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e">&lt;#	
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">	</span><span style="color:#e6db74">.NOTES</span><span style="color:#75715e">
@@ -447,14 +442,12 @@
 </span></span><span style="display:flex;"><span>	$Install = WingetRun -RunType install -PackageID $PackageID
 </span></span><span style="display:flex;"><span>	Write-Log $Install
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#endregion</span></span></span></code></pre></div>
-<p>Upload the package to Intune as a Win32App. For the install command, enter the following. Edit the PackageID and Log parameters as needed. Use the exact WinGet package ID.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>powershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID <span style="color:#e6db74">&#34;Google.Chrome&#34;</span> -Log <span style="color:#e6db74">&#34;ChromeWingetInstall.log&#34;</span></span></span></code></pre></div>
-<p>To find the ID, open PowerShell or CMD and run &ldquo;Winget Search SoftwareName&rdquo;. In the output you will see the ID field.</p>
-
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#endregion</span>
+</span></span></code></pre></div><p>Upload the package to Intune as a Win32App. For the install command, enter the following. Edit the PackageID and Log parameters as needed. Use the exact WinGet package ID.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>powershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID <span style="color:#e6db74">&#34;Google.Chrome&#34;</span> -Log <span style="color:#e6db74">&#34;ChromeWingetInstall.log&#34;</span>
+</span></span></code></pre></div><p>To find the ID, open PowerShell or CMD and run &ldquo;Winget Search SoftwareName&rdquo;. In the output you will see the ID field.</p>
 
   <img src="/img/winget1.png"  class="center"  style="border-radius: 8px;"  />
-
 
 
 <p>The uninstall command is going to be dependent on the particular software. You can usually find the uninstall command in the uninstall registry key. You can use this PowerShell function I wrote to grab the uninstall string. Look for a quiet uninstall parameter, you may need to do some searching.</p>
@@ -480,14 +473,11 @@
 </span></span><span style="display:flex;"><span>		$softwareTable | Sort-Object -Property displayname -Unique
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>	
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>And running this for Google Chrome we get the Msiexec uninstall command. Simply add /qn /norestart at the end of the command and enter that into Intune as the Uninstall command.</p>
-
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>And running this for Google Chrome we get the Msiexec uninstall command. Simply add /qn /norestart at the end of the command and enter that into Intune as the Uninstall command.</p>
 <p>Or if you don&rsquo;t care really about uninstalling, you can just type anything like &ldquo;Uninstall&rdquo;.</p>
 
-
   <img src="/img/winget2.png"  class="center"  style="border-radius: 8px;"  />
-
 
 
 <p>Finally for the detection script, I like to use the same Get-RegUinstallKey function to look for the presence of an uninstall key for the software to determine if it is installed. You can find the detection script here and Ill also include it below:</p>
@@ -544,8 +534,8 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	exit 1
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>And that&rsquo;s it! Now you don&rsquo;t need to worry about uploading the latest installer for commonly installed software. WinGet will always install the latest version.</p>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>And that&rsquo;s it! Now you don&rsquo;t need to worry about uploading the latest installer for commonly installed software. WinGet will always install the latest version.</p>
 
     </div>
     
@@ -558,6 +548,13 @@
             <hr />
           </div>
           <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/post/intune-for-macos-configure-profiles/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles</span>
+                </a>
+              </span>
             
             
               <span class="button next">

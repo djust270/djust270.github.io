@@ -78,9 +78,7 @@ I started searching online for free Weather REST APIs which I could query for th
 >
   
     <span class="logo__mark">PS C:\Users\Dave></span>
-    <span class="logo__text"
-      >Invoke-Blog</span
-    >
+    <span class="logo__text">Invoke-Blog</span>
     <span class="logo__cursor"></span>
   
 </a>
@@ -201,9 +199,7 @@ I started searching online for free Weather REST APIs which I could query for th
     <div class="post-content">
       
       <p>I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.</p>
-
-<p>I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is <a href="https://api.weather.gov/gridpoints/{office}/{grid">https://api.weather.gov/gridpoints/{office}/{grid</a> X},{grid Y}/forecast. To find the grid points, we can use the /points endpoint with latitude and longitude co-ordinates <a href="https://api.weather.gov/points/{latitude},{longitude">https://api.weather.gov/points/{latitude},{longitude</a>}. I found a free web service which will provide latitude and longitude based on zip code <a href="https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=$zipcode&amp;key=17o8dysaCDrgv1c">https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=$zipcode&amp;key=17o8dysaCDrgv1c</a>.</p>
-
+<p>I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is <a href="https://api.weather.gov/gridpoints/%7Boffice%7D/%7Bgrid">https://api.weather.gov/gridpoints/{office}/{grid</a> X},{grid Y}/forecast. To find the grid points, we can use the /points endpoint with latitude and longitude co-ordinates <a href="https://api.weather.gov/points/%7Blatitude%7D,%7Blongitude%7D">https://api.weather.gov/points/{latitude},{longitude}</a>. I found a free web service which will provide latitude and longitude based on zip code <a href="https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=$zipcode&amp;key=17o8dysaCDrgv1c">https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=$zipcode&amp;key=17o8dysaCDrgv1c</a>.</p>
 <p>After fiddling around with Invoke-RestMethod to get the data I wanted, I came up with this function in PowerShell.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-WeatherForecast {
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> (
@@ -261,8 +257,8 @@ I started searching online for free Weather REST APIs which I could query for th
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Write-Host <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">Tomorrows Forecast:</span><span style="color:#ae81ff">`n</span>$($tomorrowsForecast.detailedForecast)<span style="color:#e6db74">&#34;</span> -foregroundcolor Green -BackgroundColor Black
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<p>All in all, this project took about an hour. I have since combined it with a scheduled task on one of my VM&rsquo;s to send me a daily email with the forecast using the Microsoft Graph SendMail API. For a tutorial on sending mail using Graph, I recommend checking out the tech guy blog Send Mail with PowerShell and Microsoft Graph API - TechGuy</p>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>All in all, this project took about an hour. I have since combined it with a scheduled task on one of my VM&rsquo;s to send me a daily email with the forecast using the Microsoft Graph SendMail API. For a tutorial on sending mail using Graph, I recommend checking out the tech guy blog Send Mail with PowerShell and Microsoft Graph API - TechGuy</p>
 
     </div>
     

@@ -9,10 +9,58 @@
     <description>Recent content in O365 on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 19 Apr 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/o365/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Helpful macOS Resources</title>
+      <link>/macosresources/</link>
+      <pubDate>Tue, 19 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/macosresources/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+            Office Apps : https://macadmins.software/
+  Useful tools : https://www.macadmin.info/#managementtools
+  Profile Creator : https://github.com/ProfileCreator/ProfileCreator
+  Best Practices : https://techcommunity.microsoft.com/t5/intune-customer-success/best-practice-examples-for-configuring-macos-apps-with-microsoft/ba-p/2564255
+  Deploying Office : https://docs.microsoft.com/en-us/deployoffice/mac/preferences-outlook#disable-skype-for-business-online-meetings
+  OneDrive config : https://docs.microsoft.com/en-us/onedrive/deploy-and-configure-on-macos#filesondemandenabled
+  Custom onboarding splash screen : https://techcommunity.microsoft.com/t5/intune-customer-success/build-a-macos-onboarding-splash-screen-with-microsoft-endpoint/ba-p/2770980
+  
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles</title>
+      <link>/post/intune-for-macos-configure-profiles/</link>
+      <pubDate>Tue, 19 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/intune-for-macos-configure-profiles/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+ Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>Intune Deploy Software with WinGet</title>
