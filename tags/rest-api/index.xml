@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>REST API on David Just</title>
+    
+    
+    
+    <link>/tags/rest-api/</link>
+    <description>Recent content in REST API on David Just</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 20 Apr 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rest-api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Working with the Microsoft Graph PowerShell SDK</title>
+      <link>/post/working-with-powershell-microsoft-graph-sdk/</link>
+      <pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/working-with-powershell-microsoft-graph-sdk/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/working-with-powershell-microsoft-graph-sdk/graph.png&#34;/&gt;
+          
+        
+        
+        
+          What is an API anyway? API stands for &amp;ldquo;Application Interface&amp;rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:
+ API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

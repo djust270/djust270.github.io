@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/</loc>
-    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/microsoft-graph/</loc>
+    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/o365/</loc>
+    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/</loc>
+    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/powershell/</loc>
+    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/rest-api/</loc>
+    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/working-with-powershell-microsoft-graph-sdk/</loc>
+    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/macosresources/</loc>
     <lastmod>2022-04-19T00:00:00+00:00</lastmod>
@@ -17,15 +38,6 @@
     <loc>/tags/macos/</loc>
     <lastmod>2022-04-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/o365/</loc>
-    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/post/</loc>
-    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/about/</loc>
     <lastmod>2022-04-17T00:00:00+00:00</lastmod>
   </url><url>
@@ -37,9 +49,6 @@
   </url><url>
     <loc>/post/intune-for-macos-configure-macos-vm/</loc>
     <lastmod>2022-01-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/powershell/</loc>
-    <lastmod>2021-10-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/use-powershell-to-get-the-weather-report/</loc>
     <lastmod>2021-10-26T00:00:00+00:00</lastmod>

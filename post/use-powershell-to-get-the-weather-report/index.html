@@ -12,7 +12,7 @@
 <meta
   name="description"
   content="I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
-I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast."
+I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast."
 />
 <meta
   name="keywords"
@@ -60,13 +60,13 @@ ga('send', 'pageview');
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="PowerShell Project - Get the Weather report"/>
 <meta name="twitter:description" content="I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
-I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast."/>
+I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast."/>
 
 
 
 <meta property="og:title" content="PowerShell Project - Get the Weather report" />
 <meta property="og:description" content="I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
-I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast." />
+I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/use-powershell-to-get-the-weather-report/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-10-26T00:00:00+00:00" />
@@ -211,7 +211,13 @@ I started searching online for free Weather REST APIs which I could query for th
     <div class="post-content">
       
       <p>I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.</p>
-<p>I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is <a href="https://api.weather.gov/gridpoints/%7Boffice%7D/%7Bgrid">https://api.weather.gov/gridpoints/{office}/{grid</a> X},{grid Y}/forecast. To find the grid points, we can use the /points endpoint with latitude and longitude co-ordinates <a href="https://api.weather.gov/points/%7Blatitude%7D,%7Blongitude%7D">https://api.weather.gov/points/{latitude},{longitude}</a>. I found a free web service which will provide latitude and longitude based on zip code <a href="https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=$zipcode&amp;key=17o8dysaCDrgv1c">https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=$zipcode&amp;key=17o8dysaCDrgv1c</a>.</p>
+<p>I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is <a href="https://api.weather.gov/gridpoints/%7boffice%7d/%7bgrid" target="_blank">
+    https://api.weather.gov/gridpoints/{office}/{grid
+  </a> X},{grid Y}/forecast. To find the grid points, we can use the /points endpoint with latitude and longitude co-ordinates <a href="https://api.weather.gov/points/%7blatitude%7d,%7blongitude%7d" target="_blank">
+    https://api.weather.gov/points/{latitude},{longitude}
+  </a>. I found a free web service which will provide latitude and longitude based on zip code <a href="https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=$zipcode&amp;key=17o8dysaCDrgv1c" target="_blank">
+    https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=$zipcode&amp;key=17o8dysaCDrgv1c
+  </a>.</p>
 <p>After fiddling around with Invoke-RestMethod to get the data I wanted, I came up with this function in PowerShell.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Get-WeatherForecast {
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> (
@@ -367,6 +373,9 @@ width="40" height="40"
 </footer>
 <script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
+
+    <script src="/assets/clipboard.js" ></script>
+
 
 
       

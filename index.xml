@@ -9,10 +9,30 @@
     <description>Recent content on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 Apr 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Working with the Microsoft Graph PowerShell SDK</title>
+      <link>/post/working-with-powershell-microsoft-graph-sdk/</link>
+      <pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/working-with-powershell-microsoft-graph-sdk/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/working-with-powershell-microsoft-graph-sdk/graph.png&#34;/&gt;
+          
+        
+        
+        
+          What is an API anyway? API stands for &amp;ldquo;Application Interface&amp;rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:
+ API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>Helpful macOS Resources</title>
@@ -49,13 +69,12 @@
       <guid>/post/intune-for-macos-configure-profiles/</guid>
       <description>
         
-          
-          
+          &lt;img src=&#34;/post/intune-for-macos-configure-profiles/mac.jpeg&#34;/&gt;
           
         
         
         
-          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
           
         
@@ -91,8 +110,7 @@ I have a passion for learning and sharing the things I have learned. As a System
       <guid>/post/intune-install-software-with-winget/</guid>
       <description>
         
-          
-          
+          &lt;img src=&#34;/post/intune-install-software-with-winget/winget.png&#34;/&gt;
           
         
         
@@ -111,8 +129,7 @@ I have a passion for learning and sharing the things I have learned. As a System
       <guid>/post/intune-for-macos-configure-macos-vm/</guid>
       <description>
         
-          
-          
+          &lt;img src=&#34;/post/intune-for-macos-configure-macos-vm/macdark.png&#34;/&gt;
           
         
         
@@ -139,7 +156,7 @@ One of my clients has an Apple only environment. The client was previously manag
         
         
           I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
-I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast.
+I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast.
           
         
         </description>

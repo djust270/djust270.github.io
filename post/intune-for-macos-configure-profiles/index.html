@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta
   name="description"
-  content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+  content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate."
 />
 <meta
@@ -59,13 +59,13 @@ ga('send', 'pageview');
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles"/>
-<meta name="twitter:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+<meta name="twitter:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate."/>
 
 
 
 <meta property="og:title" content="Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles" />
-<meta property="og:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+<meta property="og:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/intune-for-macos-configure-profiles/" /><meta property="article:section" content="post" />
@@ -209,6 +209,15 @@ ga('send', 'pageview');
     
 
     
+      <figure class="post-cover">
+  
+    <img src="/post/intune-for-macos-configure-profiles/mac.jpeg" alt="Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles"/>
+  
+
+  
+</figure>
+
+    
 
     <div class="post-content">
       
@@ -217,7 +226,9 @@ ga('send', 'pageview');
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p><a href="/post/intune-for-macos-configure-macos-vm/">In part 1</a>, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune.
+</a></h3><p><a href="/post/intune-for-macos-configure-macos-vm/">
+    In part 1
+  </a>, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune.
 The first thing we need to do is get an Apple MDM push certificate.</p>
 <ul>
 <li>Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment.</li>
@@ -229,7 +240,9 @@ The first thing we need to do is get an Apple MDM push certificate.</p>
 <li>Download the newly created MDM push certificate and upload to Intune.</li>
 </ul>
 <p>At this point BYOD enrollment using the company portal app will work, but we need to setup some policies.</p>
-<p><a href="https://docs.microsoft.com/en-us/mem/intune/user-help/enroll-your-device-in-intune-macos-cp#install-company-portal-app">See the official Microsoft doc for the BYOD enrollment flow</a></p>
+<p><a href="https://docs.microsoft.com/en-us/mem/intune/user-help/enroll-your-device-in-intune-macos-cp#install-company-portal-app" target="_blank">
+    See the official Microsoft doc for the BYOD enrollment flow
+  </a></p>
 <h3 id="configuration-profiles">Configuration Profiles <a href="#configuration-profiles">
   <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
@@ -316,9 +329,13 @@ For this example, we will create a profile for software update settings.</p>
 <p>Create a profile name, select the appropriate deployment channel, upload the exported profile, then assign to the appropriate user group.</p>
 </li>
 </ul>
-<p>You can find the custom profiles I have created here <a href="https://github.com/djust270/macOS-Intune-Profiles">https://github.com/djust270/macOS-Intune-Profiles</a></p>
+<p>You can find the custom profiles I have created here <a href="https://github.com/djust270/macOS-Intune-Profiles" target="_blank">
+    https://github.com/djust270/macOS-Intune-Profiles
+  </a></p>
 <p>In the next part, I will cover software deployment using shell scripts.</p>
-<p><a href="/macosresources">Helpful macOS Resources</a></p>
+<p><a href="/macosresources">
+    Helpful macOS Resources
+  </a></p>
 
     </div>
     
@@ -331,6 +348,13 @@ For this example, we will create a profile for software update settings.</p>
             <hr />
           </div>
           <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/post/working-with-powershell-microsoft-graph-sdk/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Working with the Microsoft Graph PowerShell SDK</span>
+                </a>
+              </span>
             
             
               <span class="button next">
@@ -408,6 +432,7 @@ width="40" height="40"
 </footer>
 <script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
+
 
 
       

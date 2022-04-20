@@ -49,13 +49,12 @@
       <guid>/post/intune-for-macos-configure-profiles/</guid>
       <description>
         
-          
-          
+          &lt;img src=&#34;/post/intune-for-macos-configure-profiles/mac.jpeg&#34;/&gt;
           
         
         
         
-          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
           
         
@@ -70,8 +69,7 @@
       <guid>/post/intune-for-macos-configure-macos-vm/</guid>
       <description>
         
-          
-          
+          &lt;img src=&#34;/post/intune-for-macos-configure-macos-vm/macdark.png&#34;/&gt;
           
         
         
