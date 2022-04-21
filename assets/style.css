@@ -1223,3 +1223,13 @@ div.code-toolbar>.toolbar a:focus,div.code-toolbar>.toolbar a:hover,div.code-too
     border-color: #080808;
 }
 
+.tip { /*next paragraph after <div class="note"></div>*/
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    border-radius: 4px;
+    color: #f5f5f5;
+    background-color: #4556f3;
+    border-color: #080808;
+}
+

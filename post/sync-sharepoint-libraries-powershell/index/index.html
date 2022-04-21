@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta
   name="description"
-  content="The Problem So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
+  content="The Problem So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
 There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit."
 />
 <meta
@@ -59,13 +59,13 @@ ga('send', 'pageview');
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Sync SharePoint Libraries with PowerShell"/>
-<meta name="twitter:description" content="The Problem So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
+<meta name="twitter:description" content="The Problem So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
 There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit."/>
 
 
 
 <meta property="og:title" content="Sync SharePoint Libraries with PowerShell" />
-<meta property="og:description" content="The Problem So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
+<meta property="og:description" content="The Problem So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
 There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/sync-sharepoint-libraries-powershell/index/" /><meta property="article:section" content="post" />
@@ -215,14 +215,18 @@ There are a few ways we can go about syncing libraries for our users. We can set
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h2><p>So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.</p>
+</a></h2>
+
+<p>So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.</p>
 <p>There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit. We could also try and provide instructions to have our users sync it themselves or we can remote in and do it for them. But say you just have a few users that need a library. Can we just make a simple PS script to sync the library without going through a GPO? Sure we can!</p>
 <h3 id="lets-automate">Lets Automate <a href="#lets-automate">
   <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>First, we need to get the sync link. To do that go to the SharePoint document library you want to sync, and fire up your browser developer tools. Go to Network, Select All. Click the Sync button and grab the URL</p>
+</a></h3>
+
+<p>First, we need to get the sync link. To do that go to the SharePoint document library you want to sync, and fire up your browser developer tools. Go to Network, Select All. Click the Sync button and grab the URL</p>
 
   <img src="/img/SP-URL.png"  alt="SP-URL"  class="center"  style="border-radius: 8px;"  />
 

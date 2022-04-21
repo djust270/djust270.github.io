@@ -54,7 +54,7 @@
         
         
         
-          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
           
         
@@ -155,7 +155,7 @@ I did a quick search online and found lots of examples, however all the examples
         
         
         
-          The Problem So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
+          The Problem So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
 There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit.
           
         

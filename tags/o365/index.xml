@@ -27,7 +27,7 @@
         
         
         
-          What is an API anyway? API stands for &amp;ldquo;Application Interface&amp;rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:
+          What is an API anyway? API stands for &amp;ldquo;Application Interface&amp;rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:
  API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
           
         
@@ -74,7 +74,7 @@
         
         
         
-          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
           
         

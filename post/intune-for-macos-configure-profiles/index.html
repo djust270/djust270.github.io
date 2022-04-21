@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta
   name="description"
-  content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+  content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate."
 />
 <meta
@@ -59,13 +59,13 @@ ga('send', 'pageview');
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles"/>
-<meta name="twitter:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+<meta name="twitter:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate."/>
 
 
 
 <meta property="og:title" content="Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles" />
-<meta property="og:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+<meta property="og:description" content="Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
  Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/intune-for-macos-configure-profiles/" /><meta property="article:section" content="post" />
@@ -226,7 +226,9 @@ ga('send', 'pageview');
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p><a href="/post/intune-for-macos-configure-macos-vm/">
+</a></h3>
+
+<p><a href="/post/intune-for-macos-configure-macos-vm/">
     In part 1
   </a>, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune.
 The first thing we need to do is get an Apple MDM push certificate.</p>
@@ -248,13 +250,17 @@ The first thing we need to do is get an Apple MDM push certificate.</p>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>The official policies supported out of the box in Intune are a bit limited currently.</p>
+</a></h3>
+
+<p>The official policies supported out of the box in Intune are a bit limited currently.</p>
 <h4 id="currently-available-configuration-policies-in-intune">Currently available configuration policies in Intune: <a href="#currently-available-configuration-policies-in-intune">
   <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h4><ul>
+</a></h4>
+
+<ul>
 <li>Device Features</li>
 <li>Device Restrictions</li>
 <li>Endpoint Protection</li>
@@ -269,7 +275,9 @@ The first thing we need to do is get an Apple MDM push certificate.</p>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>For settings not available in the included policies, we can upload custom config profiles to Intune. To do this officially, you would need Apple server with Apple Profile Manager. I do not have the luxury of having access to apple server, so instead I recommend using Profile Creator over on GitHub. Simply download the latest release version and run on your test VM with macOS.</p>
+</a></h3>
+
+<p>For settings not available in the included policies, we can upload custom config profiles to Intune. To do this officially, you would need Apple server with Apple Profile Manager. I do not have the luxury of having access to apple server, so instead I recommend using Profile Creator over on GitHub. Simply download the latest release version and run on your test VM with macOS.</p>
 <ul>
 <li>When you open Profile Creator for the first time, you will get a warning about the app being from an unidentified developer</li>
 </ul>
@@ -320,7 +328,9 @@ For this example, we will create a profile for software update settings.</p>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>Now that we have the profile settings saved to an xml file, we can upload it to Intune.</p>
+</a></h3>
+
+<p>Now that we have the profile settings saved to an xml file, we can upload it to Intune.</p>
 <ul>
 <li>
 <p>Go to Device &lt; Configuration Profiles &lt; Create Profile &lt; macOS &lt; Templates &lt; Custom</p>
