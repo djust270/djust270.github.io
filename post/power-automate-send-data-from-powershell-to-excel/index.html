@@ -469,14 +469,16 @@ Click add action.</p>
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$printerList = <span style="color:#66d9ef">foreach</span> ($printer <span style="color:#66d9ef">in</span> $printers){
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$printers = 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($printer <span style="color:#66d9ef">in</span> (get-printer)){
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">[pscustomobject]</span>@{
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;ComputerName&#39;</span> = $env:COMPUTERNAME   
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;PrinterName&#39;</span> = $printer.name
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;PrinterPortname&#39;</span> = $printer.portname
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;Type&#39;</span> = $printer.type
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>} | ConvertTO-JSON 
+</span></span><span style="display:flex;"><span>} 
+</span></span><span style="display:flex;"><span>$printers | ConvertTO-JSON 
 </span></span></code></pre></div>
   <img src="./flow6.png"  class="center"  style="border-radius: 8px;"  />
 
