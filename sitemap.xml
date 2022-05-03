@@ -3,16 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/</loc>
-    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/power-automate-send-data-from-powershell-to-excel/</loc>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/intune/</loc>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/microsoft-graph/</loc>
-    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/o365/</loc>
-    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/</loc>
-    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/power-automate/</loc>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/powershell/</loc>
     <lastmod>2022-04-20T00:00:00+00:00</lastmod>
@@ -20,16 +32,10 @@
     <loc>/tags/rest-api/</loc>
     <lastmod>2022-04-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2022-04-20T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/post/working-with-microsoft-graph-powershell-sdk/</loc>
     <lastmod>2022-04-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/macosresources/</loc>
-    <lastmod>2022-04-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/intune/</loc>
     <lastmod>2022-04-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/intune-for-macos-configure-profiles/</loc>
@@ -58,6 +64,9 @@
   </url><url>
     <loc>/post/o365-license-report-with-friendly-names/</loc>
     <lastmod>2021-04-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/create-power-automate-flows-with-powershell-reports/</loc>
+    <lastmod>2021-04-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/remove-document-redirection-vpn/</loc>
     <lastmod>2021-04-01T00:00:00+00:00</lastmod>
