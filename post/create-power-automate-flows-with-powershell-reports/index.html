@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Collect data in an Azure Table with Power Automate and PowerShell ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="If there is one thing I love it is automation. If you are a systems administrator, you have probably at some point needed to create some reports using PowerShell. Usually you would do this manually and export this to a CSV them hand off the report in an email or through SharePoint ect. But how can we automate this process?
+While you could run PowerShell scripts as a scheduled task to fire off an email which is quick and dirty."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/create-power-automate-flows-with-powershell-reports/" />
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Page(\/post\/Create-Power-Automate-Flows-with-PowerShell-Reports\/index.md)', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Collect data in an Azure Table with Power Automate and PowerShell"/>
+<meta name="twitter:description" content="If there is one thing I love it is automation. If you are a systems administrator, you have probably at some point needed to create some reports using PowerShell. Usually you would do this manually and export this to a CSV them hand off the report in an email or through SharePoint ect. But how can we automate this process?
+While you could run PowerShell scripts as a scheduled task to fire off an email which is quick and dirty."/>
+
+
+
+<meta property="og:title" content="Collect data in an Azure Table with Power Automate and PowerShell" />
+<meta property="og:description" content="If there is one thing I love it is automation. If you are a systems administrator, you have probably at some point needed to create some reports using PowerShell. Usually you would do this manually and export this to a CSV them hand off the report in an email or through SharePoint ect. But how can we automate this process?
+While you could run PowerShell scripts as a scheduled task to fire off an email which is quick and dirty." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/create-power-automate-flows-with-powershell-reports/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-04T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text">Invoke-Blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Collect data in an Azure Table with Power Automate and PowerShell</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          April 4, 2021
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/o365/">#O365</a>&nbsp;
+        
+          <a href="/tags/intune/">#Intune</a>&nbsp;
+        
+          <a href="/tags/power-automate/">#Power Automate</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <p>If there is one thing I love it is automation. If you are a systems administrator, you have probably at some point needed to create some reports using PowerShell. Usually you would do this manually and export this to a CSV them hand off the report in an email or through SharePoint ect. But how can we automate this process?</p>
+<p>While you could run PowerShell scripts as a scheduled task to fire off an email which is quick and dirty. But is there a more elegant solution? In comes Power Automate Flows.</p>
+<p>First I am going to create an Azure Storage Table to hold our report data. Why? While this is not 100% necessary, I like the idea of retaining the data for future use, or wowing the client/boss with a PowerBi report. Log into Azure and create a v2 storage account. Go to &ldquo;Tables&rdquo; and create a table. Name it whatever you desire.</p>
+
+  <img src="./1.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Here I have created a couple tables to hold different reports.</p>
+<p>Now lets log into Power Automate and create our flow.</p>
+<p>Select &ldquo;New Flow&rdquo; then &ldquo;Automated Cloud Flow&rdquo;. Click Skip without entering a trigger. We will do this manually</p>
+
+  <img src="./2.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Now lets create our trigger. We will use &ldquo;When a HTTP request is recieved&rdquo;</p>
+
+  <img src="./3.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Now we need to generate a JSON schema. To do this run your powershell report. Here is the report I will be using</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Connect-AzureAD
+</span></span><span style="display:flex;"><span>$TenantID = Get-AzureADTenantDetail | select -ExpandProperty ObjectID
+</span></span><span style="display:flex;"><span>$users = Get-AzureADUser -all $true | where assignedlicenses <span style="color:#f92672">-ne</span> $null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$list = <span style="color:#66d9ef">[System.Collections.Generic.List[PsObject]]</span>::new()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($user <span style="color:#66d9ef">in</span> $users)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	$licenses = ($user).assignedlicenses.skuid | <span style="color:#66d9ef">foreach</span> { (Get-AzureADSubscribedSku -ObjectID ($($TenantID) + <span style="color:#e6db74">&#39;_&#39;</span> + $_)).skupartnumber }
+</span></span><span style="display:flex;"><span>	$lic = $licenses -join <span style="color:#e6db74">&#39; &#39;</span>
+</span></span><span style="display:flex;"><span>	$licComma = $lic <span style="color:#f92672">-replace</span> <span style="color:#e6db74">&#39; &#39;</span>, <span style="color:#e6db74">&#39;,&#39;</span>
+</span></span><span style="display:flex;"><span>	$list.add(<span style="color:#66d9ef">[PSCustomObject]</span>@{
+</span></span><span style="display:flex;"><span>			Name = $user.displayname
+</span></span><span style="display:flex;"><span>			Email = $user.UserPrincipalName
+</span></span><span style="display:flex;"><span>			licenses = $licComma
+</span></span><span style="display:flex;"><span>			StreetAddress = $user.streetaddress
+</span></span><span style="display:flex;"><span>		})
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This report will generate a list of licensed users with their license details and location. To generate our sample JSON payload, just convert the output to JSON:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$list | ConvertTo-Json
+</span></span></code></pre></div><p>Grab the output and slap it into the sample JSON payload. Heres what the schema looks like this:</p>
+<pre tabindex="0"><code>{
+    &#34;type&#34;: &#34;array&#34;,
+    &#34;items&#34;: {
+        &#34;type&#34;: &#34;object&#34;,
+        &#34;properties&#34;: {
+            &#34;Name&#34;: {
+                &#34;type&#34;: &#34;string&#34;
+            },
+            &#34;Email&#34;: {
+                &#34;type&#34;: &#34;string&#34;
+            },
+            &#34;licenses&#34;: {
+                &#34;type&#34;: &#34;string&#34;
+            },
+            &#34;StreetAddress&#34;: {
+                &#34;type&#34;: &#34;string&#34;
+            }
+        },
+        &#34;required&#34;: [
+            &#34;Name&#34;,
+            &#34;Email&#34;,
+            &#34;licenses&#34;,
+            &#34;StreetAddress&#34;
+        ]
+    }
+}
+</code></pre><p>Now Click next step. Search for &ldquo;Azure Table Storage&rdquo;. Next, setup the connection.</p>
+
+  <img src="./4.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Set the connection name to something descriptive. The Storage account name is the exact name as its displayed on your account. The storage key is found under Settings / Access Keys</p>
+
+  <img src="./5.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Next you&rsquo;ll be asked to enter a partition Key, Row Key and Entity. For parition key we will use partition1 (this can be anything you want). For row key we will use &ldquo;Name&rdquo;. For entity select &ldquo;Current Item&rdquo;</p>
+
+  <img src="./6.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>At this point our flow is good enough to get data into our table. Go ahead and click Save.</p>
+<p>Once saved, click on the first step &ldquo;When a HTTP request is received&rdquo;. Copy the HTTP Post URL.</p>
+
+  <img src="./7.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Now, over in our script lets add what we need to POST the data. We need to generate a header and use invoke rest method:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$header = @{ <span style="color:#e6db74">&#39;Content-Type&#39;</span> = <span style="color:#e6db74">&#34;application/json&#34;</span> }
+</span></span><span style="display:flex;"><span>$flowheader = $list
+</span></span><span style="display:flex;"><span>$flow = <span style="color:#e6db74">&#34;https://prod-133.westus.logic.azure.com_ect&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Invoke-RestMethod -Method Post -Body $($flowheader | ConvertTo-Json -Compress) -uri $flow -Headers $header
+</span></span></code></pre></div><p>Our header specifies that we are sending &ldquo;application/json&rdquo; data. If we do not include this, our POST operation will fail. The uri parameter of invoke rest method is the URL we copied from our first flow step.</p>
+<p>Ok to test we just run our entire script. You can check My flows to see if the status was a success.</p>
+
+  <img src="./8.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Now go over to your Azure storage account. Use the Storage explorer to confirm the table was filled.</p>
+
+  <img src="./9.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Now we see it was a success! Our table is filled with the output of our PS script. We can create more steps in our flow to take this data and post it to teams, send an email, upload to SharePoint ect.</p>
+<p>I will quickly demo how to send this to a email as an HTML table. Lets go back 
+to our flow and add some more steps. Select New Step and add &ldquo;Get Entities&rdquo;</p>
+
+  <img src="./10.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>If you want to filter based on property criteria, you can use and OData filter query. An example would be  <code>StreetAddress eq '1234 Fake Street'</code></p>
+<p>This query would only output users with the street address parameter of &lsquo;1234 Fake Street&rsquo;.</p>
+<p>Select New Step and use &ldquo;Initialize Variable&rdquo;.  Set name to &lsquo;Table&rsquo;, type to &lsquo;Array&rsquo;. Value is &lsquo;Get entities result list of entities&rsquo; from our dynamic content</p>
+
+  <img src="./11.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Next, we will create an HTML table. From use the dynamic content of the output from our array &ldquo;Table&rdquo;</p>
+
+  <img src="./12.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>The next step is optional. If you only want to fill certain properties from the array to our HTML table, create a step &ldquo;Data operation - Select&rdquo;</p>
+<p>example:</p>
+<p>From - Table
+Map : Name | item()?[&lsquo;Name&rsquo;]</p>
+<p>Map : Email  | item()?[&lsquo;Email&rsquo;]</p>
+<p>Input the selection values inter the expression field as shown:</p>
+
+  <img src="./13.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>Last we will generate an email with the HTML table we created.</p>
+<p>Create a new step &ldquo;Send an Email&rdquo;. In body select dynamic content &ldquo;Output&rdquo; . Alternatively you could put the &ldquo;Output&rdquo; in attachments.</p>
+
+  <img src="./14.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>And that&rsquo;s it! You should have a good foundation here to create some nifty flows. Combine this with Azure Automation to run the reports on a schedule.</p>
+<p>Credit to the Intune Training youtube channel for their amazing example <a href="https://www.youtube.com/watch?v=MVyGn35zoT4" target="_blank">
+    Using Power Automate Flows to Collect Custom Client Inventory - Part 1
+  </a></p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/post/o365-license-report-with-friendly-names/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Export O365 User License Report with friendly names</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="/post/remove-document-redirection-vpn/">
+                  <span class="button__text">Remove Document Redirection Policies over VPN</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  davidjust.com © 2022     
+  <div class="footer__inner">    
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+    <script src="/assets/clipboard.js" ></script>
+
+
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELHH4HTZ7"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-WELHH4HTZ7', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>
