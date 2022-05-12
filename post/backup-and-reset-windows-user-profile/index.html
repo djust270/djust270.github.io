@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Backup and Reset Windows User Profile ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Premise If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/backup-and-reset-windows-user-profile/" />
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Page(\/post\/Backup-And-Reset-Windows-User-Profile\/index.md)', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Backup and Reset Windows User Profile"/>
+<meta name="twitter:description" content="Premise If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists."/>
+
+
+
+<meta property="og:title" content="Backup and Reset Windows User Profile" />
+<meta property="og:description" content="Premise If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/backup-and-reset-windows-user-profile/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-12T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text">Invoke-Blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Backup and Reset Windows User Profile</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          May 12, 2022
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/windows/">#Windows</a>&nbsp;
+        
+          <a href="/tags/powershell/">#PowerShell</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <h1 id="premise">Premise <a href="#premise">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h1>
+
+<p>If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists. If the issue is not present in another Windows account, then you have a case of a borked Windows user profile.</p>
+<p>You can try to keep fixing the issue, but Ive found its typically faster and easier to just backup and &ldquo;blow-out&rdquo; the user profile</p>
+<h3 id="backing-up-user-data-and-removing-the-profile">Backing up user data and removing the profile. <a href="#backing-up-user-data-and-removing-the-profile">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h3>
+
+<ol>
+<li>
+<p>Create a backup folder to store files. C:\backup for example.</p>
+</li>
+<li>
+<p>Export browser data, including saved passwords, bookmarks etc. If you store passwords in Chrome/Firefox/Edge and you are not syncing an account, the passwords will be lost unless they are exported.</p>
+</li>
+<li>
+<p>Make note of any obvious user customizations, such as taskbar layout, outlook layout, background pictures etc.</p>
+</li>
+<li>
+<p>Make note of any user installed software. This can be done by checking the Uninstall registry key under <code>HKCU\Software\Microsoft\Windows\CurrentVersion\Uninstall</code></p>
+</li>
+<li>
+<p>Sign out and sign into a local admin account</p>
+</li>
+<li>
+<p>Remove the affected user profile registry key under <code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\</code> The keyname will be the SID of the user account.</p>
+</li>
+<li>
+<p>Reboot</p>
+</li>
+<li>
+<p>After reboot, log back into the local admin account. Rename the user folder adding .bak to the name.</p>
+<p>Some of this process can be easily automated. The following script will export a list of user specific programs, also backup and remove the user profile registry key.</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e">#Requires -RunAsAdministrator</span>
+</span></span><span style="display:flex;"><span>$userprofiles = (Get-ChildItem registry::<span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\&#34;</span> | get-itemproperty).pschildname
+</span></span><span style="display:flex;"><span>$users = <span style="color:#66d9ef">foreach</span> ($user <span style="color:#66d9ef">in</span> ($userprofiles | where { $_.Length <span style="color:#f92672">-gt</span> 20 }))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	$sid = $user
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">[pscustomobject]</span>@{
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#39;UserName&#39;</span> = (<span style="color:#66d9ef">[System.Security.Principal.SecurityIdentifier]</span>($sid)).translate(<span style="color:#66d9ef">[System.Security.Principal.NTAccount]</span>).value
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#39;SID&#39;</span>	   = $sid
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#39;ProfilePath&#39;</span> = (Get-ItemProperty registry::HKEY_LOCAL_MACHINE\<span style="color:#e6db74">&#34;SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\$sid&#34;</span>).ProfileImagePath
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">Catch</span> {}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Welcome
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	Write-Host <span style="color:#e6db74">&#34;####################################################################################################&#34;</span>
+</span></span><span style="display:flex;"><span>	Write-Host <span style="color:#e6db74">&#34;User Profile Backup/Removal Tool Version 1.0</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">Author: David Just&#34;</span> -ForegroundColor DarkCyan -BackgroundColor Black
+</span></span><span style="display:flex;"><span>	Write-Host <span style="color:#e6db74">&#34;Welcome to the User Profile Backup/Removal Tool&#34;</span> -ForegroundColor Green -BackgroundColor Black
+</span></span><span style="display:flex;"><span>	Write-Host <span style="color:#e6db74">&#34;#################################################################################################### </span><span style="color:#ae81ff">`r`n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>	Write-Warning <span style="color:#e6db74">&#34;This tool performs potentially descructive actions. </span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">Before running, please export and save browser passwords, bookmarks etc.&#34;</span>
+</span></span><span style="display:flex;"><span>	pause
+</span></span><span style="display:flex;"><span>	Write-Host <span style="color:#e6db74">&#34;[1] Backup/remove user profile registry key and reboot</span><span style="color:#ae81ff">`n</span><span style="color:#e6db74">[2] Rename user profile folder&#34;</span>
+</span></span><span style="display:flex;"><span>	$global:option = <span style="color:#66d9ef">[int]</span>(Read-Host <span style="color:#e6db74">&#34;Which step would you like to perform?&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> ListUserProgram
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>		$SID,
+</span></span><span style="display:flex;"><span>		$ProfilePath 
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>	reg load HKU\brokenuser $ProfilePath\NTUSER.DAT
+</span></span><span style="display:flex;"><span>	$RegPath = <span style="color:#e6db74">&#34;registry::HKU\brokenuser\Software\Microsoft\Windows\CurrentVersion\Uninstall&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$softwareTable = Get-Childitem $RegPath -ErrorAction Stop | Get-ItemProperty | where displayname | select displayname, displayversion 
+</span></span><span style="display:flex;"><span>		New-Item -ItemType directory -Path $env:SystemDrive\backup -force | Out-Null
+</span></span><span style="display:flex;"><span>		$softwareTable | Export-Csv <span style="color:#e6db74">&#34;$env:SystemDrive\backup\usersoftware.csv&#34;</span> -NoTypeInformation
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">Catch</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		$_
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;Error exporting user software list&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;Stopping Operation&#34;</span>
+</span></span><span style="display:flex;"><span>		reg unload HKU\brokenuser 
+</span></span><span style="display:flex;"><span>		sleep 5
+</span></span><span style="display:flex;"><span>		exit 1
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Welcome
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> RemoveAndBackupUserProfile {
+</span></span><span style="display:flex;"><span>	[<span style="color:#66d9ef">Cmdletbinding</span>(SupportsShouldProcess)]
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">[string]</span>$SID,
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">[string]</span>$profilepath
+</span></span><span style="display:flex;"><span>	)
+</span></span><span style="display:flex;"><span>	reg export <span style="color:#e6db74">&#34;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\$sid&#34;</span> $env:SystemDrive\backup\profile.reg
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	$profilepath | Out-File $env:SystemDrive\backup\profilepath.txt
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	Remove-Item registry::<span style="color:#e6db74">&#34;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\$sid&#34;</span> -Recurse
+</span></span><span style="display:flex;"><span>	CheckandSuspendBitlocker	
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;Profile removed from registry. Rebooting in 5 seconds&#34;</span>
+</span></span><span style="display:flex;"><span>	shutdown /r /t 5
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> CheckandSuspendBitlocker <span style="color:#75715e"># Suspend Bitlocker protection for reboot</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	$Status = (Get-BitLockerVolume -MountPoint $env:systemdrive).protectionstatus
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ($Status <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;On&#34;</span>)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;Suspending bitlocker protection...&#34;</span>
+</span></span><span style="display:flex;"><span>		Suspend-BitLocker -MountPoint $env:SystemDrive -RebootCount 1
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">switch</span> ($option)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	1 {
+</span></span><span style="display:flex;"><span>		$index = 1
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">foreach</span> ($user <span style="color:#66d9ef">in</span> $users)
+</span></span><span style="display:flex;"><span>		{
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;[$index] {0}&#34;</span> <span style="color:#f92672">-f</span> $user.username
+</span></span><span style="display:flex;"><span>			$index++
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		$Selection = <span style="color:#66d9ef">[int]</span>(Read-Host <span style="color:#e6db74">&#34;Which user account do you wish to backup and remove?&#34;</span>) - 1		
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		Write-Host <span style="color:#e6db74">&#34;Exporting User Program List...&#34;</span>
+</span></span><span style="display:flex;"><span>		sleep 1
+</span></span><span style="display:flex;"><span>		ListUserProgram -SID ($users[$Selection]).SID -ProfilePath ($users[$Selection]).ProfilePath
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;Program list saved to $env:SystemDrive\backup\usersoftware.csv&#34;</span>
+</span></span><span style="display:flex;"><span>		Pause
+</span></span><span style="display:flex;"><span>		RemoveAndBackupUserProfile -SID ($users[$Selection]).SID -profilepath ($users[$Selection]).ProfilePath -Confirm
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	2 {
+</span></span><span style="display:flex;"><span>		$profilepath = Get-Content $env:SystemDrive\backup\profilepath.txt
+</span></span><span style="display:flex;"><span>		Rename-Item $profilepath -NewName ($profilepath + <span style="color:#e6db74">&#34;.bak&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;Renamed {0} to {1}&#34;</span> <span style="color:#f92672">-f</span> $profilepath,($profilepath + <span style="color:#e6db74">&#34;.bak&#34;</span>)
+</span></span><span style="display:flex;"><span>		sleep 5
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="9">
+<li>Logout. Log back in as the original user</li>
+<li>All user data still remains in the original renamed user folder (including registry information). If needed, move any data needed back from the backup folder.</li>
+<li>Reinstall any user specific programs. If you run the script, these will be listed out in the CSV file under C:\backup.</li>
+</ol>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/post/power-automate-send-data-from-powershell-to-excel/">
+                  <span class="button__text">Get Data from workstations and send to an Excel Table for free</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  davidjust.com © 2022     
+  <div class="footer__inner">    
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+    <script src="/assets/clipboard.js" ></script>
+
+
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELHH4HTZ7"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-WELHH4HTZ7', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>
