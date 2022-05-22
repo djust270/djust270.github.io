@@ -309,12 +309,15 @@ This consits of 3 steps</p>
 <ul>
 <li>Create a shared mailbox for our sending mail account</li>
 <li>Create an application policy to restrict our app from sending as any mailbox other than our service account</li>
+<li>Create a mail enabled security group to apply the application policy to</li>
 </ul>
 <p>We can easily do this in PowerShell:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$mailsender = <span style="color:#66d9ef">[mailaddress]</span><span style="color:#e6db74">&#39;flowservice@justgeeks.co&#39;</span>
 </span></span><span style="display:flex;"><span>$appID = <span style="color:#e6db74">&#39;APP ID you copied down before&#39;</span>
 </span></span><span style="display:flex;"><span>New-Mailbox -Shared -Name $mailsender.user -DisplayName $mailsender.user -Alias $mailsender.user -PrimarySmtpAddress $mailsender.address
-</span></span><span style="display:flex;"><span>New-ApplicationAccessPolicy -AccessRight RestrictAccess -AppId $AppID -PolicyScopeGroupId $mailsender.address -Description <span style="color:#e6db74">&#34;Restrict this app&#39;s access to flow service account&#34;</span>
+</span></span><span style="display:flex;"><span>New-DistributionGroup -Type Security -Name <span style="color:#e6db74">&#39;GraphSendAllowed&#39;</span> -Members $mailsender.user <span style="color:#75715e"># create security group to add graph mail sender to</span>
+</span></span><span style="display:flex;"><span>Set-DistributionGroup <span style="color:#e6db74">&#39;GraphSendAllowd&#39;</span> -HiddenFromAddressListsEnabled $true <span style="color:#75715e"># hide from distribution list</span>
+</span></span><span style="display:flex;"><span>New-ApplicationAccessPolicy -AccessRight RestrictAccess -AppId $AppID -PolicyScopeGroupId <span style="color:#e6db74">&#39;GraphSendAllowed&#39;</span> -Description <span style="color:#e6db74">&#34;Restrict this app&#39;s access to flow service account&#34;</span> <span style="color:#75715e"># apply restriction policy to only allow app send as members of GraphSendAllowed </span>
 </span></span></code></pre></div><h3 id="send-data-from-each-workstation-via-email">Send data from each workstation via email <a href="#send-data-from-each-workstation-via-email">
   <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
@@ -524,6 +527,13 @@ Click add action.</p>
             <hr />
           </div>
           <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="/post/backup-and-reset-windows-user-profile/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Backup and Reset Windows User Profile</span>
+                </a>
+              </span>
             
             
               <span class="button next">

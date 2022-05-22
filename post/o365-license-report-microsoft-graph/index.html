@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        O365 License Report With Friendly Names Using The Microsoft Graph ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="In a previous article, I demonstrated how to export a license report for all users withe the &amp;lsquo;friendly&amp;rsquo; license names using the AzureAD PowerShell module.
+Since then, Microsoft has announced the coming retirement of the AzureAD API (and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDK
+Here I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/o365-license-report-microsoft-graph/" />
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Page(\/post\/O365-License-Report-Microsoft-Graph\/index.md)', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="O365 License Report With Friendly Names Using The Microsoft Graph"/>
+<meta name="twitter:description" content="In a previous article, I demonstrated how to export a license report for all users withe the &lsquo;friendly&rsquo; license names using the AzureAD PowerShell module.
+Since then, Microsoft has announced the coming retirement of the AzureAD API (and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDK
+Here I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph."/>
+
+
+
+<meta property="og:title" content="O365 License Report With Friendly Names Using The Microsoft Graph" />
+<meta property="og:description" content="In a previous article, I demonstrated how to export a license report for all users withe the &lsquo;friendly&rsquo; license names using the AzureAD PowerShell module.
+Since then, Microsoft has announced the coming retirement of the AzureAD API (and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDK
+Here I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/o365-license-report-microsoft-graph/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-05-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-05-22T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text">Invoke-Blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">O365 License Report With Friendly Names Using The Microsoft Graph</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          May 22, 2022
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/o365/">#O365</a>&nbsp;
+        
+          <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
+        
+          <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
+        
+      </span>
+    
+
+    
+      <figure class="post-cover">
+  
+    <img src="/post/o365-license-report-microsoft-graph/ConnectGraph.png" alt="O365 License Report With Friendly Names Using The Microsoft Graph"/>
+  
+
+  
+</figure>
+
+    
+
+    <div class="post-content">
+      
+      <p><a href="https://davidjust.com/post/o365-license-report-with-friendly-names/" target="_blank">
+    In a previous article
+  </a>, I demonstrated how to export a license report for all users withe the &lsquo;friendly&rsquo; license names using the AzureAD PowerShell module.</p>
+<p>Since then, Microsoft has announced the coming <a href="https://docs.microsoft.com/en-us/graph/migrate-azure-ad-graph-overview" target="_blank">
+    retirement of the AzureAD API
+  </a> (and assocaiated PowerShell modules). You should be migrating all scripts over to using the <a href="https://docs.microsoft.com/en-us/powershell/microsoftgraph/overview?view=graph-powershell-beta" target="_blank">
+    Microsoft Graph PowerShell SDK
+  </a></p>
+<p>Here I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph. I you need a primer on the Graph, see my previous article <a href="https://davidjust.com/post/working-with-microsoft-graph-powershell-sdk/" target="_blank">
+    Working with the Microsoft Graph PowerShell SDK
+  </a></p>
+<p>When querying Graph for license information, you will be previded with the sku part number for each license instead of the &ldquo;friendly name&rdquo;. First I will demonstate creating a hash table to lookup the friendly name from the license sku part number :</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$FriendlyLicenses = @{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;O365_BUSINESS_ESSENTIALS&#39;</span>		     = <span style="color:#e6db74">&#39;Office 365 Business Essentials&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;O365_BUSINESS_PREMIUM&#39;</span>			     = <span style="color:#e6db74">&#39;Office 365 Business Premium&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DESKLESSPACK&#39;</span>					     = <span style="color:#e6db74">&#39;Office 365 (Plan K1)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DESKLESSWOFFPACK&#39;</span>				     = <span style="color:#e6db74">&#39;Office 365 (Plan K2)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;LITEPACK&#39;</span>						     = <span style="color:#e6db74">&#39;Office 365 (Plan P1)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGESTANDARD&#39;</span>				     = <span style="color:#e6db74">&#39;Office 365 Exchange Online Only&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDPACK&#39;</span>					     = <span style="color:#e6db74">&#39;Enterprise Plan E1&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDWOFFPACK&#39;</span>				     = <span style="color:#e6db74">&#39;Office 365 (Plan E2)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEPACK&#39;</span>					 = <span style="color:#e6db74">&#39;Enterprise Plan E3&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEPACKLRG&#39;</span>				     = <span style="color:#e6db74">&#39;Enterprise Plan E3&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEWITHSCAL&#39;</span>				 = <span style="color:#e6db74">&#39;Enterprise Plan E4&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDPACK_STUDENT&#39;</span>			     = <span style="color:#e6db74">&#39;Office 365 (Plan A1) for Students&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDWOFFPACKPACK_STUDENT&#39;</span>	     = <span style="color:#e6db74">&#39;Office 365 (Plan A2) for Students&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEPACK_STUDENT&#39;</span>			 = <span style="color:#e6db74">&#39;Office 365 (Plan A3) for Students&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEWITHSCAL_STUDENT&#39;</span>		 = <span style="color:#e6db74">&#39;Office 365 (Plan A4) for Students&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDPACK_FACULTY&#39;</span>			     = <span style="color:#e6db74">&#39;Office 365 (Plan A1) for Faculty&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDWOFFPACKPACK_FACULTY&#39;</span>	     = <span style="color:#e6db74">&#39;Office 365 (Plan A2) for Faculty&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEPACK_FACULTY&#39;</span>			 = <span style="color:#e6db74">&#39;Office 365 (Plan A3) for Faculty&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEWITHSCAL_FACULTY&#39;</span>		 = <span style="color:#e6db74">&#39;Office 365 (Plan A4) for Faculty&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEPACK_B_PILOT&#39;</span>			 = <span style="color:#e6db74">&#39;Office 365 (Enterprise Preview)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARD_B_PILOT&#39;</span>				     = <span style="color:#e6db74">&#39;Office 365 (Small Business Preview)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;VISIOCLIENT&#39;</span>					     = <span style="color:#e6db74">&#39;Visio Pro Online&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;POWER_BI_ADDON&#39;</span>					 = <span style="color:#e6db74">&#39;Office 365 Power BI Addon&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;POWER_BI_INDIVIDUAL_USE&#39;</span>		     = <span style="color:#e6db74">&#39;Power BI Individual User&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;POWER_BI_STANDALONE&#39;</span>			     = <span style="color:#e6db74">&#39;Power BI Stand Alone&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;POWER_BI_STANDARD&#39;</span>				     = <span style="color:#e6db74">&#39;Power-BI Standard&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;PROJECTESSENTIALS&#39;</span>				     = <span style="color:#e6db74">&#39;Project Lite&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;PROJECTCLIENT&#39;</span>					     = <span style="color:#e6db74">&#39;Project Professional&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;PROJECTONLINE_PLAN_1&#39;</span>			     = <span style="color:#e6db74">&#39;Project Online&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;PROJECTONLINE_PLAN_2&#39;</span>			     = <span style="color:#e6db74">&#39;Project Online and PRO&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ProjectPremium&#39;</span>					 = <span style="color:#e6db74">&#39;Project Online Premium&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ECAL_SERVICES&#39;</span>					     = <span style="color:#e6db74">&#39;ECAL&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EMS&#39;</span>							     = <span style="color:#e6db74">&#39;Enterprise Mobility Suite&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;RIGHTSMANAGEMENT_ADHOC&#39;</span>			 = <span style="color:#e6db74">&#39;Windows Azure Rights Management&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;MCOMEETADV&#39;</span>						 = <span style="color:#e6db74">&#39;PSTN conferencing&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SHAREPOINTSTORAGE&#39;</span>				     = <span style="color:#e6db74">&#39;SharePoint storage&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;PLANNERSTANDALONE&#39;</span>				     = <span style="color:#e6db74">&#39;Planner Standalone&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;CRMIUR&#39;</span>							 = <span style="color:#e6db74">&#39;CMRIUR&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;BI_AZURE_P1&#39;</span>					     = <span style="color:#e6db74">&#39;Power BI Reporting and Analytics&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;INTUNE_A&#39;</span>						     = <span style="color:#e6db74">&#39;Windows Intune Plan A&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;PROJECTWORKMANAGEMENT&#39;</span>			     = <span style="color:#e6db74">&#39;Office 365 Planner Preview&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ATP_ENTERPRISE&#39;</span>					 = <span style="color:#e6db74">&#39;Exchange Online Advanced Threat Protection&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EQUIVIO_ANALYTICS&#39;</span>				     = <span style="color:#e6db74">&#39;Office 365 Advanced eDiscovery&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;AAD_BASIC&#39;</span>						     = <span style="color:#e6db74">&#39;Azure Active Directory Basic&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;RMS_S_ENTERPRISE&#39;</span>				     = <span style="color:#e6db74">&#39;Azure Active Directory Rights Management&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;AAD_PREMIUM&#39;</span>					     = <span style="color:#e6db74">&#39;Azure Active Directory Premium&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;MFA_PREMIUM&#39;</span>					     = <span style="color:#e6db74">&#39;Azure Multi-Factor Authentication&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDPACK_GOV&#39;</span>				     = <span style="color:#e6db74">&#39;Microsoft Office 365 (Plan G1) for Government&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDWOFFPACK_GOV&#39;</span>			     = <span style="color:#e6db74">&#39;Microsoft Office 365 (Plan G2) for Government&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEPACK_GOV&#39;</span>				 = <span style="color:#e6db74">&#39;Microsoft Office 365 (Plan G3) for Government&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEWITHSCAL_GOV&#39;</span>			 = <span style="color:#e6db74">&#39;Microsoft Office 365 (Plan G4) for Government&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DESKLESSPACK_GOV&#39;</span>				     = <span style="color:#e6db74">&#39;Microsoft Office 365 (Plan K1) for Government&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ESKLESSWOFFPACK_GOV&#39;</span>			     = <span style="color:#e6db74">&#39;Microsoft Office 365 (Plan K2) for Government&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGESTANDARD_GOV&#39;</span>			     = <span style="color:#e6db74">&#39;Microsoft Office 365 Exchange Online (Plan 1) only for Government&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGEENTERPRISE_GOV&#39;</span>			 = <span style="color:#e6db74">&#39;Microsoft Office 365 Exchange Online (Plan 2) only for Government&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SHAREPOINTDESKLESS_GOV&#39;</span>			 = <span style="color:#e6db74">&#39;SharePoint Online Kiosk&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGE_S_DESKLESS_GOV&#39;</span>		     = <span style="color:#e6db74">&#39;Exchange Kiosk&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;RMS_S_ENTERPRISE_GOV&#39;</span>			     = <span style="color:#e6db74">&#39;Windows Azure Active Directory Rights Management&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;OFFICESUBSCRIPTION_GOV&#39;</span>			 = <span style="color:#e6db74">&#39;Office ProPlus&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;MCOSTANDARD_GOV&#39;</span>				     = <span style="color:#e6db74">&#39;Lync Plan 2G&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SHAREPOINTWAC_GOV&#39;</span>				     = <span style="color:#e6db74">&#39;Office Online for Government&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SHAREPOINTENTERPRISE_GOV&#39;</span>		     = <span style="color:#e6db74">&#39;SharePoint Plan 2G&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGE_S_ENTERPRISE_GOV&#39;</span>		     = <span style="color:#e6db74">&#39;Exchange Plan 2G&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGE_S_ARCHIVE_ADDON_GOV&#39;</span>	     = <span style="color:#e6db74">&#39;Exchange Online Archiving&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGE_S_DESKLESS&#39;</span>			     = <span style="color:#e6db74">&#39;Exchange Online Kiosk&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SHAREPOINTDESKLESS&#39;</span>				 = <span style="color:#e6db74">&#39;SharePoint Online Kiosk&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SHAREPOINTWAC&#39;</span>					     = <span style="color:#e6db74">&#39;Office Online&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;YAMMER_ENTERPRISE&#39;</span>				     = <span style="color:#e6db74">&#39;Yammer for the Starship Enterprise&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGE_L_STANDARD&#39;</span>			     = <span style="color:#e6db74">&#39;Exchange Online (Plan 1)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;MCOLITE&#39;</span>						     = <span style="color:#e6db74">&#39;Lync Online (Plan 1)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SHAREPOINTLITE&#39;</span>					 = <span style="color:#e6db74">&#39;SharePoint Online (Plan 1)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;OFFICE_PRO_PLUS_SUBSCRIPTION_SMBIZ&#39;</span> = <span style="color:#e6db74">&#39;Office ProPlus&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGE_S_STANDARD_MIDMARKET&#39;</span>	     = <span style="color:#e6db74">&#39;Exchange Online (Plan 1)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;MCOSTANDARD_MIDMARKET&#39;</span>			     = <span style="color:#e6db74">&#39;Lync Online (Plan 1)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SHAREPOINTENTERPRISE_MIDMARKET&#39;</span>	 = <span style="color:#e6db74">&#39;SharePoint Online (Plan 1)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;OFFICESUBSCRIPTION&#39;</span>				 = <span style="color:#e6db74">&#39;Office ProPlus&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;YAMMER_MIDSIZE&#39;</span>					 = <span style="color:#e6db74">&#39;Yammer&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DYN365_ENTERPRISE_PLAN1&#39;</span>		     = <span style="color:#e6db74">&#39;Dynamics 365 Customer Engagement Plan Enterprise Edition&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEPREMIUM_NOPSTNCONF&#39;</span>	     = <span style="color:#e6db74">&#39;Enterprise E5 (without Audio Conferencing)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ENTERPRISEPREMIUM&#39;</span>				     = <span style="color:#e6db74">&#39;Enterprise E5 (with Audio Conferencing)&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;MCOSTANDARD&#39;</span>					     = <span style="color:#e6db74">&#39;Skype for Business Online Standalone Plan 2&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;PROJECT_MADEIRA_PREVIEW_IW_SKU&#39;</span>	 = <span style="color:#e6db74">&#39;Dynamics 365 for Financials for IWs&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDWOFFPACK_IW_STUDENT&#39;</span>	     = <span style="color:#e6db74">&#39;Office 365 Education for Students&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDWOFFPACK_IW_FACULTY&#39;</span>	     = <span style="color:#e6db74">&#39;Office 365 Education for Faculty&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EOP_ENTERPRISE_FACULTY&#39;</span>			 = <span style="color:#e6db74">&#39;Exchange Online Protection for Faculty&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGESTANDARD_STUDENT&#39;</span>		     = <span style="color:#e6db74">&#39;Exchange Online (Plan 1) for Students&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;OFFICESUBSCRIPTION_STUDENT&#39;</span>		 = <span style="color:#e6db74">&#39;Office ProPlus Student Benefit&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDWOFFPACK_FACULTY&#39;</span>		     = <span style="color:#e6db74">&#39;Office 365 Education E1 for Faculty&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;STANDARDWOFFPACK_STUDENT&#39;</span>		     = <span style="color:#e6db74">&#39;Microsoft Office 365 (Plan A2) for Students&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DYN365_FINANCIALS_BUSINESS_SKU&#39;</span>	 = <span style="color:#e6db74">&#39;Dynamics 365 for Financials Business Edition&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DYN365_FINANCIALS_TEAM_MEMBERS_SKU&#39;</span> = <span style="color:#e6db74">&#39;Dynamics 365 for Team Members Business Edition&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;FLOW_FREE&#39;</span>						     = <span style="color:#e6db74">&#39;Microsoft Flow Free&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;POWER_BI_PRO&#39;</span>					     = <span style="color:#e6db74">&#39;Power BI Pro&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;O365_BUSINESS&#39;</span>					     = <span style="color:#e6db74">&#39;Office 365 Business&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DYN365_ENTERPRISE_SALES&#39;</span>		     = <span style="color:#e6db74">&#39;Dynamics Office 365 Enterprise Sales&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;RIGHTSMANAGEMENT&#39;</span>				     = <span style="color:#e6db74">&#39;Rights Management&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;PROJECTPROFESSIONAL&#39;</span>			     = <span style="color:#e6db74">&#39;Project Professional&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;VISIOONLINE_PLAN1&#39;</span>				     = <span style="color:#e6db74">&#39;Visio Online Plan 1&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGEENTERPRISE&#39;</span>				 = <span style="color:#e6db74">&#39;Exchange Online Plan 2&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DYN365_ENTERPRISE_P1_IW&#39;</span>		     = <span style="color:#e6db74">&#39;Dynamics 365 P1 Trial for Information Workers&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DYN365_ENTERPRISE_TEAM_MEMBERS&#39;</span>	 = <span style="color:#e6db74">&#39;Dynamics 365 For Team Members Enterprise Edition&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;CRMSTANDARD&#39;</span>					     = <span style="color:#e6db74">&#39;Microsoft Dynamics CRM Online Professional&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGEARCHIVE_ADDON&#39;</span>			     = <span style="color:#e6db74">&#39;Exchange Online Archiving For Exchange Online&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EXCHANGEDESKLESS&#39;</span>				     = <span style="color:#e6db74">&#39;Exchange Online Kiosk&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SPZA_IW&#39;</span>						     = <span style="color:#e6db74">&#39;App Connect&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;WINDOWS_STORE&#39;</span>					     = <span style="color:#e6db74">&#39;Windows Store for Business&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;MCOEV&#39;</span>							     = <span style="color:#e6db74">&#39;Microsoft Phone System&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;VIDEO_INTEROP&#39;</span>					     = <span style="color:#e6db74">&#39;Polycom Skype Meeting Video Interop for Skype for Business&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SPE_E5&#39;</span>							 = <span style="color:#e6db74">&#39;Microsoft 365 E5&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;SPE_E3&#39;</span>							 = <span style="color:#e6db74">&#39;Microsoft 365 E3&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;ATA&#39;</span>							     = <span style="color:#e6db74">&#39;Advanced Threat Analytics&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;MCOPSTN2&#39;</span>						     = <span style="color:#e6db74">&#39;Domestic and International Calling Plan&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;FLOW_P1&#39;</span>						     = <span style="color:#e6db74">&#39;Microsoft Flow Plan 1&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;FLOW_P2&#39;</span>						     = <span style="color:#e6db74">&#39;Microsoft Flow Plan 2&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DeveloperPack&#39;</span>					     = <span style="color:#e6db74">&#39;OFFICE 365 ENTERPRISE E3 DEVELOPER&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;EMSPremium&#39;</span>						 = <span style="color:#e6db74">&#39;ENTERPRISE MOBILITY + SECURITY E5&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;RightsManagemnt&#39;</span>				     = <span style="color:#e6db74">&#39;AZURE INFORMATION PROTECTION PLAN 1&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;DYN365_ENTERPRISE_CUSTOMER_SERVICE&#39;</span> = <span style="color:#e6db74">&#39;DYNAMICS 365 FOR CUSTOMER SERVICE ENTERPRISE EDITION&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;POWERFLOW_P1&#39;</span>					     = <span style="color:#e6db74">&#39;Microsoft PowerApps Plan 1&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;POWERFLOW_P2&#39;</span>					     = <span style="color:#e6db74">&#39;Microsoft PowerApps Plan 2&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;AAD_PREMIUM_P1&#39;</span>					 = <span style="color:#e6db74">&#39;Azure Active Directory Premium P1&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;AAD_PREMIUM_P2&#39;</span>					 = <span style="color:#e6db74">&#39;Azure Active Directory Premium P2&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;TEAMS_EXPLORATORY&#39;</span>				     = <span style="color:#e6db74">&#39;Teams Exploratory&#39;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#39;MDATP_XPLAT&#39;</span>					     = <span style="color:#e6db74">&#39;Microsoft Defender for Endpoint P2&#39;</span>
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Above we see a simple hash table mapping all skus to the friendly name. Simply index the hashtable to get the value <code>$FriendlyLicenses['AAD_Basic']</code> for example.</p>
+<p>Next, we connect to Graph with the appropriate permission scopes</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Get necessary permission scoped</span>
+</span></span><span style="display:flex;"><span>$perms = <span style="color:#e6db74">&#39;User.Read.All&#39;</span>, <span style="color:#e6db74">&#39;User.ReadWrite.All&#39;</span>,<span style="color:#e6db74">&#39;Directory.Read.All&#39;</span>
+</span></span><span style="display:flex;"><span>Connect-MgGraph -UseDeviceAuthentication -ForceRefresh -Scopes $perms 
+</span></span><span style="display:flex;"><span>Select-MgProfile beta
+</span></span></code></pre></div><p>Next, we can initialize some neccesary varibles. We need to get the license skus currenly purchased under the tenant, including the total cound and count used. Then we need to get a list of all users.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">[Array]</span>$Skus = Get-MgSubscribedSku <span style="color:#75715e"># Get all skus in the tenant</span>
+</span></span><span style="display:flex;"><span>$TenantLicenseDetails = $Skus | select SkuPartNumber, ConsumedUnits, @{ n = <span style="color:#e6db74">&#39;TotalUnits&#39;</span>; e = { $_.prepaidunits.enabled } }, @{ n = <span style="color:#e6db74">&#39;FriendlyName&#39;</span>; e= {$_ | <span style="color:#66d9ef">foreach</span> { $FriendlyLicenses[$_.SkuPartNumber] } } } <span style="color:#75715e"># Get the Sku name, the total number assigned, the number used, and the friendly name</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[Array]</span>$Users = Get-MGUser -All <span style="color:#75715e"># Get all user accounts</span>
+</span></span><span style="display:flex;"><span>$i = 0 <span style="color:#75715e"># Increment variable</span>
+</span></span></code></pre></div><p>Now we need to loop through the users and build a record of each users license assignment(s)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($user <span style="color:#66d9ef">in</span> $Users)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Write-Progress -Activity <span style="color:#e6db74">&#34;Processing User License details&#34;</span> -Status <span style="color:#e6db74">&#34;Working on </span>$($user.displayname)<span style="color:#e6db74">&#34;</span> -PercentComplete (($i / $Users.Count) * 100)
+</span></span><span style="display:flex;"><span>	$user.LicenseDetails = Get-MgUserLicenseDetail -UserId $user.id
+</span></span><span style="display:flex;"><span>	Start-Sleep -Milliseconds 400
+</span></span><span style="display:flex;"><span>	$i++
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Finally, lets filter out users without any license, and build the properties for our report</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$UserLicenseDetails = $Users | where LicenseDetails | select UserPrincipalName, @{ n = <span style="color:#e6db74">&#39;Licenses&#39;</span>
+</span></span><span style="display:flex;"><span>e = { 
+</span></span><span style="display:flex;"><span>		($_ | <span style="color:#66d9ef">foreach</span> { $_.licensedetails | <span style="color:#66d9ef">foreach</span> { <span style="color:#66d9ef">if</span> ($FriendlyLicenses[$_.SkuPartNumber]) { $FriendlyLicenses[$_.SkuPartNumber] }
+</span></span><span style="display:flex;"><span>					<span style="color:#66d9ef">else</span> { $_.SkuPartID }
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>			}) -join <span style="color:#e6db74">&#39;;&#39;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Now we can export the report. I added in a function to open a handy save file dialog box to prompt for a location and name for the report file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e">#File Save box function </span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Function</span> Get-SaveFileLocation
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">[System.Reflection.Assembly]</span>::LoadWithPartialName(<span style="color:#e6db74">&#34;System.windows.forms&#34;</span>) |
+</span></span><span style="display:flex;"><span>	Out-Null
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	$SaveFileDialog = New-Object System.Windows.Forms.SaveFileDialog
+</span></span><span style="display:flex;"><span>	$SaveFileDialog.initialDirectory = <span style="color:#66d9ef">[system.Environment]</span>::GetFolderPath(<span style="color:#e6db74">&#39;Desktop&#39;</span>)
+</span></span><span style="display:flex;"><span>	$SaveFileDialog.<span style="color:#66d9ef">filter</span> = <span style="color:#e6db74">&#34;All files (*.*)| *.*&#34;</span>
+</span></span><span style="display:flex;"><span>	$SaveFileDialog.ShowDialog() | Out-Null
+</span></span><span style="display:flex;"><span>	$SaveFileDialog.filename
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Write-Verbose <span style="color:#e6db74">&#34;Enter Save FilePath&#34;</span>
+</span></span><span style="display:flex;"><span>$savepath = Get-SaveFileLocation <span style="color:#75715e"># Open Save File dialogbox</span>
+</span></span><span style="display:flex;"><span>$UserLicenseDetails | Export-Csv $savepath -NoTypeInformation <span style="color:#75715e"># Export to CSV</span>
+</span></span><span style="display:flex;"><span>&amp; $savepath <span style="color:#75715e"># Automatically open the CSV once complete</span>
+</span></span></code></pre></div><p>See the full script in my <a href="https://github.com/djust270/Microsoft-Graph-PowerShell-SDK-Scripts" target="_blank">
+    Github Repository
+  </a></p>
+<p>If you have any questions or comments, feel free to drop them down below, or shoot me an email.</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/post/backup-and-reset-windows-user-profile/">
+                  <span class="button__text">Backup and Reset Windows User Profile</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  davidjust.com © 2022     
+  <div class="footer__inner">    
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+    <script src="/assets/clipboard.js" ></script>
+
+
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELHH4HTZ7"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-WELHH4HTZ7', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>

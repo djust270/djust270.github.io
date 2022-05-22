@@ -9,13 +9,53 @@
     <description>Recent content in Posts on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 May 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Get Data from workstation and send to an Excel Table for free</title>
+      <title>O365 License Report With Friendly Names Using The Microsoft Graph</title>
+      <link>/post/o365-license-report-microsoft-graph/</link>
+      <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/o365-license-report-microsoft-graph/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/o365-license-report-microsoft-graph/ConnectGraph.png&#34;/&gt;
+          
+        
+        
+        
+          In a previous article, I demonstrated how to export a license report for all users withe the &amp;lsquo;friendly&amp;rsquo; license names using the AzureAD PowerShell module.
+Since then, Microsoft has announced the coming retirement of the AzureAD API (and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDK
+Here I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Backup and Reset Windows User Profile</title>
+      <link>/post/backup-and-reset-windows-user-profile/</link>
+      <pubDate>Thu, 12 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/backup-and-reset-windows-user-profile/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/backup-and-reset-windows-user-profile/WindowsProfile.png&#34;/&gt;
+          
+        
+        
+        
+          Premise If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Get Data from workstations and send to an Excel Table for free</title>
       <link>/post/power-automate-send-data-from-powershell-to-excel/</link>
       <pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate>
       
