@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+	<meta name="generator" content="Hugo 0.97.2" />
     
       <title>
-        Posts ::
-        David Just — A technology website
+        David Just —
+        A technology website
       </title>
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta
   name="description"
-  content=""
+  content="A technology website"
 />
 <meta
   name="keywords"
   content=""
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="/post/" />
+<link rel="canonical" href="/" />
 
 
 
@@ -29,7 +30,7 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'Page(\/post)', 'auto');
+ga('create', 'Page(\u0022David Just\u0022)', 'auto');
 ga('send', 'pageview');
 
 </script>
@@ -57,20 +58,20 @@ ga('send', 'pageview');
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="David Just"/>
 <meta name="twitter:description" content=""/>
 
 
 
-<meta property="og:title" content="Posts" />
+<meta property="og:title" content="David Just" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/post/" /><meta property="og:site_name" content="David Just" />
+<meta property="og:url" content="/" /><meta property="og:site_name" content="David Just" />
 
 
 
 
-<link rel="alternate" type="application/rss+xml" href="/post/index.xml" title="David Just" />
+<link rel="alternate" type="application/rss+xml" href="/index.xml" title="David Just" />
 
 
 
@@ -167,657 +168,96 @@ ga('send', 'pageview');
 
       <div class="content">
         
+  
+  
+
+  
+  
+    
+  
+  
+
+  
+
   <div class="posts">
     
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/kb5014754-certificate-woes-intune-ndes-scep/">KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Tuesday, June 21, 2022
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/post/create-power-automate-flows-with-powershell-reports/">Collect data in an Azure Table with Power Automate and PowerShell</a></h1>
+      <div class="post-meta">
         
-          <span class="post-tags">
-            
-              <a href="/tags/o365/">#O365</a>&nbsp;
-            
-              <a href="/tags/intune/">#Intune</a>&nbsp;
-            
-              <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
-            
+          <span class="post-date">
+            April 4, 2021
+
           </span>
-        
 
-        
-          <figure class="post-cover">
-  
-    <img src="/post/kb5014754-certificate-woes-intune-ndes-scep/KB.png" alt="KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune"/>
-  
-
-  
-</figure>
-
-        
-
-        <div class="post-content">
           
-            
-              About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
-Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request.
-            
-          
-        </div>
         
-          <div>
-            <a class="read-more button" href="/post/kb5014754-certificate-woes-intune-ndes-scep/"
-              >Read more →</a
-            >
-          </div>
+
+        
+          <span class="post-author">— Written by David Just</span>
+        
+
         
       </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/o365-license-report-microsoft-graph/">O365 License Report With Friendly Names Using The Microsoft Graph</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Sunday, May 22, 2022
-            </span>
 
-            
+      
+        <span class="post-tags">
           
+            <a href="/tags/o365/">#O365</a>&nbsp;
           
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
+            <a href="/tags/intune/">#Intune</a>&nbsp;
           
-        </div>
+            <a href="/tags/power-automate/">#Power Automate</a>&nbsp;
+          
+        </span>
+      
 
+      
+
+      <div class="post-content">
         
-          <span class="post-tags">
-            
-              <a href="/tags/o365/">#O365</a>&nbsp;
-            
-              <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
-            
-              <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
-            
-          </span>
-        
-
-        
-          <figure class="post-cover">
-  
-    <img src="/post/o365-license-report-microsoft-graph/ConnectGraph.png" alt="O365 License Report With Friendly Names Using The Microsoft Graph"/>
-  
-
-  
-</figure>
-
-        
-
-        <div class="post-content">
           
-            
-              In a previous article, I demonstrated how to export a license report for all users withe the &lsquo;friendly&rsquo; license names using the AzureAD PowerShell module.
-Since then, Microsoft has announced the coming retirement of the AzureAD API (and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDK
-Here I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
-            
-          
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/o365-license-report-microsoft-graph/"
-              >Read more →</a
-            >
-          </div>
-        
-      </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/backup-and-reset-windows-user-profile/">Backup and Reset Windows User Profile</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Thursday, May 12, 2022
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
-        
-          <span class="post-tags">
-            
-              <a href="/tags/windows/">#Windows</a>&nbsp;
-            
-              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
-            
-          </span>
-        
-
-        
-          <figure class="post-cover">
-  
-    <img src="/post/backup-and-reset-windows-user-profile/WindowsProfile.png" alt="Backup and Reset Windows User Profile"/>
-  
-
-  
-</figure>
-
-        
-
-        <div class="post-content">
-          
-            
-              Premise If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists.
-            
-          
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/backup-and-reset-windows-user-profile/"
-              >Read more →</a
-            >
-          </div>
-        
-      </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/power-automate-send-data-from-powershell-to-excel/">Get Data from workstations and send to an Excel Table for free</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Tuesday, May 3, 2022
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
-        
-          <span class="post-tags">
-            
-              <a href="/tags/o365/">#O365</a>&nbsp;
-            
-              <a href="/tags/intune/">#Intune</a>&nbsp;
-            
-              <a href="/tags/power-automate/">#Power Automate</a>&nbsp;
-            
-              <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
-            
-          </span>
-        
-
-        
-          <figure class="post-cover">
-  
-    <img src="/post/power-automate-send-data-from-powershell-to-excel/powerautomate.png" alt="Get Data from workstations and send to an Excel Table for free"/>
-  
-
-  
-</figure>
-
-        
-
-        <div class="post-content">
-          
-            
-              Premise There are times when I encounter a situation where I want to gather some data from workstations and store it in a spreadsheet / table ect. for tracking purposes. Recently I was working with a client to deploy a cloud printing solution. The on prem print environment was somewhat complex with multiple shared printers some of which were locked down to AD security groups. I needed a way to get a pre-deployment printer inventory for each workstation, then compare a post deployment inventory.
-            
-          
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/power-automate-send-data-from-powershell-to-excel/"
-              >Read more →</a
-            >
-          </div>
-        
-      </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/working-with-microsoft-graph-powershell-sdk/">Working with the Microsoft Graph PowerShell SDK</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Wednesday, April 20, 2022
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
-        
-          <span class="post-tags">
-            
-              <a href="/tags/o365/">#O365</a>&nbsp;
-            
-              <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
-            
-              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
-            
-              <a href="/tags/rest-api/">#REST API</a>&nbsp;
-            
-          </span>
-        
-
-        
-          <figure class="post-cover">
-  
-    <img src="/post/working-with-microsoft-graph-powershell-sdk/graph.png" alt="Working with the Microsoft Graph PowerShell SDK"/>
-  
-
-  
-</figure>
-
-        
-
-        <div class="post-content">
-          
-            
-              What is an API anyway? API stands for &ldquo;Application Interface&rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:
- API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
-            
-          
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/working-with-microsoft-graph-powershell-sdk/"
-              >Read more →</a
-            >
-          </div>
-        
-      </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/intune-for-macos-configure-profiles/">Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Tuesday, April 19, 2022
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
-        
-          <span class="post-tags">
-            
-              <a href="/tags/o365/">#O365</a>&nbsp;
-            
-              <a href="/tags/intune/">#Intune</a>&nbsp;
-            
-              <a href="/tags/macos/">#macOS</a>&nbsp;
-            
-          </span>
-        
-
-        
-          <figure class="post-cover">
-  
-    <img src="/post/intune-for-macos-configure-profiles/mac.jpeg" alt="Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles"/>
-  
-
-  
-</figure>
-
-        
-
-        <div class="post-content">
-          
-            
-              Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
- Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
-            
-          
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/intune-for-macos-configure-profiles/"
-              >Read more →</a
-            >
-          </div>
-        
-      </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/intune-install-software-with-winget/">Intune Deploy Software with WinGet</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Tuesday, March 8, 2022
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
-        
-          <span class="post-tags">
-            
-              <a href="/tags/o365/">#O365</a>&nbsp;
-            
-              <a href="/tags/intune/">#Intune</a>&nbsp;
-            
-              <a href="/tags/winget/">#WinGet</a>&nbsp;
-            
-          </span>
-        
-
-        
-          <figure class="post-cover">
-  
-    <img src="/post/intune-install-software-with-winget/winget.png" alt="Intune Deploy Software with WinGet"/>
-  
-
-  
-</figure>
-
-        
-
-        <div class="post-content">
-          
-            
-              Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind.
-            
-          
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/intune-install-software-with-winget/"
-              >Read more →</a
-            >
-          </div>
-        
-      </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/intune-for-macos-configure-macos-vm/">Configuring Intune for macOS part 1 - Setup a macOS VM</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Sunday, January 2, 2022
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
-        
-          <span class="post-tags">
-            
-              <a href="/tags/o365/">#O365</a>&nbsp;
-            
-              <a href="/tags/intune/">#Intune</a>&nbsp;
-            
-              <a href="/tags/macos/">#macOS</a>&nbsp;
-            
-          </span>
-        
-
-        
-          <figure class="post-cover">
-  
-    <img src="/post/intune-for-macos-configure-macos-vm/macdark.png" alt="Configuring Intune for macOS part 1 - Setup a macOS VM"/>
-  
-
-  
-</figure>
-
-        
-
-        <div class="post-content">
-          
-            
-              Premise
-One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing?
-            
-          
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/intune-for-macos-configure-macos-vm/"
-              >Read more →</a
-            >
-          </div>
-        
-      </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/use-powershell-to-get-the-weather-report/">PowerShell Project - Get the Weather report</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Tuesday, October 26, 2021
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
-        
-          <span class="post-tags">
-            
-              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
-            
-              <a href="/tags/restapi/">#restAPI</a>&nbsp;
-            
-          </span>
-        
-
-        
-
-        <div class="post-content">
-          
-            
-              I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
-I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast.
-            
-          
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/use-powershell-to-get-the-weather-report/"
-              >Read more →</a
-            >
-          </div>
-        
-      </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/o365-license-report-with-friendly-names/">Export O365 User License Report with friendly names</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Sunday, April 11, 2021
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
-        
-          <span class="post-tags">
-            
-              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
-            
-              <a href="/tags/intune/">#Intune</a>&nbsp;
-            
-          </span>
-        
-
-        
-
-        <div class="post-content">
-          
-            
-              I was recently tasked with exporting a report for a client that detailed all users, their location and license assignment in Office 365. I knew the best way to get the job done was by writing a PowerShell script.
-I did a quick search online and found lots of examples, however all the examples I found were using the deprecated &ldquo;Microsoft Online&rdquo; / MSOL PS module. I wanted to use the Azure AD module instead so I played around a bit to get the output I wanted.
-            
-          
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/o365-license-report-with-friendly-names/"
-              >Read more →</a
-            >
-          </div>
-        
-      </div>
-    
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/create-power-automate-flows-with-powershell-reports/">Collect data in an Azure Table with Power Automate and PowerShell</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Sunday, April 4, 2021
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
-        
-          <span class="post-tags">
-            
-              <a href="/tags/o365/">#O365</a>&nbsp;
-            
-              <a href="/tags/intune/">#Intune</a>&nbsp;
-            
-              <a href="/tags/power-automate/">#Power Automate</a>&nbsp;
-            
-          </span>
-        
-
-        
-
-        <div class="post-content">
-          
-            
-              If there is one thing I love it is automation. If you are a systems administrator, you have probably at some point needed to create some reports using PowerShell. Usually you would do this manually and export this to a CSV them hand off the report in an email or through SharePoint ect. But how can we automate this process?
+            If there is one thing I love it is automation. If you are a systems administrator, you have probably at some point needed to create some reports using PowerShell. Usually you would do this manually and export this to a CSV them hand off the report in an email or through SharePoint ect. But how can we automate this process?
 While you could run PowerShell scripts as a scheduled task to fire off an email which is quick and dirty.
-            
           
-        </div>
-        
-          <div>
-            <a class="read-more button" href="/post/create-power-automate-flows-with-powershell-reports/"
-              >Read more →</a
-            >
-          </div>
         
       </div>
+      
+        <div><a class="read-more button" href="/post/create-power-automate-flows-with-powershell-reports/">Read more →</a></div>
+      
+    </div>
     
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/remove-document-redirection-vpn/">Remove Document Redirection Policies over VPN</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Thursday, April 1, 2021
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/post/remove-document-redirection-vpn/">Remove Document Redirection Policies over VPN</a></h1>
+      <div class="post-meta">
         
-          <span class="post-tags">
-            
-              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
-            
-              <a href="/tags/intune/">#Intune</a>&nbsp;
-            
+          <span class="post-date">
+            April 1, 2021
+
           </span>
+
+          
         
 
         
-          <figure class="post-cover">
+          <span class="post-author">— Written by David Just</span>
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/powershell/">#PowerShell</a>&nbsp;
+          
+            <a href="/tags/intune/">#Intune</a>&nbsp;
+          
+        </span>
+      
+
+      
+        <figure class="post-cover">
   
     <img src="/post/remove-document-redirection-vpn/DocRedCover.png" alt="Remove Document Redirection Policies over VPN"/>
   
@@ -825,77 +265,69 @@ While you could run PowerShell scripts as a scheduled task to fire off an email 
   
 </figure>
 
-        
+      
 
-        <div class="post-content">
-          
-            
-              In today&rsquo;s world of COVID with so many people working from home, more and more organizations are moving to cloud services for file storage. It used to be quite a common practice, at least in my experience to enable folder redirection for users on-prem. Trying to dismantle folder redirection, especially when our users are working remotely can prove to be a challenge. If you have ever attempted to remove a folder redirection GPO, you have undoubtedly discovered folder redirection policies only apply (and remove) at startup/user logon.
-            
-          
-        </div>
+      <div class="post-content">
         
-          <div>
-            <a class="read-more button" href="/post/remove-document-redirection-vpn/"
-              >Read more →</a
-            >
-          </div>
+          
+            In today&rsquo;s world of COVID with so many people working from home, more and more organizations are moving to cloud services for file storage. It used to be quite a common practice, at least in my experience to enable folder redirection for users on-prem. Trying to dismantle folder redirection, especially when our users are working remotely can prove to be a challenge. If you have ever attempted to remove a folder redirection GPO, you have undoubtedly discovered folder redirection policies only apply (and remove) at startup/user logon.
+          
         
       </div>
+      
+        <div><a class="read-more button" href="/post/remove-document-redirection-vpn/">Read more →</a></div>
+      
+    </div>
     
-      <div class="post on-list">
-        <h1 class="post-title"><a href="/post/sync-sharepoint-libraries-powershell/index/">Sync SharePoint Libraries with PowerShell</a></h1>
-        <div class="post-meta">
-          
-            <span class="post-date">
-              Thursday, April 1, 2021
-            </span>
-
-            
-          
-          
-            <span class="post-author"
-              >— Written by David Just</span
-            >
-
-
-          
-        </div>
-
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/post/sync-sharepoint-libraries-powershell/index/">Sync SharePoint Libraries with PowerShell</a></h1>
+      <div class="post-meta">
         
-          <span class="post-tags">
-            
-              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
-            
-              <a href="/tags/intune/">#Intune</a>&nbsp;
-            
+          <span class="post-date">
+            April 1, 2021
+
           </span>
+
+          
         
 
         
-
-        <div class="post-content">
-          
-            
-              The Problem So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
-There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit.
-            
-          
-        </div>
+          <span class="post-author">— Written by David Just</span>
         
-          <div>
-            <a class="read-more button" href="/post/sync-sharepoint-libraries-powershell/index/"
-              >Read more →</a
-            >
-          </div>
+
         
       </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/powershell/">#PowerShell</a>&nbsp;
+          
+            <a href="/tags/intune/">#Intune</a>&nbsp;
+          
+        </span>
+      
+
+      
+
+      <div class="post-content">
+        
+          
+            The Problem So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
+There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit.
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/post/sync-sharepoint-libraries-powershell/index/">Read more →</a></div>
+      
+    </div>
     
     <div class="pagination">
   <div class="pagination__buttons">
     
       <span class="button previous">
-        <a href="/post/page/2/">
+        <a href="/page/2/">
           <span class="button__icon">←</span>
           <span class="button__text">Newer posts</span>
         </a>
