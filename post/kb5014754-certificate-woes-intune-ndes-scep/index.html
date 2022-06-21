@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &amp;ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/kb5014754-certificate-woes-intune-ndes-scep/" />
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Page(\/post\/KB5014754-Certificate-Woes-Intune-NDES-SCEP\/index.md)', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune"/>
+<meta name="twitter:description" content="About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request."/>
+
+
+
+<meta property="og:title" content="KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune" />
+<meta property="og:description" content="About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/kb5014754-certificate-woes-intune-ndes-scep/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-21T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text">Invoke-Blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          June 21, 2022
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/o365/">#O365</a>&nbsp;
+        
+          <a href="/tags/intune/">#Intune</a>&nbsp;
+        
+          <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
+        
+      </span>
+    
+
+    
+      <figure class="post-cover">
+  
+    <img src="/post/kb5014754-certificate-woes-intune-ndes-scep/KB.png" alt="KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune"/>
+  
+
+  
+</figure>
+
+    
+
+    <div class="post-content">
+      
+      <p>About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the <a href="https://techcommunity.microsoft.com/t5/intune-customer-success/support-tip-how-to-configure-ndes-for-scep-certificate/ba-p/455125" target="_blank">
+    Microsoft techcommunity article
+  </a> I followed to get this configued.</p>
+<p>Fast foward to May 2022, in typical Microsoft fashion, a <a href="https://support.microsoft.com/en-gb/topic/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers-ad2c23b0-15d8-4340-a468-4d4f3b188f16" target="_blank">
+    patch
+  </a> was released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request.&rdquo; This patch completely broke certificate based authentication for my client. The NPS would log error 6273, &ldquo;Authentication failed due to a user credentials mismatch&rdquo;</p>
+
+  <img src="./AuthFail.png"  class="center"  style="border-radius: 8px;"  />
+
+
+<p>According to the KB, the new patches no longer allow &ldquo;weak&rdquo; certificate mapping. My SCEP profile in Intune requests a certificate based on the users UPN which is considered weak. At this time, there is no option in the SCEP profile that would work with the new strong certificate mapping requirement. The KB does mention manually mapping the X509IssuerSerialNumber of the issued certificate to the <em>altSecurityIdentities</em> attribute of the AD user object. My collegue found <a href="https://system32.blog/post/adsmapcertificates/" target="_blank">
+    this article
+  </a> which describes the issue and links to a script to automate mapping the certificates to user objects. The provided script however assumes that you are working with certificates that were requested by the AD user / computer (probably based on a GPO). With NDES, a service account requests the certificate on behlaf of the user. I just had to modify the script a little for my purposes.</p>
+<p>Original Code specifying requester property for certificate mapping</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span>($cert <span style="color:#66d9ef">in</span> ($certs | Sort-Object -Property <span style="color:#e6db74">&#39;RequestID&#39;</span> -Descending)){
+</span></span><span style="display:flex;"><span>    $requester = $cert.<span style="color:#e6db74">&#39;Request.RequesterName&#39;</span>
+</span></span><span style="display:flex;"><span>    $requesterSplit = $requester.Split(<span style="color:#e6db74">&#34;\&#34;</span>)
+</span></span><span style="display:flex;"><span>    $CN = $requesterSplit[1]
+</span></span><span style="display:flex;"><span>    $Domain = $requesterSplit[0]
+</span></span></code></pre></div><p>Here I just had to change the requester variable to <code>$requester = $cert.CommonName</code> , as the CommonName is the users UPN that the cert should be mapped to. Then I changed the $CN variable to <code>$CN = $requester</code></p>
+<p>Here is a link to the entire script <a href="https://github.com/djust270/Intune-Scripts/blob/master/Invoke-ADCSCertMappingNDES.ps1" target="_blank">
+    https://github.com/djust270/Intune-Scripts/blob/master/Invoke-ADCSCertMappingNDES.ps1
+  </a>.
+Just update the static definitions at the top of the script. Change $dryrun to $false once you are ready to run. I have this running as a scheduled task every 5 minutes for my client so any new certificates will get mapped to the user object in AD.</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/post/o365-license-report-microsoft-graph/">
+                  <span class="button__text">O365 License Report With Friendly Names Using The Microsoft Graph</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  davidjust.com © 2022     
+  <div class="footer__inner">    
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+    <script src="/assets/clipboard.js" ></script>
+
+
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELHH4HTZ7"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-WELHH4HTZ7', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>
