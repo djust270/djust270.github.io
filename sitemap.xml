@@ -2,34 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/tags/azure-ad/</loc>
+    <lastmod>2022-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2022-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/intune/</loc>
+    <lastmod>2022-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/kb5014754-certificate-woes-intune-ndes-scep/</loc>
+    <lastmod>2022-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/o365/</loc>
+    <lastmod>2022-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/</loc>
+    <lastmod>2022-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-06-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/microsoft-graph/</loc>
+    <lastmod>2022-05-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/o365-license-report-microsoft-graph/</loc>
+    <lastmod>2022-05-22T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/post/backup-and-reset-windows-user-profile/</loc>
     <lastmod>2022-05-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/</loc>
-    <lastmod>2022-05-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/post/</loc>
-    <lastmod>2022-05-12T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/tags/powershell/</loc>
-    <lastmod>2022-05-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
     <lastmod>2022-05-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/windows/</loc>
     <lastmod>2022-05-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/power-automate-send-data-from-powershell-to-excel/</loc>
-    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/intune/</loc>
-    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/microsoft-graph/</loc>
-    <lastmod>2022-05-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/o365/</loc>
     <lastmod>2022-05-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/power-automate/</loc>

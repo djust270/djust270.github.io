@@ -9,10 +9,30 @@
     <description>Recent content on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune</title>
+      <link>/post/kb5014754-certificate-woes-intune-ndes-scep/</link>
+      <pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/kb5014754-certificate-woes-intune-ndes-scep/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/kb5014754-certificate-woes-intune-ndes-scep/KB.png&#34;/&gt;
+          
+        
+        
+        
+          About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &amp;ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>O365 License Report With Friendly Names Using The Microsoft Graph</title>
