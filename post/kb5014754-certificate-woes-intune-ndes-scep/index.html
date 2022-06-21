@@ -11,8 +11,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta
   name="description"
-  content="About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
-Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &amp;ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request."
+  content="About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article
+ I followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patch
+ was released to fix a security vulnerability to &amp;ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request."
 />
 <meta
   name="keywords"
@@ -59,14 +61,18 @@ ga('send', 'pageview');
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune"/>
-<meta name="twitter:description" content="About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
-Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request."/>
+<meta name="twitter:description" content="About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article
+ I followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patch
+ was released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request."/>
 
 
 
 <meta property="og:title" content="KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune" />
-<meta property="og:description" content="About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
-Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request." />
+<meta property="og:description" content="About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article
+ I followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patch
+ was released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/kb5014754-certificate-woes-intune-ndes-scep/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-06-21T00:00:00+00:00" />
@@ -233,7 +239,7 @@ Fast foward to May 2022, in typical Microsoft fashion, a patch was released to 
 
 <p>According to the KB, the new patches no longer allow &ldquo;weak&rdquo; certificate mapping. My SCEP profile in Intune requests a certificate based on the users UPN which is considered weak. At this time, there is no option in the SCEP profile that would work with the new strong certificate mapping requirement. The KB does mention manually mapping the X509IssuerSerialNumber of the issued certificate to the <em>altSecurityIdentities</em> attribute of the AD user object. My collegue found <a href="https://system32.blog/post/adsmapcertificates/" target="_blank">
     this article
-  </a> which describes the issue and links to a script to automate mapping the certificates to user objects. The provided script however assumes that you are working with certificates that were requested by the AD user / computer (probably based on a GPO). With NDES, a service account requests the certificate on behlaf of the user. I just had to modify the script a little for my purposes.</p>
+  </a> which describes the issue and links to a script to automate mapping the certificates to user objects. The provided script however assumes that you are working with certificates that were requested by the AD user / computer (probably based on a GPO). With NDES, a service account requests the certificate on behalf of the user. I just had to modify the script a little for my purposes.</p>
 <p>Original Code specifying requester property for certificate mapping</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span>($cert <span style="color:#66d9ef">in</span> ($certs | Sort-Object -Property <span style="color:#e6db74">&#39;RequestID&#39;</span> -Descending)){
 </span></span><span style="display:flex;"><span>    $requester = $cert.<span style="color:#e6db74">&#39;Request.RequesterName&#39;</span>
