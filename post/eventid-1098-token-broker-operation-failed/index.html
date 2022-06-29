@@ -11,8 +11,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta
   name="description"
-  content="Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &amp;lsquo;breaks&amp;rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
-The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles and Event 1098 Error 0xcaa5001c."
+  content="Problem signs 
+
+
+Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &amp;lsquo;breaks&amp;rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix 
+
+
+Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles
+ and Event 1098 Error 0xcaa5001c
+."
 />
 <meta
   name="keywords"
@@ -59,14 +67,30 @@ ga('send', 'pageview');
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AAD Token Broker Issues"/>
-<meta name="twitter:description" content="Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
-The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles and Event 1098 Error 0xcaa5001c."/>
+<meta name="twitter:description" content="Problem signs 
+
+
+Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix 
+
+
+Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles
+ and Event 1098 Error 0xcaa5001c
+."/>
 
 
 
 <meta property="og:title" content="AAD Token Broker Issues" />
-<meta property="og:description" content="Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
-The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles and Event 1098 Error 0xcaa5001c." />
+<meta property="og:description" content="Problem signs 
+
+
+Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix 
+
+
+Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles
+ and Event 1098 Error 0xcaa5001c
+." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/post/eventid-1098-token-broker-operation-failed/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2022-06-29T00:00:00+00:00" />
@@ -251,7 +275,7 @@ These are the initial symptoms I have seen when the AAD token broker &lsquo;brea
 <p>Sign into a Local Admin account.</p>
 </li>
 <li>
-<p>Navigate to the affected users profile folder local appdata folder. Rename or delete the AAD Token Broker folder. For example: C:\users*username*\Appdata\Local\Packages\Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy</p>
+<p>Navigate to the affected users profile folder local appdata folder. Rename or delete the AAD Token Broker folder. For example: C:\users\*username*\Appdata\Local\Packages\Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy</p>
 </li>
 <li>
 <p>If the computer is AzureAD registered, delete the computer object from AzureAD. If the computer is AzureAD joined, disconnect from AzureAD, then delete the computer object from AzureAD (if it exists).</p>
