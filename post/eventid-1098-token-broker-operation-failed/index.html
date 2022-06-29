@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        AAD Token Broker Issues ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &amp;lsquo;breaks&amp;rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles and Event 1098 Error 0xcaa5001c."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/eventid-1098-token-broker-operation-failed/" />
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Page(\/post\/EventID-1098-Token-broker-operation-failed\/index.md)', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AAD Token Broker Issues"/>
+<meta name="twitter:description" content="Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles and Event 1098 Error 0xcaa5001c."/>
+
+
+
+<meta property="og:title" content="AAD Token Broker Issues" />
+<meta property="og:description" content="Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles and Event 1098 Error 0xcaa5001c." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/eventid-1098-token-broker-operation-failed/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-29T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text">Invoke-Blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">AAD Token Broker Issues</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          June 29, 2022
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/o365/">#O365</a>&nbsp;
+        
+          <a href="/tags/windows/">#Windows</a>&nbsp;
+        
+          <a href="/tags/azuread/">#AzureAD</a>&nbsp;
+        
+      </span>
+    
+
+    
+      <figure class="post-cover">
+  
+    <img src="/post/eventid-1098-token-broker-operation-failed/1098.png" alt="AAD Token Broker Issues"/>
+  
+
+  
+</figure>
+
+    
+
+    <div class="post-content">
+      
+      <h3 id="problem-signs">Problem signs <a href="#problem-signs">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h3>
+
+<p>Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. 
+These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.</p>
+<h3 id="the-fix">The fix <a href="#the-fix">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h3>
+
+<p>Microsoft has a couple troubleshooting articles on event 1098 <a href="https://docs.microsoft.com/en-us/outlook/troubleshoot/profiles-and-accounts/event-1098-and-cannot-create-new-profiles" target="_blank">
+    Event 1098 Cannot Create New Profiles
+  </a> and <a href="https://docs.microsoft.com/en-us/troubleshoot/windows-client/user-profiles-and-logon/event-1098-error-0xcaa5001c" target="_blank">
+    Event 1098 Error 0xcaa5001c
+  </a>.</p>
+<p>I have found a surefire way to get this resolved is to do the following:</p>
+<ol>
+<li>
+<p>Sign out of the affected user account</p>
+</li>
+<li>
+<p>Sign into a Local Admin account.</p>
+</li>
+<li>
+<p>Navigate to the affected users profile folder local appdata folder. Rename or delete the AAD Token Broker folder. For example: C:\users*username*\Appdata\Local\Packages\Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy</p>
+</li>
+<li>
+<p>If the computer is AzureAD registered, delete the computer object from AzureAD. If the computer is AzureAD joined, disconnect from AzureAD, then delete the computer object from AzureAD (if it exists).</p>
+</li>
+<li>
+<p>Reboot. Sign back into the affected users profile (reconnecting AzureAD if necessary)</p>
+</li>
+<li>
+<p>Sign back into office apps.</p>
+</li>
+</ol>
+<h3 id="the-takeaway">The takeaway <a href="#the-takeaway">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h3>
+
+<p>I have not found an adequete explanantion for this behavior or why it happens. Microsoft does detail AzureAD authentication on Windows using the PRT (primary refresh token) and how the plugins work at a high level <a href="https://docs.microsoft.com/en-us/azure/active-directory/devices/concept-primary-refresh-token" target="_blank">
+    https://docs.microsoft.com/en-us/azure/active-directory/devices/concept-primary-refresh-token
+  </a>. My best educated guess is the PRT or session keys somehow get corrupted and the automatic recovery process fails. Doing the above steps forces authentication as if this was a new device. If anyone has a better explanation, please let me know.</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/post/kb5014754-certificate-woes-intune-ndes-scep/">
+                  <span class="button__text">KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  davidjust.com © 2022     
+  <div class="footer__inner">    
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELHH4HTZ7"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-WELHH4HTZ7', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>

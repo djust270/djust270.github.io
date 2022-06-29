@@ -9,10 +9,30 @@
     <description>Recent content in Posts on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AAD Token Broker Issues</title>
+      <link>/post/eventid-1098-token-broker-operation-failed/</link>
+      <pubDate>Wed, 29 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/eventid-1098-token-broker-operation-failed/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/eventid-1098-token-broker-operation-failed/1098.png&#34;/&gt;
+          
+        
+        
+        
+          Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &amp;lsquo;breaks&amp;rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles and Event 1098 Error 0xcaa5001c.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune</title>
