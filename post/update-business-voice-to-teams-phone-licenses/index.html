@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Update Business Voice to Teams Phone Licenses ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Microsoft has announced the retirement of Business Voice licensing. If your tenant is still using Business Voice with Calling Plan or Business Voice without Calling Plan, you will need to switch to the new equivalent Teams Phone plan.
+If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30)."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/update-business-voice-to-teams-phone-licenses/" />
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Page(\/post\/update-business-voice-to-teams-phone-licenses\/index.md)', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Update Business Voice to Teams Phone Licenses"/>
+<meta name="twitter:description" content="Microsoft has announced the retirement of Business Voice licensing. If your tenant is still using Business Voice with Calling Plan or Business Voice without Calling Plan, you will need to switch to the new equivalent Teams Phone plan.
+If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30)."/>
+
+
+
+<meta property="og:title" content="Update Business Voice to Teams Phone Licenses" />
+<meta property="og:description" content="Microsoft has announced the retirement of Business Voice licensing. If your tenant is still using Business Voice with Calling Plan or Business Voice without Calling Plan, you will need to switch to the new equivalent Teams Phone plan.
+If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/update-business-voice-to-teams-phone-licenses/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-06-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-06-30T00:00:00+00:00" /><meta property="og:site_name" content="David Just" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text">Invoke-Blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Update Business Voice to Teams Phone Licenses</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          June 30, 2022
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/o365/">#O365</a>&nbsp;
+        
+          <a href="/tags/powershell/">#PowerShell</a>&nbsp;
+        
+          <a href="/tags/teams/">#Teams</a>&nbsp;
+        
+          <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
+        
+          <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
+        
+      </span>
+    
+
+    
+      <figure class="post-cover">
+  
+    <img src="/post/update-business-voice-to-teams-phone-licenses/dontuse.png" alt="Update Business Voice to Teams Phone Licenses"/>
+  
+
+  
+</figure>
+
+    
+
+    <div class="post-content">
+      
+      <p>Microsoft has announced the <a href="https://docs.microsoft.com/en-us/microsoftteams/business-voice-to-teams-phone-licenses?tabs=powershell" target="_blank">
+    retirement of Business Voice licensing
+  </a>. If your tenant
+is still using Business Voice with Calling Plan or Business Voice without Calling Plan, you will need to switch to the new equivalent Teams Phone plan.</p>
+<p>If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30). I went ahead and created a script utilizing the Microsoft Graph API do update the licenses in bulk.</p>
+<p>First, as a precaution, connect to Microsoft Teams with PowerShell and export a list of all users and their assigned numbers. If at any time the voice license feature is unassigned for a user, their phone number assigment will be removed immediately. Don&rsquo;t ask me how I know.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># As a precaution, backup all users phone number assignments</span>
+</span></span><span style="display:flex;"><span>Connect-MicrosoftTeams
+</span></span><span style="display:flex;"><span>Get-CsOnlineUser | where LineUri | select Displayname, UserPrincipalName, DialPlan, @{
+</span></span><span style="display:flex;"><span>	N = <span style="color:#e6db74">&#34;Line&#34;</span>; e = { $_.lineuri <span style="color:#f92672">-replace</span> <span style="color:#e6db74">&#39;tel:&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span> }
+</span></span><span style="display:flex;"><span>} | export-Csv TeamsUsers.csv -NoTypeInformation
+</span></span></code></pre></div><p>Next we need to identify the license sku to remove and the sku to add in place of the old sku. Log into Azure AD and check your current licensed products. Use the table here to find the SkuPartID (center column) <a href="https://docs.microsoft.com/en-us/azure/active-directory/enterprise-users/licensing-service-plan-reference" target="_blank">
+    https://docs.microsoft.com/en-us/azure/active-directory/enterprise-users/licensing-service-plan-reference
+  </a></p>
+<p>In my example, I will replace Business Voice with Calling Plan, with Teams Phone with Calling Plan and Microsoft Teams Audio Conferencing with dial-out to USA/CAN</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Replace with appropriate sku names</span>
+</span></span><span style="display:flex;"><span>$OldSku = <span style="color:#e6db74">&#34;BUSINESS_VOICE_MED2_TELCO&#34;</span>
+</span></span><span style="display:flex;"><span>$NewSku = <span style="color:#e6db74">&#34;MCOTEAMS_ESSENTIALS&#34;</span>, <span style="color:#e6db74">&#34;MCOMEETBASIC&#34;</span>
+</span></span><span style="display:flex;"><span>$NewSkuTable = $newSku | <span style="color:#66d9ef">foreach</span> { @{ SkuID = $_ } }
+</span></span></code></pre></div><p>Now we need to connect to Microsoft Graph and gather our tenants license info</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Get necessary permission scopes</span>
+</span></span><span style="display:flex;"><span>$perms = <span style="color:#e6db74">&#39;User.Read.All&#39;</span>, <span style="color:#e6db74">&#39;User.ReadWrite.All&#39;</span>, <span style="color:#e6db74">&#39;Directory.Read.All&#39;</span>
+</span></span><span style="display:flex;"><span>Connect-MgGraph -UseDeviceAuthentication -ForceRefresh -Scopes $perms
+</span></span><span style="display:flex;"><span>Select-MgProfile beta
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$Skus = Get-MgSubscribedSku <span style="color:#75715e"># Get all skus in the tenant</span>
+</span></span><span style="display:flex;"><span>$Users = Get-MGUser -All <span style="color:#75715e"># Get all user accounts</span>
+</span></span><span style="display:flex;"><span>$OldVoiceSku = $skus | where { $_.skupartnumber <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;$OldSku&#34;</span> }
+</span></span><span style="display:flex;"><span>$NewVoiceSku = $skus | where { $_.skupartnumber <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;$NewSku&#34;</span> }
+</span></span></code></pre></div><p>Finally, we need to process our users, gather their current license assignment, filter for the users who need updated, then update the license assignment.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$i = 0 <span style="color:#75715e"># Increment variable</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($user <span style="color:#66d9ef">in</span> $Users) <span style="color:#75715e"># Gather license assigments for all users</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Write-Progress -Activity <span style="color:#e6db74">&#34;Processing User License details&#34;</span> -Status <span style="color:#e6db74">&#34;Working on </span>$($user.displayname)<span style="color:#e6db74">&#34;</span> -PercentComplete (($i / $Users.Count) * 100)
+</span></span><span style="display:flex;"><span>	$user.LicenseDetails = Get-MgUserLicenseDetail -UserId $user.id
+</span></span><span style="display:flex;"><span>	Start-Sleep -Milliseconds 200
+</span></span><span style="display:flex;"><span>	$i++
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$NeedsUpdated = $Users | where { $_.LicenseDetails.SkuPartNumber <span style="color:#f92672">-like</span> $OldSku }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($u <span style="color:#66d9ef">in</span> $NeedsUpdated)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;Updating License assignment for {0}&#34;</span> <span style="color:#f92672">-f</span> $u.UserPrincipalName
+</span></span><span style="display:flex;"><span>	Set-MgUserLicense -UserId $u.id -AddLicenses $NewSkuTable -RemoveLicenses @($OldVoiceSku.id) <span style="color:#75715e">#Add new license and remove old</span>
+</span></span><span style="display:flex;"><span>	Start-Sleep -Milliseconds 200
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Finally as a check, lets make sure our users still have their phone assigments.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>Get-CsOnlineUser | select name,userprincipalname,lineuri
+</span></span></code></pre></div><p>You should see no change if everything went according to plan.
+See the entire script on my github account <a href="https://github.com/djust270/Microsoft-Graph-PowerShell-SDK-Scripts/blob/main/Update-TeamsVoiceLicenses.ps1" target="_blank">
+    https://github.com/djust270/Microsoft-Graph-PowerShell-SDK-Scripts/blob/main/Update-TeamsVoiceLicenses.ps1
+  </a></p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/post/eventid-1098-token-broker-operation-failed/">
+                  <span class="button__text">AAD Token Broker Issues</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  davidjust.com © 2022     
+  <div class="footer__inner">    
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+    <script src="/assets/clipboard.js" ></script>
+
+
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELHH4HTZ7"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-WELHH4HTZ7', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>

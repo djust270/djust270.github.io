@@ -9,10 +9,30 @@
     <description>Recent content in Posts on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 30 Jun 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Update Business Voice to Teams Phone Licenses</title>
+      <link>/post/update-business-voice-to-teams-phone-licenses/</link>
+      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/update-business-voice-to-teams-phone-licenses/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/update-business-voice-to-teams-phone-licenses/dontuse.png&#34;/&gt;
+          
+        
+        
+        
+          Microsoft has announced the retirement of Business Voice licensing. If your tenant is still using Business Voice with Calling Plan or Business Voice without Calling Plan, you will need to switch to the new equivalent Teams Phone plan.
+If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30).
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>AAD Token Broker Issues</title>
