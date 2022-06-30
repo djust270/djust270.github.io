@@ -243,7 +243,6 @@ is still using Business Voice with Calling Plan or Business Voice without Callin
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Replace with appropriate sku names</span>
 </span></span><span style="display:flex;"><span>$OldSku = <span style="color:#e6db74">&#34;BUSINESS_VOICE_MED2_TELCO&#34;</span>
 </span></span><span style="display:flex;"><span>$NewSku = <span style="color:#e6db74">&#34;MCOTEAMS_ESSENTIALS&#34;</span>, <span style="color:#e6db74">&#34;MCOMEETBASIC&#34;</span>
-</span></span><span style="display:flex;"><span>$NewSkuTable = $NewSku | <span style="color:#66d9ef">foreach</span> { @{ SkuID = $_ } }
 </span></span></code></pre></div><p>Now we need to connect to Microsoft Graph and gather our tenants license info</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Get necessary permission scopes</span>
 </span></span><span style="display:flex;"><span>$perms = <span style="color:#e6db74">&#39;User.Read.All&#39;</span>, <span style="color:#e6db74">&#39;User.ReadWrite.All&#39;</span>, <span style="color:#e6db74">&#39;Directory.Read.All&#39;</span>
@@ -253,7 +252,10 @@ is still using Business Voice with Calling Plan or Business Voice without Callin
 </span></span><span style="display:flex;"><span>$Skus = Get-MgSubscribedSku <span style="color:#75715e"># Get all skus in the tenant</span>
 </span></span><span style="display:flex;"><span>$Users = Get-MGUser -All <span style="color:#75715e"># Get all user accounts</span>
 </span></span><span style="display:flex;"><span>$OldVoiceSku = $skus | where { $_.skupartnumber <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#34;$OldSku&#34;</span> }
-</span></span><span style="display:flex;"><span>$NewVoiceSku = $skus | where { $_.skupartnumber <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;$NewSku&#34;</span> }
+</span></span><span style="display:flex;"><span>$NewVoiceSku = <span style="color:#66d9ef">foreach</span> ($Product <span style="color:#66d9ef">in</span> $NewSkus){
+</span></span><span style="display:flex;"><span>$s = $skus | where { $_.skupartnumber <span style="color:#f92672">-like</span> <span style="color:#e6db74">&#34;$Product&#34;</span> }
+</span></span><span style="display:flex;"><span>@{ SkuID = $s.ID }
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Finally, we need to process our users, gather their current license assignment, filter for the users who need updated, then update the license assignment.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span>$i = 0 <span style="color:#75715e"># Increment variable</span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($user <span style="color:#66d9ef">in</span> $Users) <span style="color:#75715e"># Gather license assigments for all users</span>
@@ -268,7 +270,7 @@ is still using Business Voice with Calling Plan or Business Voice without Callin
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">foreach</span> ($u <span style="color:#66d9ef">in</span> $NeedsUpdated)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;Updating License assignment for {0}&#34;</span> <span style="color:#f92672">-f</span> $u.UserPrincipalName
-</span></span><span style="display:flex;"><span>	Set-MgUserLicense -UserId $u.id -AddLicenses $NewSkuTable -RemoveLicenses @($OldVoiceSku.id) <span style="color:#75715e">#Add new license and remove old</span>
+</span></span><span style="display:flex;"><span>	Set-MgUserLicense -UserId $u.id -AddLicenses $NewVoiceSku -RemoveLicenses @($OldVoiceSku.id) <span style="color:#75715e">#Add new license and remove old</span>
 </span></span><span style="display:flex;"><span>	Start-Sleep -Milliseconds 200
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Finally as a check, lets make sure our users still have their phone assigments.</p>
