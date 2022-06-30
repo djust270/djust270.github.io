@@ -229,7 +229,7 @@ If you take a look at the Microsoft doc linked above, there are examples for how
     retirement of Business Voice licensing
   </a>. If your tenant
 is still using Business Voice with Calling Plan or Business Voice without Calling Plan, you will need to switch to the new equivalent Teams Phone plan.</p>
-<p>If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30). I went ahead and created a script utilizing the Microsoft Graph API do update the licenses in bulk.</p>
+<p>If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30). I went ahead and created a script utilizing the Microsoft Graph API to update the licenses in bulk.</p>
 <p>First, as a precaution, connect to Microsoft Teams with PowerShell and export a list of all users and their assigned numbers. If at any time the voice license feature is unassigned for a user, their phone number assigment will be removed immediately. Don&rsquo;t ask me how I know.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># As a precaution, backup all users phone number assignments</span>
 </span></span><span style="display:flex;"><span>Connect-MicrosoftTeams
@@ -243,7 +243,7 @@ is still using Business Voice with Calling Plan or Business Voice without Callin
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Replace with appropriate sku names</span>
 </span></span><span style="display:flex;"><span>$OldSku = <span style="color:#e6db74">&#34;BUSINESS_VOICE_MED2_TELCO&#34;</span>
 </span></span><span style="display:flex;"><span>$NewSku = <span style="color:#e6db74">&#34;MCOTEAMS_ESSENTIALS&#34;</span>, <span style="color:#e6db74">&#34;MCOMEETBASIC&#34;</span>
-</span></span><span style="display:flex;"><span>$NewSkuTable = $newSku | <span style="color:#66d9ef">foreach</span> { @{ SkuID = $_ } }
+</span></span><span style="display:flex;"><span>$NewSkuTable = $NewSku | <span style="color:#66d9ef">foreach</span> { @{ SkuID = $_ } }
 </span></span></code></pre></div><p>Now we need to connect to Microsoft Graph and gather our tenants license info</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># Get necessary permission scopes</span>
 </span></span><span style="display:flex;"><span>$perms = <span style="color:#e6db74">&#39;User.Read.All&#39;</span>, <span style="color:#e6db74">&#39;User.ReadWrite.All&#39;</span>, <span style="color:#e6db74">&#39;Directory.Read.All&#39;</span>
