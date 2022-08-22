@@ -9,10 +9,29 @@
     <description>Recent content in Posts on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Keep Applications Updated with WinGet and Proactive Remediations</title>
+      <link>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</link>
+      <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/WingetTools.png&#34;/&gt;
+          
+        
+        
+        
+          The Why In a previous article, I demonstrated how to deploy applications to Intune using WinGet. I recieved a request to demonstrate how to use WinGet to update applications, and more importantly, how to run this on a schedule to keep applications updated. Since then, I found a really handy PowerShell wrapper module for WinGet called WinGetTools by Jeffrey Hicks. I made a small contribution to this module to allow it to work running under SYSTEM context.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>Update Business Voice to Teams Phone Licenses</title>
