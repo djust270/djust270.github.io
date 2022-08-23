@@ -320,7 +320,7 @@ As best practice always test new deployments with a pilot group. Go ahead and as
 </span></span><span style="display:flex;"><span>$Log = <span style="color:#e6db74">&#34;$LogName-$LogDate.log&#34;</span>
 </span></span><span style="display:flex;"><span>$LogPath = <span style="color:#e6db74">&#34;$env:ProgramData\Microsoft\IntuneManagementExtension\Logs&#34;</span>
 </span></span><span style="display:flex;"><span>Import-Module WingetTools
-</span></span><span style="display:flex;"><span>$WingetPath = Get-WingetPath
+</span></span><span style="display:flex;"><span>$WingetPath = Get-WGPath
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Add any apps you do not wish to get updated here (for instance apps that auto-update). Use the Winget ID</span>
 </span></span><span style="display:flex;"><span>$Blacklisted = @(
