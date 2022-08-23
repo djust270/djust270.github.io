@@ -320,6 +320,7 @@ As best practice always test new deployments with a pilot group. Go ahead and as
 </span></span><span style="display:flex;"><span>$Log = <span style="color:#e6db74">&#34;$LogName-$LogDate.log&#34;</span>
 </span></span><span style="display:flex;"><span>$LogPath = <span style="color:#e6db74">&#34;$env:ProgramData\Microsoft\IntuneManagementExtension\Logs&#34;</span>
 </span></span><span style="display:flex;"><span>Import-Module WingetTools
+</span></span><span style="display:flex;"><span>$WingetPath = Get-WingetPath
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Add any apps you do not wish to get updated here (for instance apps that auto-update). Use the Winget ID</span>
 </span></span><span style="display:flex;"><span>$Blacklisted = @(
@@ -379,6 +380,9 @@ As best practice always test new deployments with a pilot group. Go ahead and as
 </ul>
 <p>This may take awhile to feed back results. When looking at the proactive remediation results, add the columns &ldquo;Pre-remediation detection output&rdquo; and &ldquo;Post-remediation detection output&rdquo; to see the output from the scripts.</p>
 <p>And thats it. Now you can keep applications updated with Intune and Proactive remediations.</p>
+<p>If you do not want to use a proactive remediaiton <a href="https://github.com/djust270/Intune-Scripts/blob/master/WingetUpgradeTask.ps1" target="_blank">
+    this script
+  </a> will create a scheduled task on the endpoint to run the upgrade remediation.</p>
 
     </div>
     
