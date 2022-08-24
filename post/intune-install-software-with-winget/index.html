@@ -495,6 +495,8 @@ ga('send', 'pageview');
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>	
 </span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$app = Read-Host -Prompt <span style="color:#e6db74">&#39;Input App search name&#39;</span>
+</span></span><span style="display:flex;"><span>Get-RegUninstallKey -displayname $app | select *uninstall*
 </span></span></code></pre></div><p>And running this for Google Chrome we get the Msiexec uninstall command. Simply add /qn /norestart at the end of the command and enter that into Intune as the Uninstall command.</p>
 <p>Or if you don&rsquo;t care really about uninstalling, you can just type anything like &ldquo;Uninstall&rdquo;.</p>
 
