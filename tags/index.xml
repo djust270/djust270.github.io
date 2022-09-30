@@ -9,17 +9,17 @@
     <description>Recent content in Tags on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Sep 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Microsoft Graph</title>
-      <link>/tags/microsoft-graph/</link>
-      <pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate>
+      <title>Intune</title>
+      <link>/tags/intune/</link>
+      <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>/tags/microsoft-graph/</guid>
+      <guid>/tags/intune/</guid>
       <description>
         
           
@@ -37,7 +37,7 @@
     <item>
       <title>O365</title>
       <link>/tags/o365/</link>
-      <pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
       
       <guid>/tags/o365/</guid>
       <description>
@@ -57,9 +57,149 @@
     <item>
       <title>PowerShell</title>
       <link>/tags/powershell/</link>
-      <pubDate>Wed, 20 Apr 2022 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
       
       <guid>/tags/powershell/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>/tags/windows/</link>
+      <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/windows/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>WinGet</title>
+      <link>/tags/winget/</link>
+      <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/winget/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Azure AD</title>
+      <link>/tags/azure-ad/</link>
+      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/azure-ad/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Microsoft Graph</title>
+      <link>/tags/microsoft-graph/</link>
+      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/microsoft-graph/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Teams</title>
+      <link>/tags/teams/</link>
+      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/teams/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>AzureAD</title>
+      <link>/tags/azuread/</link>
+      <pubDate>Wed, 29 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/azuread/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Power Automate</title>
+      <link>/tags/power-automate/</link>
+      <pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/power-automate/</guid>
       <description>
         
           
@@ -95,51 +235,11 @@
     </item>
     
     <item>
-      <title>Intune</title>
-      <link>/tags/intune/</link>
-      <pubDate>Tue, 19 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/intune/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
-          
-        
-        </description>
-    </item>
-    
-    <item>
       <title>macOS</title>
       <link>/tags/macos/</link>
       <pubDate>Tue, 19 Apr 2022 00:00:00 +0000</pubDate>
       
       <guid>/tags/macos/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
-          
-        
-        </description>
-    </item>
-    
-    <item>
-      <title>WinGet</title>
-      <link>/tags/winget/</link>
-      <pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/winget/</guid>
       <description>
         
           

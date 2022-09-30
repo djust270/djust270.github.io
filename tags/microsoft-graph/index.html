@@ -170,6 +170,188 @@ ga('send', 'pageview');
   <div class="posts">
     
       <div class="post on-list">
+        <h1 class="post-title"><a href="/post/update-business-voice-to-teams-phone-licenses/">Update Business Voice to Teams Phone Licenses</a></h1>
+        <div class="post-meta">
+          
+            <span class="post-date">
+              Thursday, June 30, 2022
+            </span>
+
+            
+          
+          
+            <span class="post-author"
+              >— Written by David Just</span
+            >
+
+
+          
+        </div>
+
+        
+          <span class="post-tags">
+            
+              <a href="/tags/o365/">#O365</a>&nbsp;
+            
+              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
+            
+              <a href="/tags/teams/">#Teams</a>&nbsp;
+            
+              <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
+            
+              <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
+            
+          </span>
+        
+
+        
+          <figure class="post-cover">
+  
+    <img src="/post/update-business-voice-to-teams-phone-licenses/dontuse.png" alt="Update Business Voice to Teams Phone Licenses"/>
+  
+
+  
+</figure>
+
+        
+
+        <div class="post-content">
+          
+            
+              Microsoft has announced the retirement of Business Voice licensing. If your tenant is still using Business Voice with Calling Plan or Business Voice without Calling Plan, you will need to switch to the new equivalent Teams Phone plan.
+If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30).
+            
+          
+        </div>
+        
+          <div>
+            <a class="read-more button" href="/post/update-business-voice-to-teams-phone-licenses/"
+              >Read more →</a
+            >
+          </div>
+        
+      </div>
+    
+      <div class="post on-list">
+        <h1 class="post-title"><a href="/post/o365-license-report-microsoft-graph/">O365 License Report With Friendly Names Using The Microsoft Graph</a></h1>
+        <div class="post-meta">
+          
+            <span class="post-date">
+              Sunday, May 22, 2022
+            </span>
+
+            
+          
+          
+            <span class="post-author"
+              >— Written by David Just</span
+            >
+
+
+          
+        </div>
+
+        
+          <span class="post-tags">
+            
+              <a href="/tags/o365/">#O365</a>&nbsp;
+            
+              <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
+            
+              <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
+            
+          </span>
+        
+
+        
+          <figure class="post-cover">
+  
+    <img src="/post/o365-license-report-microsoft-graph/ConnectGraph.png" alt="O365 License Report With Friendly Names Using The Microsoft Graph"/>
+  
+
+  
+</figure>
+
+        
+
+        <div class="post-content">
+          
+            
+              In a previous article, I demonstrated how to export a license report for all users withe the &lsquo;friendly&rsquo; license names using the AzureAD PowerShell module.
+Since then, Microsoft has announced the coming retirement of the AzureAD API(and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDKHere I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
+            
+          
+        </div>
+        
+          <div>
+            <a class="read-more button" href="/post/o365-license-report-microsoft-graph/"
+              >Read more →</a
+            >
+          </div>
+        
+      </div>
+    
+      <div class="post on-list">
+        <h1 class="post-title"><a href="/post/power-automate-send-data-from-powershell-to-excel/">Get Data from workstations and send to an Excel Table for free</a></h1>
+        <div class="post-meta">
+          
+            <span class="post-date">
+              Tuesday, May 3, 2022
+            </span>
+
+            
+          
+          
+            <span class="post-author"
+              >— Written by David Just</span
+            >
+
+
+          
+        </div>
+
+        
+          <span class="post-tags">
+            
+              <a href="/tags/o365/">#O365</a>&nbsp;
+            
+              <a href="/tags/intune/">#Intune</a>&nbsp;
+            
+              <a href="/tags/power-automate/">#Power Automate</a>&nbsp;
+            
+              <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
+            
+          </span>
+        
+
+        
+          <figure class="post-cover">
+  
+    <img src="/post/power-automate-send-data-from-powershell-to-excel/powerautomate.png" alt="Get Data from workstations and send to an Excel Table for free"/>
+  
+
+  
+</figure>
+
+        
+
+        <div class="post-content">
+          
+            
+              Premise There are times when I encounter a situation where I want to gather some data from workstations and store it in a spreadsheet / table ect. for tracking purposes. Recently I was working with a client to deploy a cloud printing solution. The on prem print environment was somewhat complex with multiple shared printers some of which were locked down to AD security groups. I needed a way to get a pre-deployment printer inventory for each workstation, then compare a post deployment inventory.
+            
+          
+        </div>
+        
+          <div>
+            <a class="read-more button" href="/post/power-automate-send-data-from-powershell-to-excel/"
+              >Read more →</a
+            >
+          </div>
+        
+      </div>
+    
+      <div class="post on-list">
         <h1 class="post-title"><a href="/post/working-with-microsoft-graph-powershell-sdk/">Working with the Microsoft Graph PowerShell SDK</a></h1>
         <div class="post-meta">
           
@@ -216,8 +398,7 @@ ga('send', 'pageview');
         <div class="post-content">
           
             
-              What is an API anyway? API stands for &ldquo;Application Interface&rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:
- API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
+              What is an API anyway? API stands for &ldquo;Application Interface&rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
             
           
         </div>

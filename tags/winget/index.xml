@@ -9,10 +9,29 @@
     <description>Recent content in WinGet on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/winget/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Keep Applications Updated with WinGet and Proactive Remediations</title>
+      <link>/post/keep-applications-updated-with-winget-and-proactive-remediations/</link>
+      <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/keep-applications-updated-with-winget-and-proactive-remediations/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/keep-applications-updated-with-winget-and-proactive-remediations/WingetTools.png&#34;/&gt;
+          
+        
+        
+        
+          They Why In a previous article, I demonstrated how to deploy applications to Intune using WinGet . I recieved a request to demonstrate how to use WinGet to update applications, and more importantly, how to run this on a schedule to keep applications updated. Since then, I found a really handy PowerShell wrapper module for WinGet called WinGetTools by Jeffrey Hicks. I made a small contribution to this module to allow it to work running under SYSTEM context.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>Intune Deploy Software with WinGet</title>

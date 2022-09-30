@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<meta name="generator" content="Hugo 0.97.2" />
+	<meta name="generator" content="Hugo 0.102.1" />
     
       <title>
         David Just —
@@ -182,6 +182,60 @@ ga('send', 'pageview');
   <div class="posts">
     
     <div class="post on-list">
+      <h1 class="post-title"><a href="/post/intune-install-software-with-winget/">Intune Deploy Software with WinGet</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            March 8, 2022
+
+          </span>
+
+          
+        
+
+        
+          <span class="post-author">— Written by David Just</span>
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/o365/">#O365</a>&nbsp;
+          
+            <a href="/tags/intune/">#Intune</a>&nbsp;
+          
+            <a href="/tags/winget/">#WinGet</a>&nbsp;
+          
+        </span>
+      
+
+      
+        <figure class="post-cover">
+  
+    <img src="/post/intune-install-software-with-winget/winget.png" alt="Intune Deploy Software with WinGet"/>
+  
+
+  
+</figure>
+
+      
+
+      <div class="post-content">
+        
+          
+            Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind.
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/post/intune-install-software-with-winget/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
       <h1 class="post-title"><a href="/post/intune-for-macos-configure-macos-vm/">Configuring Intune for macOS part 1 - Setup a macOS VM</a></h1>
       <div class="post-meta">
         
@@ -271,7 +325,7 @@ One of my clients has an Apple only environment. The client was previously manag
         
           
             I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
-I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast.
+I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{gridX},{grid Y}/forecast.
           
         
       </div>
@@ -367,58 +421,6 @@ While you could run PowerShell scripts as a scheduled task to fire off an email 
       </div>
       
         <div><a class="read-more button" href="/post/create-power-automate-flows-with-powershell-reports/">Read more →</a></div>
-      
-    </div>
-    
-    <div class="post on-list">
-      <h1 class="post-title"><a href="/post/remove-document-redirection-vpn/">Remove Document Redirection Policies over VPN</a></h1>
-      <div class="post-meta">
-        
-          <span class="post-date">
-            April 1, 2021
-
-          </span>
-
-          
-        
-
-        
-          <span class="post-author">— Written by David Just</span>
-        
-
-        
-      </div>
-
-      
-        <span class="post-tags">
-          
-            <a href="/tags/powershell/">#PowerShell</a>&nbsp;
-          
-            <a href="/tags/intune/">#Intune</a>&nbsp;
-          
-        </span>
-      
-
-      
-        <figure class="post-cover">
-  
-    <img src="/post/remove-document-redirection-vpn/DocRedCover.png" alt="Remove Document Redirection Policies over VPN"/>
-  
-
-  
-</figure>
-
-      
-
-      <div class="post-content">
-        
-          
-            In today&rsquo;s world of COVID with so many people working from home, more and more organizations are moving to cloud services for file storage. It used to be quite a common practice, at least in my experience to enable folder redirection for users on-prem. Trying to dismantle folder redirection, especially when our users are working remotely can prove to be a challenge. If you have ever attempted to remove a folder redirection GPO, you have undoubtedly discovered folder redirection policies only apply (and remove) at startup/user logon.
-          
-        
-      </div>
-      
-        <div><a class="read-more button" href="/post/remove-document-redirection-vpn/">Read more →</a></div>
       
     </div>
     

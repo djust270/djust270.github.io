@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure AD on David Just</title>
+    
+    
+    
+    <link>/tags/azure-ad/</link>
+    <description>Recent content in Azure AD on David Just</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Jun 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/azure-ad/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Update Business Voice to Teams Phone Licenses</title>
+      <link>/post/update-business-voice-to-teams-phone-licenses/</link>
+      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/update-business-voice-to-teams-phone-licenses/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/update-business-voice-to-teams-phone-licenses/dontuse.png&#34;/&gt;
+          
+        
+        
+        
+          Microsoft has announced the retirement of Business Voice licensing. If your tenant is still using Business Voice with Calling Plan or Business Voice without Calling Plan, you will need to switch to the new equivalent Teams Phone plan.
+If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30).
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune</title>
+      <link>/post/kb5014754-certificate-woes-intune-ndes-scep/</link>
+      <pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/kb5014754-certificate-woes-intune-ndes-scep/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/kb5014754-certificate-woes-intune-ndes-scep/KB.png&#34;/&gt;
+          
+        
+        
+        
+          About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity articleI followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patchwas released to fix a security vulnerability to &amp;ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>O365 License Report With Friendly Names Using The Microsoft Graph</title>
+      <link>/post/o365-license-report-microsoft-graph/</link>
+      <pubDate>Sun, 22 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/o365-license-report-microsoft-graph/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/o365-license-report-microsoft-graph/ConnectGraph.png&#34;/&gt;
+          
+        
+        
+        
+          In a previous article, I demonstrated how to export a license report for all users withe the &amp;lsquo;friendly&amp;rsquo; license names using the AzureAD PowerShell module.
+Since then, Microsoft has announced the coming retirement of the AzureAD API(and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDKHere I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

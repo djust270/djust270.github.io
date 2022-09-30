@@ -3,7 +3,7 @@
   <head>
     
       <title>
-        macOS ::
+        Azure AD ::
         David Just — A technology website
       </title>
     
@@ -18,7 +18,7 @@
   content=""
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="/tags/macos/" />
+<link rel="canonical" href="/tags/azure-ad/" />
 
 
 
@@ -29,7 +29,7 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'Page(\/tags\/macos)', 'auto');
+ga('create', 'Page(\/tags\/azure-ad)', 'auto');
 ga('send', 'pageview');
 
 </script>
@@ -57,20 +57,20 @@ ga('send', 'pageview');
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="macOS"/>
+<meta name="twitter:title" content="Azure AD"/>
 <meta name="twitter:description" content=""/>
 
 
 
-<meta property="og:title" content="macOS" />
+<meta property="og:title" content="Azure AD" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/tags/macos/" /><meta property="og:site_name" content="David Just" />
+<meta property="og:url" content="/tags/azure-ad/" /><meta property="og:site_name" content="David Just" />
 
 
 
 
-<link rel="alternate" type="application/rss+xml" href="/tags/macos/index.xml" title="David Just" />
+<link rel="alternate" type="application/rss+xml" href="/tags/azure-ad/index.xml" title="David Just" />
 
 
 
@@ -170,16 +170,19 @@ ga('send', 'pageview');
   <div class="posts">
     
       <div class="post on-list">
-        <h1 class="post-title"><a href="/macosresources/">Helpful macOS Resources</a></h1>
+        <h1 class="post-title"><a href="/post/update-business-voice-to-teams-phone-licenses/">Update Business Voice to Teams Phone Licenses</a></h1>
         <div class="post-meta">
           
             <span class="post-date">
-              Tuesday, April 19, 2022
+              Thursday, June 30, 2022
             </span>
 
             
           
           
+            <span class="post-author"
+              >— Written by David Just</span
+            >
 
 
           
@@ -190,23 +193,39 @@ ga('send', 'pageview');
             
               <a href="/tags/o365/">#O365</a>&nbsp;
             
-              <a href="/tags/intune/">#Intune</a>&nbsp;
+              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
             
-              <a href="/tags/macos/">#macOS</a>&nbsp;
+              <a href="/tags/teams/">#Teams</a>&nbsp;
+            
+              <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
+            
+              <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
             
           </span>
         
+
+        
+          <figure class="post-cover">
+  
+    <img src="/post/update-business-voice-to-teams-phone-licenses/dontuse.png" alt="Update Business Voice to Teams Phone Licenses"/>
+  
+
+  
+</figure>
 
         
 
         <div class="post-content">
           
             
+              Microsoft has announced the retirement of Business Voice licensing. If your tenant is still using Business Voice with Calling Plan or Business Voice without Calling Plan, you will need to switch to the new equivalent Teams Phone plan.
+If you take a look at the Microsoft doc linked above, there are examples for how to update the licenses on bulk, however it is baffling Microsoft chose to demonstrate using the Azure AD PowerShell module, when the licensing portion of that module is slated to be retired as of today (6/30).
+            
           
         </div>
         
           <div>
-            <a class="read-more button" href="/macosresources/"
+            <a class="read-more button" href="/post/update-business-voice-to-teams-phone-licenses/"
               >Read more →</a
             >
           </div>
@@ -214,11 +233,11 @@ ga('send', 'pageview');
       </div>
     
       <div class="post on-list">
-        <h1 class="post-title"><a href="/post/intune-for-macos-configure-profiles/">Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles</a></h1>
+        <h1 class="post-title"><a href="/post/kb5014754-certificate-woes-intune-ndes-scep/">KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune</a></h1>
         <div class="post-meta">
           
             <span class="post-date">
-              Tuesday, April 19, 2022
+              Tuesday, June 21, 2022
             </span>
 
             
@@ -239,7 +258,7 @@ ga('send', 'pageview');
             
               <a href="/tags/intune/">#Intune</a>&nbsp;
             
-              <a href="/tags/macos/">#macOS</a>&nbsp;
+              <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
             
           </span>
         
@@ -247,7 +266,7 @@ ga('send', 'pageview');
         
           <figure class="post-cover">
   
-    <img src="/post/intune-for-macos-configure-profiles/mac.jpeg" alt="Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles"/>
+    <img src="/post/kb5014754-certificate-woes-intune-ndes-scep/KB.png" alt="KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune"/>
   
 
   
@@ -258,14 +277,14 @@ ga('send', 'pageview');
         <div class="post-content">
           
             
-              Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
-Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
+              About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity articleI followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patchwas released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request.
             
           
         </div>
         
           <div>
-            <a class="read-more button" href="/post/intune-for-macos-configure-profiles/"
+            <a class="read-more button" href="/post/kb5014754-certificate-woes-intune-ndes-scep/"
               >Read more →</a
             >
           </div>
@@ -273,11 +292,11 @@ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple E
       </div>
     
       <div class="post on-list">
-        <h1 class="post-title"><a href="/post/intune-for-macos-configure-macos-vm/">Configuring Intune for macOS part 1 - Setup a macOS VM</a></h1>
+        <h1 class="post-title"><a href="/post/o365-license-report-microsoft-graph/">O365 License Report With Friendly Names Using The Microsoft Graph</a></h1>
         <div class="post-meta">
           
             <span class="post-date">
-              Sunday, January 2, 2022
+              Sunday, May 22, 2022
             </span>
 
             
@@ -296,9 +315,9 @@ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple E
             
               <a href="/tags/o365/">#O365</a>&nbsp;
             
-              <a href="/tags/intune/">#Intune</a>&nbsp;
+              <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
             
-              <a href="/tags/macos/">#macOS</a>&nbsp;
+              <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
             
           </span>
         
@@ -306,7 +325,7 @@ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple E
         
           <figure class="post-cover">
   
-    <img src="/post/intune-for-macos-configure-macos-vm/macdark.png" alt="Configuring Intune for macOS part 1 - Setup a macOS VM"/>
+    <img src="/post/o365-license-report-microsoft-graph/ConnectGraph.png" alt="O365 License Report With Friendly Names Using The Microsoft Graph"/>
   
 
   
@@ -317,14 +336,14 @@ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple E
         <div class="post-content">
           
             
-              Premise
-One of my clients has an Apple only environment. The client was previously managed with Jamf. Jamf is a great MDM platform for Apple devices and works really well however there are some downsides. First, the cost of Jamf is quite high, also while Jamf does support M365 condtional access and SSO with M365, it requires a bit more configuration than Intune does. My client was already paying for Enterprise mobility and Security licensing through M365 with Defender ATP for Endpoint so why not take advantage of the included Intune licensing?
+              In a previous article, I demonstrated how to export a license report for all users withe the &lsquo;friendly&rsquo; license names using the AzureAD PowerShell module.
+Since then, Microsoft has announced the coming retirement of the AzureAD API(and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDKHere I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
             
           
         </div>
         
           <div>
-            <a class="read-more button" href="/post/intune-for-macos-configure-macos-vm/"
+            <a class="read-more button" href="/post/o365-license-report-microsoft-graph/"
               >Read more →</a
             >
           </div>
