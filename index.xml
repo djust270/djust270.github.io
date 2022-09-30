@@ -9,25 +9,45 @@
     <description>Recent content on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 22 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Sep 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Keep Applications Updated with WinGet and Proactive Remediations</title>
-      <link>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</link>
-      <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
+      <title>Intune Endpoint Tools PowerShell Module</title>
+      <link>/post/intune-endpoint-tools-powershell-module/</link>
+      <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</guid>
+      <guid>/post/intune-endpoint-tools-powershell-module/</guid>
       <description>
         
-          &lt;img src=&#34;/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/WingetTools.png&#34;/&gt;
+          &lt;img src=&#34;/post/intune-endpoint-tools-powershell-module/IntuneEndpointTools.png&#34;/&gt;
           
         
         
         
-          The Why In a previous article, I demonstrated how to deploy applications to Intune using WinGet. I recieved a request to demonstrate how to use WinGet to update applications, and more importantly, how to run this on a schedule to keep applications updated. Since then, I found a really handy PowerShell wrapper module for WinGet called WinGetTools by Jeffrey Hicks. I made a small contribution to this module to allow it to work running under SYSTEM context.
+          I am proud to introduce the PowerShell module IntuneEndpointTools. This is the first PS module I have published to the PowerShell gallery.
+IntuneEndpointTools contains a set of tools for managing and diagnosing Intune MDM on Windows endpoints designed with Intune support staff in mind. Easily perform diagnostic / troubleshooting operations such as get the MDM diagnostic report, full diagnostic package, force a full sync to Intune, force reprocessing of assigned applications and more!
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Keep Applications Updated with WinGet and Proactive Remediations</title>
+      <link>/post/keep-applications-updated-with-winget-and-proactive-remediations/</link>
+      <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/keep-applications-updated-with-winget-and-proactive-remediations/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/keep-applications-updated-with-winget-and-proactive-remediations/WingetTools.png&#34;/&gt;
+          
+        
+        
+        
+          They Why In a previous article, I demonstrated how to deploy applications to Intune using WinGet . I recieved a request to demonstrate how to use WinGet to update applications, and more importantly, how to run this on a schedule to keep applications updated. Since then, I found a really handy PowerShell wrapper module for WinGet called WinGetTools by Jeffrey Hicks. I made a small contribution to this module to allow it to work running under SYSTEM context.
           
         
         </description>
@@ -66,8 +86,8 @@ If you take a look at the Microsoft doc linked above, there are examples for how
         
         
         
-          Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &amp;lsquo;breaks&amp;rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
-The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles and Event 1098 Error 0xcaa5001c.
+          Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &amp;lsquo;breaks&amp;rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profilesand Event 1098 Error 0xcaa5001c.
           
         
         </description>
@@ -86,8 +106,8 @@ The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1
         
         
         
-          About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
-Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &amp;ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request.
+          About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity articleI followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patchwas released to fix a security vulnerability to &amp;ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request.
           
         
         </description>
@@ -107,8 +127,7 @@ Fast foward to May 2022, in typical Microsoft fashion, a patch was released to 
         
         
           In a previous article, I demonstrated how to export a license report for all users withe the &amp;lsquo;friendly&amp;rsquo; license names using the AzureAD PowerShell module.
-Since then, Microsoft has announced the coming retirement of the AzureAD API (and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDK
-Here I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
+Since then, Microsoft has announced the coming retirement of the AzureAD API(and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDKHere I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
           
         
         </description>
@@ -127,7 +146,7 @@ Here I will provide a sample script to demonstrate how to export a license repor
         
         
         
-          Premise If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists.
+          Premise If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists.
           
         
         </description>
@@ -146,7 +165,7 @@ Here I will provide a sample script to demonstrate how to export a license repor
         
         
         
-          Premise There are times when I encounter a situation where I want to gather some data from workstations and store it in a spreadsheet / table ect. for tracking purposes. Recently I was working with a client to deploy a cloud printing solution. The on prem print environment was somewhat complex with multiple shared printers some of which were locked down to AD security groups. I needed a way to get a pre-deployment printer inventory for each workstation, then compare a post deployment inventory.
+          Premise There are times when I encounter a situation where I want to gather some data from workstations and store it in a spreadsheet / table ect. for tracking purposes. Recently I was working with a client to deploy a cloud printing solution. The on prem print environment was somewhat complex with multiple shared printers some of which were locked down to AD security groups. I needed a way to get a pre-deployment printer inventory for each workstation, then compare a post deployment inventory.
           
         
         </description>
@@ -165,8 +184,7 @@ Here I will provide a sample script to demonstrate how to export a license repor
         
         
         
-          What is an API anyway? API stands for &amp;ldquo;Application Interface&amp;rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:
- API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
+          What is an API anyway? API stands for &amp;ldquo;Application Interface&amp;rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
           
         
         </description>
@@ -186,14 +204,7 @@ Here I will provide a sample script to demonstrate how to export a license repor
         
         
         
-            Office Apps : https://macadmins.software/
-  Useful tools : https://www.macadmin.info/#managementtools
-  Profile Creator : https://github.com/ProfileCreator/ProfileCreator
-  Best Practices : https://techcommunity.microsoft.com/t5/intune-customer-success/best-practice-examples-for-configuring-macos-apps-with-microsoft/ba-p/2564255
-  Deploying Office : https://docs.microsoft.com/en-us/deployoffice/mac/preferences-outlook#disable-skype-for-business-online-meetings
-  OneDrive config : https://docs.microsoft.com/en-us/onedrive/deploy-and-configure-on-macos#filesondemandenabled
-  Custom onboarding splash screen : https://techcommunity.microsoft.com/t5/intune-customer-success/build-a-macos-onboarding-splash-screen-with-microsoft-endpoint/ba-p/2770980
-  
+           Office Apps : https://macadmins.software/Useful tools : https://www.macadmin.info/#managementtoolsProfile Creator : https://github.com/ProfileCreator/ProfileCreatorBest Practices : https://techcommunity.microsoft.com/t5/intune-customer-success/best-practice-examples-for-configuring-macos-apps-with-microsoft/ba-p/2564255Deploying Office : https://docs.microsoft.com/en-us/deployoffice/mac/preferences-outlook#disable-skype-for-business-online-meetingsOneDrive config : https://docs.microsoft.com/en-us/onedrive/deploy-and-configure-on-macos#filesondemandenabledCustom onboarding splash screen : https://techcommunity.microsoft.com/t5/intune-customer-success/build-a-macos-onboarding-splash-screen-with-microsoft-endpoint/ba-p/2770980
           
         
         </description>
@@ -212,8 +223,8 @@ Here I will provide a sample script to demonstrate how to export a license repor
         
         
         
-          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
- Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
+          Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+Navigate to endpoint.microsoft.com &amp;lt; Devices &amp;lt; Enroll Devices &amp;lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
           
         
         </description>
@@ -233,8 +244,8 @@ Here I will provide a sample script to demonstrate how to export a license repor
         
         
         
-          Hi there My name is David Just. I am a technology enthusiast, nerd, father, and and husband. Welcome to my personal blog.
-I have a passion for learning and sharing the things I have learned. As a Systems Adminsitrator, I have found a passion for automation and coding, particularly with PowerShell. This blog is a place for me to jot down my thoughts and share interesting things along this journey of life.
+          Hi there My name is David Just. I am a technology enthusiast, nerd, father, and husband. Welcome to my personal blog.
+I have a passion for learning and sharing the things I have learned. As a Systems Administrator, I have found a passion for automation and coding, particularly with PowerShell. This blog is a place for me to jot down my thoughts and share interesting things along this journey of life.
           
         
         </description>
@@ -294,7 +305,7 @@ One of my clients has an Apple only environment. The client was previously manag
         
         
           I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
-I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast.
+I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{gridX},{grid Y}/forecast.
           
         
         </description>
@@ -375,8 +386,28 @@ While you could run PowerShell scripts as a scheduled task to fire off an email 
         
         
         
-          The Problem So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
+          The Problem So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
 There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
           
         
         </description>
