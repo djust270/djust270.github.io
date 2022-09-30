@@ -170,11 +170,11 @@ ga('send', 'pageview');
   <div class="posts">
     
       <div class="post on-list">
-        <h1 class="post-title"><a href="/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/">Keep Applications Updated with WinGet and Proactive Remediations</a></h1>
+        <h1 class="post-title"><a href="/post/intune-endpoint-tools-powershell-module/">Intune Endpoint Tools PowerShell Module</a></h1>
         <div class="post-meta">
           
             <span class="post-date">
-              Monday, August 22, 2022
+              Friday, September 30, 2022
             </span>
 
             
@@ -195,7 +195,9 @@ ga('send', 'pageview');
             
               <a href="/tags/intune/">#Intune</a>&nbsp;
             
-              <a href="/tags/winget/">#WinGet</a>&nbsp;
+              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
+            
+              <a href="/tags/windows/">#Windows</a>&nbsp;
             
           </span>
         
@@ -203,7 +205,7 @@ ga('send', 'pageview');
         
           <figure class="post-cover">
   
-    <img src="/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/WingetTools.png" alt="Keep Applications Updated with WinGet and Proactive Remediations"/>
+    <img src="/post/intune-endpoint-tools-powershell-module/IntuneEndpointTools.png" alt="Intune Endpoint Tools PowerShell Module"/>
   
 
   
@@ -214,13 +216,76 @@ ga('send', 'pageview');
         <div class="post-content">
           
             
-              The Why In a previous article, I demonstrated how to deploy applications to Intune using WinGet. I recieved a request to demonstrate how to use WinGet to update applications, and more importantly, how to run this on a schedule to keep applications updated. Since then, I found a really handy PowerShell wrapper module for WinGet called WinGetTools by Jeffrey Hicks. I made a small contribution to this module to allow it to work running under SYSTEM context.
+              I am proud to introduce the PowerShell module IntuneEndpointTools. This is the first PS module I have published to the PowerShell gallery.
+IntuneEndpointTools contains a set of tools for managing and diagnosing Intune MDM on Windows endpoints designed with Intune support staff in mind. Easily perform diagnostic / troubleshooting operations such as get the MDM diagnostic report, full diagnostic package, force a full sync to Intune, force reprocessing of assigned applications and more!
             
           
         </div>
         
           <div>
-            <a class="read-more button" href="/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/"
+            <a class="read-more button" href="/post/intune-endpoint-tools-powershell-module/"
+              >Read more →</a
+            >
+          </div>
+        
+      </div>
+    
+      <div class="post on-list">
+        <h1 class="post-title"><a href="/post/keep-applications-updated-with-winget-and-proactive-remediations/">Keep Applications Updated with WinGet and Proactive Remediations</a></h1>
+        <div class="post-meta">
+          
+            <span class="post-date">
+              Monday, August 22, 2022
+            </span>
+
+            
+          
+          
+            <span class="post-author"
+              >— Written by David Just</span
+            >
+
+
+          
+        </div>
+
+        
+          <span class="post-tags">
+            
+              <a href="/tags/windows/">#Windows</a>&nbsp;
+            
+              <a href="/tags/powershell/">#PowerShell</a>&nbsp;
+            
+              <a href="/tags/o365/">#O365</a>&nbsp;
+            
+              <a href="/tags/intune/">#Intune</a>&nbsp;
+            
+              <a href="/tags/winget/">#WinGet</a>&nbsp;
+            
+          </span>
+        
+
+        
+          <figure class="post-cover">
+  
+    <img src="/post/keep-applications-updated-with-winget-and-proactive-remediations/WingetTools.png" alt="Keep Applications Updated with WinGet and Proactive Remediations"/>
+  
+
+  
+</figure>
+
+        
+
+        <div class="post-content">
+          
+            
+              They Why In a previous article, I demonstrated how to deploy applications to Intune using WinGet . I recieved a request to demonstrate how to use WinGet to update applications, and more importantly, how to run this on a schedule to keep applications updated. Since then, I found a really handy PowerShell wrapper module for WinGet called WinGetTools by Jeffrey Hicks. I made a small contribution to this module to allow it to work running under SYSTEM context.
+            
+          
+        </div>
+        
+          <div>
+            <a class="read-more button" href="/post/keep-applications-updated-with-winget-and-proactive-remediations/"
               >Read more →</a
             >
           </div>
@@ -335,8 +400,8 @@ If you take a look at the Microsoft doc linked above, there are examples for how
         <div class="post-content">
           
             
-              Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
-The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profiles and Event 1098 Error 0xcaa5001c.
+              Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profilesand Event 1098 Error 0xcaa5001c.
             
           
         </div>
@@ -394,8 +459,8 @@ The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1
         <div class="post-content">
           
             
-              About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity article I followed to get this configued.
-Fast foward to May 2022, in typical Microsoft fashion, a patch was released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request.
+              About 2 years ago, I configured NDES and SCEP for a client that was moving all of their workstations to AzureAD join only. NDES and SCEP work together to provide certificate enrollment for AzureAD only joined devices for authentication with Wi-Fi / VPN etc. This was the Microsoft techcommunity articleI followed to get this configued.
+Fast foward to May 2022, in typical Microsoft fashion, a patchwas released to fix a security vulnerability to &ldquo;address an elevation of privilege vulnerability that can occur when the Kerberos Distribution Center (KDC) is servicing a certificate-based authentication request.
             
           
         </div>
@@ -454,8 +519,7 @@ Fast foward to May 2022, in typical Microsoft fashion, a patch was released to 
           
             
               In a previous article, I demonstrated how to export a license report for all users withe the &lsquo;friendly&rsquo; license names using the AzureAD PowerShell module.
-Since then, Microsoft has announced the coming retirement of the AzureAD API (and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDK
-Here I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
+Since then, Microsoft has announced the coming retirement of the AzureAD API(and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDKHere I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
             
           
         </div>
@@ -511,7 +575,7 @@ Here I will provide a sample script to demonstrate how to export a license repor
         <div class="post-content">
           
             
-              Premise If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists.
+              Premise If you use Windows long enough, eventually you will run into a broken user profile. Sometimes its the start menu that busted, or the Windows store wont open etc. If the typical recommendations of sfc / dism / re-register appx packages with PowerShell fails to remedy the issue, see if the issue is isolated to the user profile. Log into another Windows user account and see if the issue persists.
             
           
         </div>
@@ -571,7 +635,7 @@ Here I will provide a sample script to demonstrate how to export a license repor
         <div class="post-content">
           
             
-              Premise There are times when I encounter a situation where I want to gather some data from workstations and store it in a spreadsheet / table ect. for tracking purposes. Recently I was working with a client to deploy a cloud printing solution. The on prem print environment was somewhat complex with multiple shared printers some of which were locked down to AD security groups. I needed a way to get a pre-deployment printer inventory for each workstation, then compare a post deployment inventory.
+              Premise There are times when I encounter a situation where I want to gather some data from workstations and store it in a spreadsheet / table ect. for tracking purposes. Recently I was working with a client to deploy a cloud printing solution. The on prem print environment was somewhat complex with multiple shared printers some of which were locked down to AD security groups. I needed a way to get a pre-deployment printer inventory for each workstation, then compare a post deployment inventory.
             
           
         </div>
@@ -631,8 +695,7 @@ Here I will provide a sample script to demonstrate how to export a license repor
         <div class="post-content">
           
             
-              What is an API anyway? API stands for &ldquo;Application Interface&rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:
- API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
+              What is an API anyway? API stands for &ldquo;Application Interface&rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
             
           
         </div>
@@ -690,8 +753,8 @@ Here I will provide a sample script to demonstrate how to export a license repor
         <div class="post-content">
           
             
-              Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
- Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
+              Setup BYOD Enrollment In part 1, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune. The first thing we need to do is get an Apple MDM push certificate.
+Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple Enrollment. Download the CSR. Follow the link “Create your MDM Push Certificate” Sign into your Apple ID (or create one if you do not have one) Click create certificate.
             
           
         </div>
@@ -856,7 +919,7 @@ One of my clients has an Apple only environment. The client was previously manag
           
             
               I thought it would be a fun project to create a PowerShell function which would get the Weather forecast for a specified location.
-I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{grid X},{grid Y}/forecast.
+I started searching online for free Weather REST APIs which I could query for the forecast. I found api.weather.gov which has a completely free and open REST API with complete documentation API Web Service (weather.gov). Checking the documentation, the REST endpoint to query the forecast is https://api.weather.gov/gridpoints/{office}/{gridX},{grid Y}/forecast.
             
           
         </div>
@@ -1057,7 +1120,7 @@ While you could run PowerShell scripts as a scheduled task to fire off an email 
         <div class="post-content">
           
             
-              The Problem So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
+              The Problem So you want to move your files to SharePoint, great! But your users don&rsquo;t understand sharepoint, don&rsquo;t wanna learn sharepoint and just want their file explorer experience.
 There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit.
             
           
@@ -1065,6 +1128,34 @@ There are a few ways we can go about syncing libraries for our users. We can set
         
           <div>
             <a class="read-more button" href="/post/sync-sharepoint-libraries-powershell/index/"
+              >Read more →</a
+            >
+          </div>
+        
+      </div>
+    
+      <div class="post on-list">
+        <h1 class="post-title"><a href="/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/"></a></h1>
+        <div class="post-meta">
+          
+          
+
+
+          
+        </div>
+
+        
+
+        
+
+        <div class="post-content">
+          
+            
+          
+        </div>
+        
+          <div>
+            <a class="read-more button" href="/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/"
               >Read more →</a
             >
           </div>
