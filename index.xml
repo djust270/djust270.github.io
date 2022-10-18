@@ -9,10 +9,30 @@
     <description>Recent content on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Oct 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Introducing the M365 Report Tools PowerShell Module</title>
+      <link>/post/m365-report-tools/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/m365-report-tools/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/m365-report-tools/m365reporttools.png&#34;/&gt;
+          
+        
+        
+        
+          The Why I often find the need to gather and extract data from various areas M365 for auditing or for project planning. I had the idea of putting together a PowerShell module containing wrapper functions for some of the most common reports I and colleagues ask for. I wanted to make the commands easy to discover and easy to use. I would like to introduce the M365.Report.Tools PowerShell module!
+What can it do?
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>Intune Endpoint Tools PowerShell Module</title>
