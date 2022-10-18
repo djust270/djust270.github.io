@@ -9,17 +9,37 @@
     <description>Recent content in Tags on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Oct 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Intune</title>
-      <link>/tags/intune/</link>
-      <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
+      <title>Azure AD</title>
+      <link>/tags/azure-ad/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>/tags/intune/</guid>
+      <guid>/tags/azure-ad/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Microsoft Graph</title>
+      <link>/tags/microsoft-graph/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/microsoft-graph/</guid>
       <description>
         
           
@@ -37,7 +57,7 @@
     <item>
       <title>O365</title>
       <link>/tags/o365/</link>
-      <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>/tags/o365/</guid>
       <description>
@@ -57,9 +77,29 @@
     <item>
       <title>PowerShell</title>
       <link>/tags/powershell/</link>
-      <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
       
       <guid>/tags/powershell/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Intune</title>
+      <link>/tags/intune/</link>
+      <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/intune/</guid>
       <description>
         
           
@@ -100,46 +140,6 @@
       <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>/tags/winget/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
-          
-        
-        </description>
-    </item>
-    
-    <item>
-      <title>Azure AD</title>
-      <link>/tags/azure-ad/</link>
-      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/azure-ad/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
-          
-        
-        </description>
-    </item>
-    
-    <item>
-      <title>Microsoft Graph</title>
-      <link>/tags/microsoft-graph/</link>
-      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/microsoft-graph/</guid>
       <description>
         
           
