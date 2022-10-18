@@ -113,5 +113,7 @@
     <loc>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</loc>
   </url><url>
     <loc>/categories/</loc>
+  </url><url>
+    <loc>/search/</loc>
   </url>
 </urlset>

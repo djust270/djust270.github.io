@@ -3,7 +3,7 @@
   <head>
     
       <title>
-        404 Page not found ::
+        Search me! ::
         David Just — A technology website
       </title>
     
@@ -18,7 +18,7 @@
   content=""
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="/404.html" />
+<link rel="canonical" href="/search/" />
 
 
 
@@ -29,7 +29,7 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'Page(\u0022404 Page not found\u0022)', 'auto');
+ga('create', 'Page(\/search\/_index.md)', 'auto');
 ga('send', 'pageview');
 
 </script>
@@ -57,19 +57,20 @@ ga('send', 'pageview');
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="404 Page not found"/>
+<meta name="twitter:title" content="Search me!"/>
 <meta name="twitter:description" content=""/>
 
 
 
-<meta property="og:title" content="404 Page not found" />
+<meta property="og:title" content="Search me!" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/404.html" /><meta property="og:site_name" content="David Just" />
+<meta property="og:url" content="/search/" /><meta property="og:site_name" content="David Just" />
 
 
 
 
+<link rel="alternate" type="application/rss+xml" href="/search/index.xml" title="David Just" />
 
 
 
@@ -176,93 +177,19 @@ ga('send', 'pageview');
 
       <div class="content">
         
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/404.html">404 Page not found</a>
-    </h1>
-    <div class="post-content">
-      <p>
-        Hmm&hellip; Sorry, this page seems to be missing.
-      </p>
+<form id="search"
+    action='/search/' method="get">
+    <label hidden for="search-input">Search site</label>
+    <input type="text" id="search-input" name="query"
+    placeholder="Type here to search">
+    <input type="submit" value="search">
+</form>
 
-      
-        <p>
-          Maybe these tags will help you find what you&rsquo;re looking for. 😄
-        </p>
-        <h2>Tags</h2>
-        <div class="terms">
-          <ul class="terms__list">
-            
-              <li class="terms__term">
-                <a href="/tags/azure-ad/">#Azure AD</a
-                ><span class="terms__term-count">4</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/azuread/">#AzureAD</a
-                ><span class="terms__term-count">1</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/intune/">#Intune</a
-                ><span class="terms__term-count">12</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/macos/">#macOS</a
-                ><span class="terms__term-count">3</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/microsoft-graph/">#Microsoft Graph</a
-                ><span class="terms__term-count">5</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/o365/">#O365</a
-                ><span class="terms__term-count">14</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/power-automate/">#Power Automate</a
-                ><span class="terms__term-count">2</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/powershell/">#PowerShell</a
-                ><span class="terms__term-count">10</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/rest-api/">#REST API</a
-                ><span class="terms__term-count">1</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/restapi/">#restAPI</a
-                ><span class="terms__term-count">1</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/teams/">#Teams</a
-                ><span class="terms__term-count">1</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/windows/">#Windows</a
-                ><span class="terms__term-count">4</span>
-              </li>
-            
-              <li class="terms__term">
-                <a href="/tags/winget/">#WinGet</a
-                ><span class="terms__term-count">2</span>
-              </li>
-            
-          </ul>
-        </div>
-      
-    </div>
-  </div>
+<ul id="results">
+    <li>
+        Enter a keyword above to search this site.
+    </li>
+</ul>
 
       </div>
 
