@@ -35,7 +35,7 @@
     <loc>/tags/windows/</loc>
     <lastmod>2022-09-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/keep-applications-updated-with-winget-and-proactive-remediations/</loc>
+    <loc>/post/intune-keep-applications-updated-with-winget-and-proactive-remediations/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/winget/</loc>
@@ -109,8 +109,6 @@
   </url><url>
     <loc>/post/sync-sharepoint-libraries-powershell/index/</loc>
     <lastmod>2021-04-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</loc>
   </url><url>
     <loc>/categories/</loc>
   </url><url>

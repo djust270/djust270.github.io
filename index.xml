@@ -56,13 +56,13 @@ IntuneEndpointTools contains a set of tools for managing and diagnosing Intune M
     
     <item>
       <title>Keep Applications Updated with WinGet and Proactive Remediations</title>
-      <link>/post/keep-applications-updated-with-winget-and-proactive-remediations/</link>
+      <link>/post/intune-keep-applications-updated-with-winget-and-proactive-remediations/</link>
       <pubDate>Mon, 22 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>/post/keep-applications-updated-with-winget-and-proactive-remediations/</guid>
+      <guid>/post/intune-keep-applications-updated-with-winget-and-proactive-remediations/</guid>
       <description>
         
-          &lt;img src=&#34;/post/keep-applications-updated-with-winget-and-proactive-remediations/WingetTools.png&#34;/&gt;
+          &lt;img src=&#34;/post/intune-keep-applications-updated-with-winget-and-proactive-remediations/WingetTools.png&#34;/&gt;
           
         
         
@@ -408,26 +408,6 @@ While you could run PowerShell scripts as a scheduled task to fire off an email 
         
           The Problem So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
 There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit.
-          
-        
-        </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</guid>
-      <description>
-        
-          
-          
-          
-        
-        
-        
-          
           
         
         </description>
