@@ -192,6 +192,61 @@ ga('send', 'pageview');
   <div class="posts">
     
     <div class="post on-list">
+      <h1 class="post-title"><a href="/post/eventid-1098-token-broker-operation-failed/">AAD Token Broker Issues</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            June 29, 2022
+
+          </span>
+
+          
+        
+
+        
+          <span class="post-author">— Written by David Just</span>
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/o365/">#O365</a>&nbsp;
+          
+            <a href="/tags/windows/">#Windows</a>&nbsp;
+          
+            <a href="/tags/azuread/">#AzureAD</a>&nbsp;
+          
+        </span>
+      
+
+      
+        <figure class="post-cover">
+  
+    <img src="/post/eventid-1098-token-broker-operation-failed/1098.png" alt="AAD Token Broker Issues"/>
+  
+
+  
+</figure>
+
+      
+
+      <div class="post-content">
+        
+          
+            Problem signs Outlook refuses to load, or a sign in window loops, opening and closing quickly. Outlook refuses to connect or send / recieve mail. The Windows store refuses to open. These are the initial symptoms I have seen when the AAD token broker &lsquo;breaks&rsquo; for lack of a better term. Event ID 1098 will be logged repeatedly in the Microsoft-Windows-AAD/Operational event log.
+The fix Microsoft has a couple troubleshooting articles on event 1098 Event 1098 Cannot Create New Profilesand Event 1098 Error 0xcaa5001c.
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/post/eventid-1098-token-broker-operation-failed/">Read more →</a></div>
+      
+    </div>
+    
+    <div class="post on-list">
       <h1 class="post-title"><a href="/post/kb5014754-certificate-woes-intune-ndes-scep/">KB5014754 Certificate Authentication Woes with NDES/SCEP and Intune</a></h1>
       <div class="post-meta">
         
@@ -409,62 +464,6 @@ Since then, Microsoft has announced the coming retirement of the AzureAD API(an
       
     </div>
     
-    <div class="post on-list">
-      <h1 class="post-title"><a href="/post/working-with-microsoft-graph-powershell-sdk/">Working with the Microsoft Graph PowerShell SDK</a></h1>
-      <div class="post-meta">
-        
-          <span class="post-date">
-            April 20, 2022
-
-          </span>
-
-          
-        
-
-        
-          <span class="post-author">— Written by David Just</span>
-        
-
-        
-      </div>
-
-      
-        <span class="post-tags">
-          
-            <a href="/tags/o365/">#O365</a>&nbsp;
-          
-            <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
-          
-            <a href="/tags/powershell/">#PowerShell</a>&nbsp;
-          
-            <a href="/tags/rest-api/">#REST API</a>&nbsp;
-          
-        </span>
-      
-
-      
-        <figure class="post-cover">
-  
-    <img src="/post/working-with-microsoft-graph-powershell-sdk/graph.png" alt="Working with the Microsoft Graph PowerShell SDK"/>
-  
-
-  
-</figure>
-
-      
-
-      <div class="post-content">
-        
-          
-            What is an API anyway? API stands for &ldquo;Application Interface&rdquo;. In simplest terms, APIs are services that bridge and allow two systems to interact. When we are talking about web services, such as those in M365, API usually refer to a REST API. I like this explanation from AWS:API architecture is usually explained in terms of client and server. The application sending the request is called the client, and the application sending the response is called the server.
-          
-        
-      </div>
-      
-        <div><a class="read-more button" href="/post/working-with-microsoft-graph-powershell-sdk/">Read more →</a></div>
-      
-    </div>
-    
     <div class="pagination">
   <div class="pagination__buttons">
     
@@ -528,16 +527,6 @@ width="40" height="40"
         
         
         
-        "\/tags\/azure-ad\/": {
-            
-            "title": "Azure AD",
-            "tags": [],
-            "content": "", 
-            "url": "\/tags\/azure-ad\/"
-        },
-        
-        
-        
         "\/": {
             
             "title": "David Just",
@@ -548,22 +537,12 @@ width="40" height="40"
         
         
         
-        "\/post\/m365-report-tools\/": {
+        "\/tags\/intune\/": {
             
-            "title": "Introducing the M365 Report Tools PowerShell Module",
-            "tags": ["O365","Microsoft Graph","Azure AD","PowerShell",],
-            "content": "The Why I often find the need to gather and extract data from various areas M365 for auditing or for project planning. I had the idea of putting together a PowerShell module containing wrapper functions for some of the most common reports I and colleagues ask for. I wanted to make the commands easy to discover and easy to use. I would like to introduce the M365.Report.Tools PowerShell module!\nWhat can it do? To quote myself M365.Report.Tools is: \u0026ldquo;A PowerShell Module with tools built for gathering data and creating reports on various areas of M365 services. This module is designed with ease of use with several baked in custom reports and the ability to export any built in Admin center usage report. Reports can be easily exported to CSV file, Excel workbook(s), or JSON.\nThis module leverages the Microsoft Graph PowerShell SDK, Exchange Online PowerShell, SharePoint Online PowerShell and ImportExcel. The majority of commands use the Graph SDK and seamlessly handle the permission scope and connection to Graph for you.\u0026rdquo;\nI tried to use the Microsoft Graph SDK as much as possible, however there are still places where Graph doesnt have much reach, such as inside Exchange Online and SharePoint Online. For more information on working with the Graph SDK, see here\r.\nI plan on continuing development on this module and will add additional functions with more reports. Here are the commands so far:\nGet-M365GroupReport\rReport of every group including group type and source of authority.\nGet-M365MailboxReport\rReport of every mailbox including details such as mailbox size. Use -IncludeMailboxSize to report on each mailbox current size.\nGet-M365MGUserPrincipalGroupMembership\rGet every group a user is a member of\nGet-M365SharePointSiteSummary\rSummarize all Sharepoint sites including details for each site such as storage usage and sharing capabilites.\nGet-M365SSOEnterpriseApps\rReturn all AzureAD enterprise applications with SAML SSO integration.\nGet-M365TeamsChannelReport\rReturn a list of every channel in each Team including members.\nGet-M365TeamsReport\rReturn a list of all Teams and Team members.\nGet-M365TenantLicenseReport\rReturn a list of all licenses in a tenant including current utilization.\nGet-M365UsageReport\rReturn any of the baked in Admin Center period usage reports for easy export.\nGet-M365UserLicenseReport\rList every license assigned to every user\nGet-M365UserReport\rGet a summary report for all user accounts in an M365 tenant.\nGet-M365AdminReportSettings\rGet the current Admin Report setting for Admin Center period usage reports.\nSet-M365AdminReportSettings\rChange the admin report settings to hide or show names in Admin Center usage reports.\nSimply pipe any of these commands to Export-CSV or Export-Excel for easy export. This should make it easy for anyone with minimal PowerShell experience to use.\nIf you have an suggestions or comments, feel free to leave a comment here or drop me a line over on Github.\n", 
-            "url": "\/post\/m365-report-tools\/"
-        },
-        
-        
-        
-        "\/tags\/microsoft-graph\/": {
-            
-            "title": "Microsoft Graph",
+            "title": "Intune",
             "tags": [],
             "content": "", 
-            "url": "\/tags\/microsoft-graph\/"
+            "url": "\/tags\/intune\/"
         },
         
         
@@ -588,16 +567,6 @@ width="40" height="40"
         
         
         
-        "\/tags\/powershell\/": {
-            
-            "title": "PowerShell",
-            "tags": [],
-            "content": "", 
-            "url": "\/tags\/powershell\/"
-        },
-        
-        
-        
         "\/tags\/": {
             
             "title": "Tags",
@@ -608,12 +577,62 @@ width="40" height="40"
         
         
         
-        "\/tags\/intune\/": {
+        "\/post\/the-new-microsoft-store-experience-in-intune\/": {
             
-            "title": "Intune",
+            "title": "The New Microsoft Store Experience in Intune",
+            "tags": ["O365","Intune","WinGet",],
+            "content": "Microsoft relecently released the new Microsoft Store integration for Intune\r. The new integration allows admins to easily search the store and deploy traditional APPX/UWP packages as well as a limited number of new Win32 app packages. WinGet (the Windows package manager)\ris the technology behind this new experience.\nThis new experience greatly simplifies application deployment through Intune and is intended to replace the Microsoft Store for Business which will be retired in the first half of next year. You can easily search for applications to deploy using the WinGet command line tool.\n⚠ Note: The only applications which are avaiable to deploy are ones which come from the 'MSSTORE' source. Apps which use the WinGet public repository are not available to deploy using the new experience. If you wish to deploy an app from the WinGet repository, you can use the method I deveolped using PowerShell. Lets take a look at some searching the store for Packages. Open CMD or PowerShell and use the following syntax to search for apps in the MS Store\nWinGet search \u0026#34;Acrobat DC\u0026#34; --source MSSTORE Acrobat DC is an example of a \u0026ldquo;Win32\u0026rdquo; app which is available in the Microsoft store. Win32 apps are designated with an ID which starts with \u0026ldquo;XP\u0026rdquo;. UWP apps will always start with 9 in the ID.\nMoving over to Intune, we can easily deploy acrobat using the new option in Intune.\nThe experience to the end user is the same as any Win32 or LOB app assigned to them. If the app is set to required, the app will install automatically, and the user will see a toast notification to let them know of the install (if enabled). If the app is set to available, the user will be able to self service install through the company portal.\nI am happy to see Microsoft continually improve Intune and add new features to make administration easier. If you have any questions or comments, please feel free to leave a comment or send me an email. As always, thanks for reading.\n", 
+            "url": "\/post\/the-new-microsoft-store-experience-in-intune\/"
+        },
+        
+        
+        
+        "\/tags\/winget\/": {
+            
+            "title": "WinGet",
             "tags": [],
             "content": "", 
-            "url": "\/tags\/intune\/"
+            "url": "\/tags\/winget\/"
+        },
+        
+        
+        
+        "\/tags\/azure-ad\/": {
+            
+            "title": "Azure AD",
+            "tags": [],
+            "content": "", 
+            "url": "\/tags\/azure-ad\/"
+        },
+        
+        
+        
+        "\/post\/m365-report-tools\/": {
+            
+            "title": "Introducing the M365 Report Tools PowerShell Module",
+            "tags": ["O365","Microsoft Graph","Azure AD","PowerShell",],
+            "content": "The Why I often find the need to gather and extract data from various areas M365 for auditing or for project planning. I had the idea of putting together a PowerShell module containing wrapper functions for some of the most common reports I and colleagues ask for. I wanted to make the commands easy to discover and easy to use. I would like to introduce the M365.Report.Tools PowerShell module!\nWhat can it do? To quote myself M365.Report.Tools is: \u0026ldquo;A PowerShell Module with tools built for gathering data and creating reports on various areas of M365 services. This module is designed with ease of use with several baked in custom reports and the ability to export any built in Admin center usage report. Reports can be easily exported to CSV file, Excel workbook(s), or JSON.\nThis module leverages the Microsoft Graph PowerShell SDK, Exchange Online PowerShell, SharePoint Online PowerShell and ImportExcel. The majority of commands use the Graph SDK and seamlessly handle the permission scope and connection to Graph for you.\u0026rdquo;\nI tried to use the Microsoft Graph SDK as much as possible, however there are still places where Graph doesnt have much reach, such as inside Exchange Online and SharePoint Online. For more information on working with the Graph SDK, see here\r.\nI plan on continuing development on this module and will add additional functions with more reports. Here are the commands so far:\nGet-M365GroupReport\rReport of every group including group type and source of authority.\nGet-M365MailboxReport\rReport of every mailbox including details such as mailbox size. Use -IncludeMailboxSize to report on each mailbox current size.\nGet-M365MGUserPrincipalGroupMembership\rGet every group a user is a member of\nGet-M365SharePointSiteSummary\rSummarize all Sharepoint sites including details for each site such as storage usage and sharing capabilites.\nGet-M365SSOEnterpriseApps\rReturn all AzureAD enterprise applications with SAML SSO integration.\nGet-M365TeamsChannelReport\rReturn a list of every channel in each Team including members.\nGet-M365TeamsReport\rReturn a list of all Teams and Team members.\nGet-M365TenantLicenseReport\rReturn a list of all licenses in a tenant including current utilization.\nGet-M365UsageReport\rReturn any of the baked in Admin Center period usage reports for easy export.\nGet-M365UserLicenseReport\rList every license assigned to every user\nGet-M365UserReport\rGet a summary report for all user accounts in an M365 tenant.\nGet-M365AdminReportSettings\rGet the current Admin Report setting for Admin Center period usage reports.\nSet-M365AdminReportSettings\rChange the admin report settings to hide or show names in Admin Center usage reports.\nSimply pipe any of these commands to Export-CSV or Export-Excel for easy export. This should make it easy for anyone with minimal PowerShell experience to use.\nIf you have an suggestions or comments, feel free to leave a comment here or drop me a line over on Github.\n", 
+            "url": "\/post\/m365-report-tools\/"
+        },
+        
+        
+        
+        "\/tags\/microsoft-graph\/": {
+            
+            "title": "Microsoft Graph",
+            "tags": [],
+            "content": "", 
+            "url": "\/tags\/microsoft-graph\/"
+        },
+        
+        
+        
+        "\/tags\/powershell\/": {
+            
+            "title": "PowerShell",
+            "tags": [],
+            "content": "", 
+            "url": "\/tags\/powershell\/"
         },
         
         
@@ -644,16 +663,6 @@ width="40" height="40"
             "tags": ["Windows","PowerShell","O365","Intune","WinGet",],
             "content": "They Why In a previous article\r, I demonstrated how to deploy applications to Intune using WinGet . I recieved a request to demonstrate how to use WinGet to update applications, and more importantly, how to run this on a schedule to keep applications updated. Since then, I found a really handy PowerShell wrapper module for WinGet called WinGetTools by Jeffrey Hicks\r. I made a small contribution to this module to allow it to work running under SYSTEM context.\nThe How First, we need to install the above mentioned module WingetTools. This module has commands for listing out, installing, upgrading, and uninstalling packages, including listing which packages have updates available!\nHead over to my Github repository and grab with Install-WingetTools.intunewin file\r. Upload to Intune as a Win32 app set to install as System. For the installation command use:\npowershell.exe -executionpolicy bypass -file Install-WingetTools.ps1 For the uninstall command:\npowershell.exe -command \u0026#34;Uninstall-Module -Name WingetTools\u0026#34; For detection, use the detection script here\rAs best practice always test new deployments with a pilot group. Go ahead and assign to this group. This can be user or devices, it does not matter.\nThe app deployment should look like this:\nNow that we have the pre-requisites out of the way, lets move onto the proactive remediation. If you are not familiar with proactive remediations, read up on it here\r.\nWe need a detection script and a remediation script. The detection script will detect any applications installed with updates available in the WinGet repository (minus any apps we blacklisted). Here is the script\r:\n\u0026lt;#\t.NOTES =========================================================================== Created with: SAPIEN Technologies, Inc., PowerShell Studio 2021 v5.8.195 Created on: 8/22/2022 3:08 PM Created by: David Just Website: davidjust.com Filename: WingetUpgrade-ProactiveDetection.ps1 =========================================================================== .DESCRIPTION Proactive Remediation detection script for applications with updates #\u0026gt; $Blacklisted = @( \u0026#39;Microsoft.Teams\u0026#39; \u0026#39;Microsoft.Office\u0026#39; \u0026#39;Microsoft.VC++2015-2022Redist-x64\u0026#39; ) Import-Module -Name WingetTools $AvailableUpdates = Get-WGInstalled | where-object { $_.id -notin $Blacklisted -and $_.update } if ($AvailableUpdates.count -gt 0) { \u0026#34;There are applications with Updates available\u0026#34; $AvailableUpdates | Select-Object -Property Name, ID, InstalledVersion, OnlineVersion exit 1 } else { \u0026#34;There are no apps to update\u0026#34; Exit 0 } Now for the remediation script\r:\n\u0026lt;#\t.NOTES =========================================================================== Created with: SAPIEN Technologies, Inc., PowerShell Studio 2021 v5.8.195 Created on: 8/22/2022 10:46 AM Created by: David Just Website: david.just.com Filename: WingetUpgrade-Remediation.ps1 =========================================================================== .DESCRIPTION A description of the file. #\u0026gt; function Write-Log($message) #Log script messages to temp directory { $LogMessage = ((Get-Date -Format \u0026#34;MM-dd-yy HH:MM:ss \u0026#34;) + $message) Out-File -InputObject $LogMessage -FilePath \u0026#34;$LogPath\\$Log\u0026#34; -Append -Encoding utf8 } $LogName = \u0026#39;WinGetPackageUpgrade\u0026#39; $LogDate = Get-Date -Format dd-MM-yy_HH-mm # go with the EU format day / month / year $Log = \u0026#34;$LogName-$LogDate.log\u0026#34; $LogPath = \u0026#34;$env:ProgramData\\Microsoft\\IntuneManagementExtension\\Logs\u0026#34; Import-Module WingetTools $WingetPath = Get-WGPath # Add any apps you do not wish to get updated here (for instance apps that auto-update). Use the Winget ID $Blacklisted = @( \u0026#39;Microsoft.Teams\u0026#39; \u0026#39;Microsoft.Office\u0026#39; \u0026#39;Microsoft.VC++2015-2022Redist-x64\u0026#39; ) $AvailableUpdates = Get-WGInstalled | where-object { $_.id -notin $Blacklisted -and $_.update } Write-Log -message \u0026#34;Packages with Updates Available:\u0026#34; $AvailableUpdates | select Name, Version | Out-File -FilePath \u0026#34;$logpath\\$Log\u0026#34; -Append -Encoding utf8 foreach ($App in $AvailableUpdates) # Invoke upgrade for each updatable app and log results { [void](Get-Process | Where-Object { $_.name -Like \u0026#34;*$App.Name*\u0026#34; } | Stop-Process -Force) $UpgradeRun = \u0026amp; $WingetPath upgrade --id $App.id -h --accept-package-agreements --accept-source-agreements $UpgradeRun | Out-File -FilePath \u0026#34;$logpath\\$log\u0026#34; -Append -Encoding utf8 $Status = [bool]($UpgradeRun | select-string -SimpleMatch \u0026#34;Successfully installed\u0026#34;) if ($Status -eq $true) { $Success += $App } else { $Failed += $App } } if ($Success.count -gt 0) { Write-Log -message \u0026#34;Successful Upgraded the following:\u0026#34; $Success | Out-File -FilePath \u0026#34;$logpath\\$log\u0026#34; -Append -Encoding utf8 \u0026#34;Sucessfully Updated the following apps:`n{0}\u0026#34; -f $($Success | Select-Object -Property name) } if ($Failed.count -gt 0) { Write-Log -message \u0026#34;Failed to Upgrade the following:\u0026#34; $Failed | Out-File -FilePath \u0026#34;$logpath\\$log\u0026#34; -Append -Encoding utf8 } Create a new Proactive Remediation deployment by going to Reports \u0026lt; Endpoint Analytics \u0026lt; Proactive Remediations [direct link]\r.\nGive the script package a descriptive name, such as “Winget Update Apps”. Upload the detection and remediations scripts. Run in 64-bit and do not run with user credentials Select your desired schedule. To test, I set this to run hourly, but daily or weekly would probably be better. Assign to your pilot group. This may take awhile to feed back results. When looking at the proactive remediation results, add the columns “Pre-remediation detection output” and “Post-remediation detection output” to see the output from the scripts.\nAnd thats it. Now you can keep applications updated with Intune and Proactive remediations.\nIf you do not want to use a proactive remediaiton this script\rwill create a scheduled task on the endpoint to run the upgrade remediation.\n", 
             "url": "\/post\/intune-keep-apps-updated-with-winget-and-proactive-remediations\/"
-        },
-        
-        
-        
-        "\/tags\/winget\/": {
-            
-            "title": "WinGet",
-            "tags": [],
-            "content": "", 
-            "url": "\/tags\/winget\/"
         },
         
         
@@ -812,7 +821,7 @@ width="40" height="40"
             
             "title": "Intune Deploy Software with WinGet",
             "tags": ["O365","Intune","WinGet",],
-            "content": "Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind. There was a crafty user on Github however that found that WinGet.exe is a proxy application for \u0026ldquo;AppInstallerCLI.exe\u0026rdquo; which can be ran as system. The executable is found under C:\\Program Files\\WindowsApps\\Microsoft.DesktopAppInstaller_1.17.10271.0_x64__8wekyb3d8bbwe\nEDIT: As of writing this, it seems for the latest version of WinGet, WinGet.exe is now located in the DesktopAppInstaller folder, AppInstallerCLI.exe is no longer here. You can call WinGet.exe directly. In my script, I check for both WinGet.exe and AppInstallerCLI.exe\nRunning this executable directly works just fine under SYSTEM. I created a simple script which when packaged as a Win32App, can be used to deploy any package located in the WinGet public repository automatically to Intune enrolled endpoints.\nThe script can be found on my Github page here. I also have this prepackaged as an IntuneWin package here. Here is the script:\n\u0026lt;#\t.NOTES =========================================================================== Created with: SAPIEN Technologies, Inc., PowerShell Studio 2021 v5.8.195 Created on: 3/7/2022 2:14 PM Created by: Dave Just Organization: Filename: Winget-InstallPackage.ps1 =========================================================================== .DESCRIPTION Installs any package within the WinGet public repository running as SYSTEM. Can be packaged and deployed as a Win32App in Intune Use as base for any install with WinGet. Simply specify the PackageID and log variables. .PARAMETER PackageID Specify the WinGet ID. Use WinGet Search \u0026#34;SoftwareName\u0026#34; to locate the PackageID .EXAMPLE powershell.exe -exectuionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID \u0026#34;Google.Chrome\u0026#34; -Log \u0026#34;ChromeWingetInstall.log\u0026#34; .EXAMPLE powershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID \u0026#34;Notepad++.Notepad++\u0026#34; -Log \u0026#34;NotepadPlusPlus.log\u0026#34; #\u0026gt; param ( $PackageID, $Log ) # Re-launch as 64bit process (source: https://z-nerd.com/blog/2020/03/31-intune-win32-apps-powershell-script-installer/) $argsString = \u0026#34;\u0026#34; If ($ENV:PROCESSOR_ARCHITEW6432 -eq \u0026#34;AMD64\u0026#34;) { Try { foreach ($k in $MyInvocation.BoundParameters.keys) { switch ($MyInvocation.BoundParameters[$k].GetType().Name) { \u0026#34;SwitchParameter\u0026#34; { if ($MyInvocation.BoundParameters[$k].IsPresent) { $argsString += \u0026#34;-$k \u0026#34; } } \u0026#34;String\u0026#34; { $argsString += \u0026#34;-$k `\u0026#34;$($MyInvocation.BoundParameters[$k])`\u0026#34; \u0026#34; } \u0026#34;Int32\u0026#34; { $argsString += \u0026#34;-$k $($MyInvocation.BoundParameters[$k]) \u0026#34; } \u0026#34;Boolean\u0026#34; { $argsString += \u0026#34;-$k `$$($MyInvocation.BoundParameters[$k]) \u0026#34; } } } Start-Process -FilePath \u0026#34;$ENV:WINDIR\\SysNative\\WindowsPowershell\\v1.0\\PowerShell.exe\u0026#34; -ArgumentList \u0026#34;-File `\u0026#34;$($PSScriptRoot)\\Winget-InstallPackage.ps1`\u0026#34; $($argsString)\u0026#34; -Wait -NoNewWindow } Catch { Throw \u0026#34;Failed to start 64-bit PowerShell\u0026#34; } Exit } #region HelperFunctions function InstallWingetAsSystem # Install WinGet as logged on user by creating a scheduled task { $script = @\u0026#39; $releases_url = \u0026#34;https://api.github.com/repos/microsoft/winget-cli/releases/latest\u0026#34; [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 $releases = Invoke-RestMethod -uri \u0026#34;$($releases_url)\u0026#34; $latestRelease = $releases.assets | Where { $_.browser_download_url.EndsWith(\u0026#34;msixbundle\u0026#34;) } | Select -First 1 Add-AppxPackage -Path \u0026#39;https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx\u0026#39; Add-AppxPackage -Path $latestRelease.browser_download_url \u0026#39;@ if (!(test-path \u0026#34;$env:systemdrive\\automation\u0026#34;)) { mkdir \u0026#34;$env:systemdrive\\automation\u0026#34; } $script | out-file \u0026#34;$env:systemdrive\\automation\\script.ps1\u0026#34; $action = New-ScheduledTaskAction -Execute \u0026#34;powershell.exe\u0026#34; -Argument \u0026#34;-executionpolicy bypass -WindowStyle minimized -file %HOMEDRIVE%\\automation\\script.ps1\u0026#34; $trigger = New-ScheduledTaskTrigger -AtLogOn $principal = New-ScheduledTaskPrincipal -UserId (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -expand UserName) $task = New-ScheduledTask -Action $action -Trigger $trigger -Principal $principal Register-ScheduledTask RunScript -InputObject $task Start-ScheduledTask -TaskName RunScript Start-Sleep -Seconds 120 Unregister-ScheduledTask -TaskName RunScript -Confirm:$false Remove-Item C:\\automation\\script.ps1 $Global:Winget = gci \u0026#34;$env:programfiles\\WindowsApps\u0026#34; -Recurse -File | where { $_.name -like \u0026#34;AppInstallerCLI.exe\u0026#34; -or $_.name -like \u0026#34;Winget.exe\u0026#34; } | select -ExpandProperty fullname } function Write-Log($message) #Log script messages to temp directory { $LogMessage = ((Get-Date -Format \u0026#34;MM-dd-yy HH:MM:ss \u0026#34;) + $message) Out-File -InputObject $LogMessage -FilePath \u0026#34;$Env:Temp\\$Log\u0026#34; -Append -Encoding utf8 } function WingetTempDownload # Download WinGet from blob storage if unable to install { $WebClient = New-Object System.Net.WebClient try { $WebClient.DownloadFile(\u0026#39;https://djstorage2.blob.core.windows.net/scriptsupport/WinGet.zip\u0026#39;, \u0026#34;$env:Temp\\WinGet.zip\u0026#34;) $WebClient.Dispose() } Catch { Write-Log $error exit 1 } try { mkdir \u0026#34;$env:TEMP\\WingetTemp\u0026#34; -Force Expand-Archive \u0026#34;$env:TEMP\\WinGet.zip\u0026#34; -destination \u0026#34;$Env:Temp\\WingetTemp\u0026#34; -Force -ErrorAction \u0026#39;Stop\u0026#39; $global:Winget = \u0026#34;$Env:TEMP\\WinGetTemp\\Winget\\AppInstallerCLI.exe\u0026#34; } Catch { Write-Log $Error exit 1 } $WebClient.Dispose() } function WingetRun { param ( $PackageID, $RunType ) \u0026amp; $Winget $RunType --id $PackageID --source Winget --silent --accept-package-agreements --accept-source-agreements } function Install-VisualC { $url = \u0026#39;https://aka.ms/vs/17/release/vc_redist.x64.exe\u0026#39; $WebClient = New-Object System.Net.WebClient $WebClient.DownloadFile(\u0026#39;https://aka.ms/vs/17/release/vc_redist.x64.exe\u0026#39;, \u0026#34;$env:Temp\\vc_redist.x64.exe\u0026#34;) $WebClient.Dispose() start-process \u0026#34;$env:temp\\vc_redist.x64.exe\u0026#34; -argumentlist \u0026#34;/q /norestart\u0026#34; -Wait } function Get-RegUninstallKey { param ( [string]$DisplayName ) $ErrorActionPreference = \u0026#39;Continue\u0026#39; #$UserSID = (New-Object -ComObject Microsoft.DiskQuota).TranslateLogonNameToSID((Get-CimInstance -Class Win32_ComputerSystem).Username) $uninstallKeys = \u0026#34;registry::HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34;, \u0026#34;registry::HKLM\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34; $softwareTable = @() foreach ($key in $uninstallKeys) { $softwareTable += Get-Childitem $key | Get-ItemProperty | where displayname | Sort-Object -Property displayname } if ($DisplayName) { $softwareTable | where displayname -Like \u0026#34;*$DisplayName*\u0026#34; } else { $softwareTable | Sort-Object -Property displayname -Unique } } #endregion HelperFunctions #region Script $VisualC = Get-RegUninstallKey -DisplayName \u0026#34;Microsoft Visual C++ 2015-2022 Redistributable (x64)\u0026#34; $loggedOnUser = (gcim win32_computersystem).username # Get path for Winget executible $Winget = gci \u0026#34;$env:ProgramFiles\\WindowsApps\u0026#34; -Recurse -File | where { $_.name -like \u0026#34;AppInstallerCLI.exe\u0026#34; -or $_.name -like \u0026#34;Winget.exe\u0026#34; } | select -ExpandProperty fullname # If there are multiple versions, select latest if ($Winget.count -gt 1) { $Winget = $Winget[-1] } # If Visual C++ Redist. not installed, install it if (!$VisualC){ Write-Log -message \u0026#34;Visual C++ X64 not found. Attempting to install\u0026#34; try { Install-VisualC } Catch [System.InvalidOperationException]{ Write-Log -message \u0026#34;Error installing visual c++ redistributable. Attempting install once more\u0026#34; Start-Sleep -Seconds 5 Install-VisualC } Catch { Write-Log -message \u0026#34;Failed to install visual c++ redistributable!\u0026#34; Write-Log -message $_ exit 1 } $VisualC = Get-RegUninstallKey -DisplayName \u0026#34;Microsoft Visual C++ 2015-2022 Redistributable (x64)\u0026#34; if (!$VisualC){Write-Log -message \u0026#34;Visual C++ Redistributable not found!\u0026#34; ; exit 1} else {Write-Log -message \u0026#34;Successfully installed Microsoft Visual C++ 2015-2022 Redistributable (x64)\u0026#34;} } # If Winget is not found, attempt to install it, or download copy from baselob storage if (!$Winget) { if ($loggedOnUser) { Write-Log -message \u0026#34;Attempting to install Winget as System under $($loggedOnUser)\u0026#34; InstallWingetAsSystem # If more than one version of Winget, select the latest if ($Winget.count -gt 1) { $Winget = $Winget[-1] } # If WinGet is not found, download copy from Blob storage if (!$Winget){Write-Log -message \u0026#34;Downloading winget from blob storage\u0026#34; ; WingetTempDownload } try { Write-Log -message \u0026#34;Winget varibale $($winget)\u0026#34; $Install = WingetRun -RunType install -PackageID $PackageID Write-Log $Install } Catch { Write-Log $error[0] exit 1 } } else { try { Write-Log \u0026#34;Winget not found, attempting to download now to $($env:TEMP)\u0026#34; WingetTempDownload try { $Install = WingetRun -RunType install -PackageID $PackageID Write-Log $Install } Catch { Write-Log $error exit 1 } } Catch { Write-Log \u0026#34;Unable to initialize Winget. Exiting\u0026#34; Write-Output $Error exit 1 } } } else { Write-Log \u0026#34;Winget found at $($Winget)\u0026#34; $Install = WingetRun -RunType install -PackageID $PackageID Write-Log $Install } #endregion Upload the package to Intune as a Win32App. For the install command, enter the following. Edit the PackageID and Log parameters as needed. Use the exact WinGet package ID.\npowershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID \u0026#34;Google.Chrome\u0026#34; -Log \u0026#34;ChromeWingetInstall.log\u0026#34; To find the ID, open PowerShell or CMD and run \u0026ldquo;Winget Search SoftwareName\u0026rdquo;. In the output you will see the ID field.\nThe uninstall command is going to be dependent on the particular software. You can usually find the uninstall command in the uninstall registry key. You can use this PowerShell function I wrote to grab the uninstall string. Look for a quiet uninstall parameter, you may need to do some searching.\nfunction Get-RegUninstallKey { param ( [string]$DisplayName ) $ErrorActionPreference = \u0026#39;Continue\u0026#39; $uninstallKeys = \u0026#34;registry::HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34;, \u0026#34;registry::HKLM\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34; $softwareTable =@() foreach ($key in $uninstallKeys) { $softwareTable += Get-Childitem $key | Get-ItemProperty | where displayname | Sort-Object -Property displayname } if ($DisplayName) { $softwareTable | where displayname -Like \u0026#34;*$DisplayName*\u0026#34; } else { $softwareTable | Sort-Object -Property displayname -Unique } } And running this for Google Chrome we get the Msiexec uninstall command. Simply add /qn /norestart at the end of the command and enter that into Intune as the Uninstall command.\nOr if you don\u0026rsquo;t care really about uninstalling, you can just type anything like \u0026ldquo;Uninstall\u0026rdquo;.\nFinally for the detection script, I like to use the same Get-RegUinstallKey function to look for the presence of an uninstall key for the software to determine if it is installed. You can find the detection script here and Ill also include it below:\n\u0026lt;#\t.NOTES =========================================================================== Created with: SAPIEN Technologies, Inc., PowerShell Studio 2021 v5.8.195 Created on: 3/7/2022 2:14 PM Created by: Dave Just Organization: Filename: WingetInstallDetection.ps1 =========================================================================== .DESCRIPTION Simple Win32App detection script. Detects the presence of an uninstall key matching the displayname of the variable $SoftwareName. If a key is matched, return to Intune that the software is installed. .EXAMPLE $SoftwareName = \u0026#39;Chrome\u0026#39; # Search for an uninstall key with Displayname \u0026#39;Chrome\u0026#39; for Google Chrome #\u0026gt; # Edit the software displayname below $SoftwareName = \u0026#39;\u0026#39; function Get-RegUninstallKey { param ( [string]$DisplayName ) $ErrorActionPreference = \u0026#39;Continue\u0026#39; #$UserSID = (New-Object -ComObject Microsoft.DiskQuota).TranslateLogonNameToSID((Get-CimInstance -Class Win32_ComputerSystem).Username) $uninstallKeys = \u0026#34;registry::HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34;, \u0026#34;registry::HKLM\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34; $softwareTable = @() foreach ($key in $uninstallKeys) { $softwareTable += Get-Childitem $key | Get-ItemProperty | where displayname | Sort-Object -Property displayname } if ($DisplayName) { $softwareTable | where displayname -Like \u0026#34;*$DisplayName*\u0026#34; } else { $softwareTable | Sort-Object -Property displayname -Unique } } $UninstallKey = Get-RegUninstallKey -DisplayName $SoftwareName if ($UninstallKey) { Write-Output \u0026#34;$($SoftwareName) is installed\u0026#34; exit 0 } else { exit 1 } And that\u0026rsquo;s it! Now you don\u0026rsquo;t need to worry about uploading the latest installer for commonly installed software. WinGet will always install the latest version.\n", 
+            "content": "Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind. There was a crafty user on Github however that found that WinGet.exe is a proxy application for \u0026ldquo;AppInstallerCLI.exe\u0026rdquo; which can be ran as system. The executable is found under C:\\Program Files\\WindowsApps\\Microsoft.DesktopAppInstaller_1.17.10271.0_x64__8wekyb3d8bbwe\nEDIT: As of writing this, it seems for the latest version of WinGet, WinGet.exe is now located in the DesktopAppInstaller folder, AppInstallerCLI.exe is no longer here. You can call WinGet.exe directly. In my script, I check for both WinGet.exe and AppInstallerCLI.exe\nRunning this executable directly works just fine under SYSTEM. I created a simple script which when packaged as a Win32App, can be used to deploy any package located in the WinGet public repository automatically to Intune enrolled endpoints.\nThe script can be found on my Github page\r. I also have this prepackaged as an IntuneWin package\r. Here is the script:\n\u0026lt;#\t.NOTES =========================================================================== Created with: SAPIEN Technologies, Inc., PowerShell Studio 2021 v5.8.195 Created on: 3/7/2022 2:14 PM Created by: Dave Just Organization: Filename: Winget-InstallPackage.ps1 =========================================================================== .DESCRIPTION Installs any package within the WinGet public repository running as SYSTEM. Can be packaged and deployed as a Win32App in Intune Use as base for any install with WinGet. Simply specify the PackageID and log variables. .PARAMETER PackageID Specify the WinGet ID. Use WinGet Search \u0026#34;SoftwareName\u0026#34; to locate the PackageID .PARAMETER AdditionalInstallArgs Specify Additional Installation Arguments to pass to WinGet https://learn.microsoft.com/en-us/windows/package-manager/winget/install .EXAMPLE powershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID \u0026#34;Google.Chrome\u0026#34; -Log \u0026#34;ChromeWingetInstall.log\u0026#34; .EXAMPLE powershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID \u0026#34;Notepad++.Notepad++\u0026#34; -Log \u0026#34;NotepadPlusPlus.log\u0026#34; .EXAMPLE powershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID \u0026#34;Python.Python.3.11\u0026#34; -Log \u0026#34;Python3Install.log\u0026#34; -AdditionalInstallArgs \u0026#34;--architecture x64\u0026#34; #\u0026gt; param ( $PackageID, $AdditionalInstallArgs, $Log ) # Re-launch as 64bit process (source: https://z-nerd.com/blog/2020/03/31-intune-win32-apps-powershell-script-installer/) $argsString = \u0026#34;\u0026#34; If ($ENV:PROCESSOR_ARCHITEW6432 -eq \u0026#34;AMD64\u0026#34;) { Try { foreach ($k in $MyInvocation.BoundParameters.keys) { switch ($MyInvocation.BoundParameters[$k].GetType().Name) { \u0026#34;SwitchParameter\u0026#34; { if ($MyInvocation.BoundParameters[$k].IsPresent) { $argsString += \u0026#34;-$k \u0026#34; } } \u0026#34;String\u0026#34; { $argsString += \u0026#34;-$k `\u0026#34;$($MyInvocation.BoundParameters[$k])`\u0026#34; \u0026#34; } \u0026#34;Int32\u0026#34; { $argsString += \u0026#34;-$k $($MyInvocation.BoundParameters[$k]) \u0026#34; } \u0026#34;Boolean\u0026#34; { $argsString += \u0026#34;-$k `$$($MyInvocation.BoundParameters[$k]) \u0026#34; } } } Start-Process -FilePath \u0026#34;$ENV:WINDIR\\SysNative\\WindowsPowershell\\v1.0\\PowerShell.exe\u0026#34; -ArgumentList \u0026#34;-File `\u0026#34;$($PSScriptRoot)\\Winget-InstallPackage.ps1`\u0026#34; $($argsString)\u0026#34; -Wait -NoNewWindow } Catch { Throw \u0026#34;Failed to start 64-bit PowerShell\u0026#34; } Exit } #region HelperFunctions function InstallWingetAsSystem # Install WinGet as logged on user by creating a scheduled task { $script = @\u0026#39; function Install-WinGet # Adapted from https://github.com/microsoft/winget-pkgs/blob/master/Tools/SandboxTest.ps1 (better than my original code!) # This function will install the latest version of WinGet and its dependancies { $tempFolderName = \u0026#39;WinGetInstall\u0026#39; $tempFolder = Join-Path -Path ([System.IO.Path]::GetTempPath()) -ChildPath $tempFolderName New-Item $tempFolder -ItemType Directory -ErrorAction SilentlyContinue | Out-Null $apiLatestUrl = if ($Prerelease) { \u0026#39;https://api.github.com/repos/microsoft/winget-cli/releases?per_page=1\u0026#39; } else { \u0026#39;https://api.github.com/repos/microsoft/winget-cli/releases/latest\u0026#39; } [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 $WebClient = New-Object System.Net.WebClient function Get-LatestUrl { ((Invoke-WebRequest $apiLatestUrl -UseBasicParsing | ConvertFrom-Json).assets | Where-Object { $_.name -match \u0026#39;^Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle$\u0026#39; }).browser_download_url } function Get-LatestHash { $shaUrl = ((Invoke-WebRequest $apiLatestUrl -UseBasicParsing | ConvertFrom-Json).assets | Where-Object { $_.name -match \u0026#39;^Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.txt$\u0026#39; }).browser_download_url $shaFile = Join-Path -Path $tempFolder -ChildPath \u0026#39;Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.txt\u0026#39; $WebClient.DownloadFile($shaUrl, $shaFile) Get-Content $shaFile } $desktopAppInstaller = @{ fileName = \u0026#39;Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle\u0026#39; url\t= $(Get-LatestUrl) hash\t= $(Get-LatestHash) } $vcLibsUwp = @{ fileName = \u0026#39;Microsoft.VCLibs.x64.14.00.Desktop.appx\u0026#39; url\t= \u0026#39;https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx\u0026#39; hash\t= \u0026#39;9BFDE6CFCC530EF073AB4BC9C4817575F63BE1251DD75AAA58CB89299697A569\u0026#39; } $uiLibsUwp = @{ fileName = \u0026#39;Microsoft.UI.Xaml.2.7.zip\u0026#39; url\t= \u0026#39;https://www.nuget.org/api/v2/package/Microsoft.UI.Xaml/2.7.0\u0026#39; hash\t= \u0026#39;422FD24B231E87A842C4DAEABC6A335112E0D35B86FAC91F5CE7CF327E36A591\u0026#39; } $dependencies = @($desktopAppInstaller, $vcLibsUwp, $uiLibsUwp) Write-Host \u0026#39;--\u0026gt; Checking dependencies\u0026#39; foreach ($dependency in $dependencies) { $dependency.file = Join-Path -Path $tempFolder -ChildPath $dependency.fileName #$dependency.pathInSandbox = (Join-Path -Path $tempFolderName -ChildPath $dependency.fileName) # Only download if the file does not exist, or its hash does not match. if (-Not ((Test-Path -Path $dependency.file -PathType Leaf) -And $dependency.hash -eq $(Get-FileHash $dependency.file).Hash)) { Write-Host @\u0026#34; - Downloading: $($dependency.url) \u0026#34;@ try { $WebClient.DownloadFile($dependency.url, $dependency.file) } catch { #Pass the exception as an inner exception throw [System.Net.WebException]::new(\u0026#34;Error downloading $($dependency.url).\u0026#34;, $_.Exception) } if (-not ($dependency.hash -eq $(Get-FileHash $dependency.file).Hash)) { throw [System.Activities.VersionMismatchException]::new(\u0026#39;Dependency hash does not match the downloaded file\u0026#39;) } } } # Extract Microsoft.UI.Xaml from zip (if freshly downloaded). # This is a workaround until https://github.com/microsoft/winget-cli/issues/1861 is resolved. if (-Not (Test-Path (Join-Path -Path $tempFolder -ChildPath \\Microsoft.UI.Xaml.2.7\\tools\\AppX\\x64\\Release\\Microsoft.UI.Xaml.2.7.appx))) { Expand-Archive -Path $uiLibsUwp.file -DestinationPath ($tempFolder + \u0026#39;\\Microsoft.UI.Xaml.2.7\u0026#39;) -Force } $uiLibsUwp.file = (Join-Path -Path $tempFolder -ChildPath \\Microsoft.UI.Xaml.2.7\\tools\\AppX\\x64\\Release\\Microsoft.UI.Xaml.2.7.appx) Add-AppxPackage -Path $($desktopAppInstaller.file) -DependencyPath $($vcLibsUwp.file), $($uiLibsUwp.file) # Clean up files Remove-Item $tempFolder -recurse -force } install-winget \u0026#39;@ if (!(test-path \u0026#34;$env:systemdrive\\automation\u0026#34;)) { mkdir \u0026#34;$env:systemdrive\\automation\u0026#34; } $script | out-file \u0026#34;$env:systemdrive\\automation\\script.ps1\u0026#34; $action = New-ScheduledTaskAction -Execute \u0026#34;powershell.exe\u0026#34; -Argument \u0026#34;-executionpolicy bypass -WindowStyle minimized -file %HOMEDRIVE%\\automation\\script.ps1\u0026#34; $trigger = New-ScheduledTaskTrigger -AtLogOn $principal = New-ScheduledTaskPrincipal -UserId (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -expand UserName) $task = New-ScheduledTask -Action $action -Trigger $trigger -Principal $principal Register-ScheduledTask RunScript -InputObject $task Start-ScheduledTask -TaskName RunScript Start-Sleep -Seconds 120 Unregister-ScheduledTask -TaskName RunScript -Confirm:$false Remove-Item C:\\automation\\script.ps1 $Global:Winget = gci \u0026#34;$env:programfiles\\WindowsApps\u0026#34; -Recurse -File | where { $_.name -like \u0026#34;AppInstallerCLI.exe\u0026#34; -or $_.name -like \u0026#34;Winget.exe\u0026#34; } | select -ExpandProperty fullname } function Write-Log($message) #Log script messages to temp directory { $LogMessage = ((Get-Date -Format \u0026#34;MM-dd-yy HH:MM:ss \u0026#34;) + $message) Out-File -InputObject $LogMessage -FilePath \u0026#34;$Env:Temp\\$Log\u0026#34; -Append -Encoding utf8 } function WingetTempDownload # Download WinGet from blob storage if unable to install { $WebClient = New-Object System.Net.WebClient try { $WebClient.DownloadFile(\u0026#39;https://djstorage2.blob.core.windows.net/scriptsupport/WinGet.zip\u0026#39;, \u0026#34;$env:Temp\\WinGet.zip\u0026#34;) $WebClient.Dispose() } Catch { Write-Log $error exit 1 } try { mkdir \u0026#34;$env:TEMP\\WingetTemp\u0026#34; -Force Expand-Archive \u0026#34;$env:TEMP\\WinGet.zip\u0026#34; -destination \u0026#34;$Env:Temp\\WingetTemp\u0026#34; -Force -ErrorAction \u0026#39;Stop\u0026#39; $global:Winget = \u0026#34;$Env:TEMP\\WinGetTemp\\Winget\\AppInstallerCLI.exe\u0026#34; } Catch { Write-Log $Error exit 1 } $WebClient.Dispose() } function WingetRun { param ( $PackageID, $RunType, $AdditionalArgs ) \u0026amp; $Winget $RunType --id $PackageID --source Winget --silent --scope Machine $AdditionalArgs --accept-package-agreements --accept-source-agreements } function Install-VisualC { $url = \u0026#39;https://aka.ms/vs/17/release/vc_redist.x64.exe\u0026#39; $WebClient = New-Object System.Net.WebClient $WebClient.DownloadFile(\u0026#39;https://aka.ms/vs/17/release/vc_redist.x64.exe\u0026#39;, \u0026#34;$env:Temp\\vc_redist.x64.exe\u0026#34;) $WebClient.Dispose() start-process \u0026#34;$env:temp\\vc_redist.x64.exe\u0026#34; -argumentlist \u0026#34;/q /norestart\u0026#34; -Wait } function Get-RegUninstallKey { param ( [string]$DisplayName ) $ErrorActionPreference = \u0026#39;Continue\u0026#39; #$UserSID = (New-Object -ComObject Microsoft.DiskQuota).TranslateLogonNameToSID((Get-CimInstance -Class Win32_ComputerSystem).Username) $uninstallKeys = \u0026#34;registry::HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34;, \u0026#34;registry::HKLM\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34; $softwareTable = @() foreach ($key in $uninstallKeys) { $softwareTable += Get-Childitem $key | Get-ItemProperty | where displayname | Sort-Object -Property displayname } if ($DisplayName) { $softwareTable | where displayname -Like \u0026#34;*$DisplayName*\u0026#34; } else { $softwareTable | Sort-Object -Property displayname -Unique } } #endregion HelperFunctions #region Script $VisualC = Get-RegUninstallKey -DisplayName \u0026#34;Microsoft Visual C++ 2015-2022 Redistributable (x64)\u0026#34; $loggedOnUser = (gcim win32_computersystem).username # Get path for Winget executible $Winget = gci \u0026#34;$env:ProgramFiles\\WindowsApps\u0026#34; -Recurse -File | where { $_.name -like \u0026#34;AppInstallerCLI.exe\u0026#34; -or $_.name -like \u0026#34;Winget.exe\u0026#34; } | select -ExpandProperty fullname # If there are multiple versions, select latest if ($Winget.count -gt 1) { $Winget = $Winget[-1] } # If Visual C++ Redist. not installed, install it if (!$VisualC){ Write-Log -message \u0026#34;Visual C++ X64 not found. Attempting to install\u0026#34; try { Install-VisualC } Catch [System.InvalidOperationException]{ Write-Log -message \u0026#34;Error installing visual c++ redistributable. Attempting install once more\u0026#34; Start-Sleep -Seconds 5 Install-VisualC } Catch { Write-Log -message \u0026#34;Failed to install visual c++ redistributable!\u0026#34; Write-Log -message $_ exit 1 } $VisualC = Get-RegUninstallKey -DisplayName \u0026#34;Microsoft Visual C++ 2015-2022 Redistributable (x64)\u0026#34; if (!$VisualC){Write-Log -message \u0026#34;Visual C++ Redistributable not found!\u0026#34; ; exit 1} else {Write-Log -message \u0026#34;Successfully installed Microsoft Visual C++ 2015-2022 Redistributable (x64)\u0026#34;} } # If Winget is not found, attempt to install it, or download copy from baselob storage if (!$Winget) { if ($loggedOnUser) { Write-Log -message \u0026#34;Attempting to install Winget as System under $($loggedOnUser)\u0026#34; InstallWingetAsSystem # If more than one version of Winget, select the latest if ($Winget.count -gt 1) { $Winget = $Winget[-1] } # If WinGet is not found, download copy from Blob storage if (!$Winget){Write-Log -message \u0026#34;Downloading winget from blob storage\u0026#34; ; WingetTempDownload } try { Write-Log -message \u0026#34;Winget varibale $($winget)\u0026#34; $Install = WingetRun -RunType install -PackageID $PackageID Write-Log $Install } Catch { Write-Log $error[0] exit 1 } } else { try { Write-Log \u0026#34;Winget not found, attempting to download now to $($env:TEMP)\u0026#34; WingetTempDownload try { $Install = WingetRun -RunType install -PackageID $PackageID Write-Log $Install } Catch { Write-Log $error exit 1 } } Catch { Write-Log \u0026#34;Unable to initialize Winget. Exiting\u0026#34; Write-Output $Error exit 1 } } } else { Write-Log \u0026#34;Winget found at $($Winget)\u0026#34; $Install = WingetRun -RunType install -PackageID $PackageID Write-Log $Install } #endregion Upload the package to Intune as a Win32App. For the install command, enter the following. Edit the PackageID and Log parameters as needed. Use the exact WinGet package ID.\npowershell.exe -executionpolicy bypass -file Winget-InstallPackage.ps1 -PackageID \u0026#34;Google.Chrome\u0026#34; -Log \u0026#34;ChromeWingetInstall.log\u0026#34; To find the ID, open PowerShell or CMD and run \u0026ldquo;Winget Search SoftwareName\u0026rdquo;. In the output you will see the ID field.\nThe uninstall command is going to be dependent on the particular software. You can usually find the uninstall command in the uninstall registry key. You can use this PowerShell function I wrote to grab the uninstall string. Look for a quiet uninstall parameter, you may need to do some searching.\nfunction Get-RegUninstallKey { param ( [string]$DisplayName ) $ErrorActionPreference = \u0026#39;Continue\u0026#39; $uninstallKeys = \u0026#34;registry::HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34;, \u0026#34;registry::HKLM\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34; $softwareTable =@() foreach ($key in $uninstallKeys) { $softwareTable += Get-Childitem $key | Get-ItemProperty | where displayname | Sort-Object -Property displayname } if ($DisplayName) { $softwareTable | where displayname -Like \u0026#34;*$DisplayName*\u0026#34; } else { $softwareTable | Sort-Object -Property displayname -Unique } } And running this for Google Chrome we get the Msiexec uninstall command. Simply add /qn /norestart at the end of the command and enter that into Intune as the Uninstall command.\nOr if you don\u0026rsquo;t care really about uninstalling, you can just type anything like \u0026ldquo;Uninstall\u0026rdquo;.\nFinally for the detection script, I like to use the same Get-RegUinstallKey function to look for the presence of an uninstall key for the software to determine if it is installed. You can find the detection script here and Ill also include it below:\n\u0026lt;#\t.NOTES =========================================================================== Created with: SAPIEN Technologies, Inc., PowerShell Studio 2021 v5.8.195 Created on: 3/7/2022 2:14 PM Created by: Dave Just Organization: Filename: WingetInstallDetection.ps1 =========================================================================== .DESCRIPTION Simple Win32App detection script. Detects the presence of an uninstall key matching the displayname of the variable $SoftwareName. If a key is matched, return to Intune that the software is installed. .EXAMPLE $SoftwareName = \u0026#39;Chrome\u0026#39; # Search for an uninstall key with Displayname \u0026#39;Chrome\u0026#39; for Google Chrome #\u0026gt; # Edit the software displayname below $SoftwareName = \u0026#39;\u0026#39; function Get-RegUninstallKey { param ( [string]$DisplayName ) $ErrorActionPreference = \u0026#39;Continue\u0026#39; #$UserSID = (New-Object -ComObject Microsoft.DiskQuota).TranslateLogonNameToSID((Get-CimInstance -Class Win32_ComputerSystem).Username) $uninstallKeys = \u0026#34;registry::HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34;, \u0026#34;registry::HKLM\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\u0026#34; $softwareTable = @() foreach ($key in $uninstallKeys) { $softwareTable += Get-Childitem $key | Get-ItemProperty | where displayname | Sort-Object -Property displayname } if ($DisplayName) { $softwareTable | where displayname -Like \u0026#34;*$DisplayName*\u0026#34; } else { $softwareTable | Sort-Object -Property displayname -Unique } } $UninstallKey = Get-RegUninstallKey -DisplayName $SoftwareName if ($UninstallKey) { Write-Output \u0026#34;$($SoftwareName) is installed\u0026#34; exit 0 } else { exit 1 } And that\u0026rsquo;s it! Now you don\u0026rsquo;t need to worry about uploading the latest installer for commonly installed software. WinGet will always install the latest version.\n", 
             "url": "\/post\/intune-install-software-with-winget\/"
         },
         
