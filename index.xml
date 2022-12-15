@@ -9,10 +9,30 @@
     <description>Recent content on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 15 Dec 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>The New Microsoft Store Experience in Intune</title>
+      <link>/post/the-new-microsoft-store-experience-in-intune/</link>
+      <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/the-new-microsoft-store-experience-in-intune/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/the-new-microsoft-store-experience-in-intune/store.png&#34;/&gt;
+          
+        
+        
+        
+          Microsoft relecently released the new Microsoft Store integration for Intune. The new integration allows admins to easily search the store and deploy traditional APPX/UWP packages as well as a limited number of new Win32 app packages. WinGet (the Windows package manager)is the technology behind this new experience.
+This new experience greatly simplifies application deployment through Intune and is intended to replace the Microsoft Store for Business which will be retired in the first half of next year.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>Introducing the M365 Report Tools PowerShell Module</title>
