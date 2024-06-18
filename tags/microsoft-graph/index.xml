@@ -8,7 +8,7 @@
     <link>/tags/microsoft-graph/</link>
     <description>Recent content in Microsoft Graph on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>en</language>
     <lastBuildDate>Sun, 16 Oct 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/microsoft-graph/index.xml" rel="self" type="application/rss+xml" />
@@ -16,13 +16,13 @@
     
     <item>
       <title>Introducing the M365 Report Tools PowerShell Module</title>
-      <link>/post/m365-report-tools/</link>
+      <link>/post/introducing-the-m365-report-tools-powershell-module/index/</link>
       <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>/post/m365-report-tools/</guid>
+      <guid>/post/introducing-the-m365-report-tools-powershell-module/index/</guid>
       <description>
         
-          &lt;img src=&#34;/post/m365-report-tools/m365reporttools.png&#34;/&gt;
+          &lt;img src=&#34;/post/introducing-the-m365-report-tools-powershell-module/index/module.png&#34;/&gt;
           
         
         

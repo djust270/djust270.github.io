@@ -2,32 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/tags/azure-ad/</loc>
-    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/</loc>
+    <lastmod>2024-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/gdap-partner-access-with-powershell/</loc>
+    <lastmod>2024-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/</loc>
+    <lastmod>2024-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/intune/</loc>
+    <lastmod>2022-12-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/o365/</loc>
+    <lastmod>2022-12-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2022-12-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/the-new-microsoft-store-experience-in-intune/</loc>
+    <lastmod>2022-12-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/winget/</loc>
+    <lastmod>2022-12-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/entra-id/</loc>
     <lastmod>2022-10-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/m365-report-tools/</loc>
+    <loc>/post/introducing-the-m365-report-tools-powershell-module/index/</loc>
     <lastmod>2022-10-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/microsoft-graph/</loc>
     <lastmod>2022-10-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/o365/</loc>
-    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/post/</loc>
-    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/tags/powershell/</loc>
     <lastmod>2022-10-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/intune/</loc>
-    <lastmod>2022-09-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/intune-endpoint-tools-powershell-module/</loc>
     <lastmod>2022-09-30T00:00:00+00:00</lastmod>
@@ -35,11 +44,11 @@
     <loc>/tags/windows/</loc>
     <lastmod>2022-09-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/intune-keep-apps-updated-with-winget-and-proactive-remediations/</loc>
+    <loc>/post/keep-applications-updated-with-winget-and-proactive-remediations/</loc>
     <lastmod>2022-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/winget/</loc>
-    <lastmod>2022-08-22T00:00:00+00:00</lastmod>
+    <loc>/tags/azure-ad/</loc>
+    <lastmod>2022-06-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/teams/</loc>
     <lastmod>2022-06-30T00:00:00+00:00</lastmod>
@@ -111,7 +120,5 @@
     <lastmod>2021-04-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
-  </url><url>
-    <loc>/search/</loc>
   </url>
 </urlset>
