@@ -4,7 +4,7 @@
     
       <title>
         Get Data from workstations and send to an Excel Table for free ::
-        David Just — A simple theme for Hugo
+        David Just — A technology website
       </title>
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -86,7 +86,7 @@ ga('send', 'pageview');
 >
   
     <span class="logo__mark">PS C:\Users\Dave></span>
-    <span class="logo__text">DavidJust</span>
+    <span class="logo__text">Invoke-Blog</span>
     <span class="logo__cursor"></span>
   
 </a>
@@ -104,7 +104,13 @@ ga('send', 'pageview');
         
       
             
-          <li><a href="https://github.com/djust270">Github <img src=""/> 
+          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
           </a></li>        
           
         
@@ -120,7 +126,11 @@ ga('send', 'pageview');
       
     
       
-        <li><a href="https://github.com/djust270">Github</a></li>
+        <li><a href="https://github.com/djust270">My Github</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
       
     
   </ul>
@@ -214,7 +224,9 @@ ga('send', 'pageview');
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>There are times when I encounter a situation where I want to gather some data from workstations and store it in a spreadsheet / table ect. for tracking purposes.
+</a></h3>
+
+<p>There are times when I encounter a situation where I want to gather some data from workstations and store it in a spreadsheet / table ect. for tracking purposes.
 Recently I was working with a client to deploy a cloud printing solution. The on prem print environment was somewhat complex with multiple shared printers some of which were
 locked down to AD security groups. I needed a way to get a pre-deployment printer inventory for each workstation, then compare a post deployment inventory. In came PowerAutomate and PowerShell.</p>
 <p>In a previous article, I covered how to use Power Automate to shuttle data from a workstation/server into an Azure Table using Power Automate and the HTTP request trigger.
@@ -225,7 +237,9 @@ the same result more or less completely for free? This article will explain the 
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>Getting a list of printers from each workstation is fairly straight forward using PowerShell.</p>
+</a></h3>
+
+<p>Getting a list of printers from each workstation is fairly straight forward using PowerShell.</p>
 <ul>
 <li>Use the <code>Get-Printer</code> cmdlet on each workstation to get a list of printers. Filter for only shared printers.</li>
 <li>Run the script as the logged on user, so we get the user connections.</li>
@@ -249,7 +263,9 @@ the same result more or less completely for free? This article will explain the 
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>Alright now how can we get this data into table and trigger a PowerAutomate flow for free? Send Mail with Microsoft graph. <a href="https://practical365.com/send-mail-exchange-online-graph-powershell/" target="_blank">
+</a></h3>
+
+<p>Alright now how can we get this data into table and trigger a PowerAutomate flow for free? Send Mail with Microsoft graph. <a href="https://practical365.com/send-mail-exchange-online-graph-powershell/" target="_blank">
     Practical 365 has a great article on how to send email with Microsoft Graph using PowerShell
   </a>
 This consits of 3 steps</p>
@@ -306,7 +322,9 @@ This consits of 3 steps</p>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>Now that we have a way to send email with the Microsoft Graph, we can craft a PowerShell script to run per workstation to send the data we want via email.
+</a></h3>
+
+<p>Now that we have a way to send email with the Microsoft Graph, we can craft a PowerShell script to run per workstation to send the data we want via email.
 We will take the PowerShell snippet from before to get the list of printers. Then add the steps to send an email with graph and attach the list of printers as an attachment in the email.
 This way we can parse the attachment later for the data we want to store.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#75715e"># List of printers</span>
@@ -388,7 +406,9 @@ This way we can parse the attachment later for the data we want to store.</p>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>Now we have framework from which to send emails through the Microsoft Graph. Now lets move on to creating our Power Automate Flow.</p>
+</a></h3>
+
+<p>Now we have framework from which to send emails through the Microsoft Graph. Now lets move on to creating our Power Automate Flow.</p>
 <ul>
 <li>Before adding creating our PowerAutomate flow, we need to prepare an excel workbook to store results
 <ul>
@@ -491,7 +511,9 @@ Click add action.</p>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3><p>While this isnt the most straight forward or simpllist solution, you cant beat free. I do not like the idea of storing secrets inside scripts, but you can mitigate any risk of misuse by creating the application policy as shown in exchange. Also, when you are done with your script deployment, simply delete the secret inside the app registration. Create a new secret each time you wish to run this flow. If you have any suggestions for improving this flow or another way of doing similar, please let me know!</p>
+</a></h3>
+
+<p>While this isnt the most straight forward or simpllist solution, you cant beat free. I do not like the idea of storing secrets inside scripts, but you can mitigate any risk of misuse by creating the application policy as shown in exchange. Also, when you are done with your script deployment, simply delete the secret inside the app registration. Create a new secret each time you wish to run this flow. If you have any suggestions for improving this flow or another way of doing similar, please let me know!</p>
 
     </div>
     
@@ -529,7 +551,26 @@ Click add action.</p>
       
         
 
-
+<div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
       
     
@@ -545,15 +586,50 @@ Click add action.</p>
   <div class="footer__inner">    
   </div>
   <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
      
   </div>     
 </footer>
 <script src="/assets/main.js"></script>
 <script src="/assets/prism.js"></script>
 
+    <script src="/assets/clipboard.js" ></script>
+
+
 
       
     </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELHH4HTZ7"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-WELHH4HTZ7', { 'anonymize_ip': false });
+}
+</script>
 
     
   </body>
