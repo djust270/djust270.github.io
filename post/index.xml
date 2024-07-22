@@ -83,7 +83,8 @@ This new experience greatly simplifies application deployment through Intune and
       <guid>/post/introducing-the-m365-report-tools-powershell-module/index/</guid>
       <description>
         
-          &lt;img src=&#34;/post/introducing-the-m365-report-tools-powershell-module/index/module.png&#34;/&gt;
+          
+          
           
         
         
@@ -413,11 +414,52 @@ While you could run PowerShell scripts as a scheduled task to fire off an email 
     </item>
     
     <item>
+      <title>Remove Document Redirection Policies over VPN</title>
+      <link>/post/removedocred/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/removedocred/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Document Redirection can be a serious PITA In today&amp;rsquo;s world of COVID with so many people working from home, more and more organizations are moving to cloud services for file storage. It used to be quite a common practice, at least in my experience to enable folder redirection for users on-prem. Trying to dismantle folder redirection, especially when our users are working remotely can prove to be a challenge. If you have ever attempted to remove a folder redirection GPO, you have undoubtedly discovered folder redirection policies only apply (and remove) at startup/user logon.
+          
+        
+        </description>
+    </item>
+    
+    <item>
       <title>Sync SharePoint Libraries with PowerShell</title>
       <link>/post/sync-sharepoint-libraries-powershell/index/</link>
       <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>/post/sync-sharepoint-libraries-powershell/index/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          The Problem So you want to move your files to SharePoint, great! But your users don&amp;rsquo;t understand sharepoint, don&amp;rsquo;t wanna learn sharepoint and just want their file explorer experience.
+There are a few ways we can go about syncing libraries for our users. We can set a group policy or Intune configuration to automatically sync a SharePoint library however there are some big caveats with this such as a 250~ url character limit.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Sync SharePoint Libraries with PowerShell</title>
+      <link>/post/syncsharepointlib/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/syncsharepointlib/</guid>
       <description>
         
           

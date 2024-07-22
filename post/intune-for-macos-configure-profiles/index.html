@@ -4,7 +4,7 @@
     
       <title>
         Intune for macOS Part 2 - Setup BYOD enrollment and Configure macOS Profiles ::
-        David Just — A technology website
+        David Just — A simple theme for Hugo
       </title>
     
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -89,7 +89,7 @@ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple E
 >
   
     <span class="logo__mark">PS C:\Users\Dave></span>
-    <span class="logo__text">Invoke-Blog</span>
+    <span class="logo__text">DavidJust</span>
     <span class="logo__cursor"></span>
   
 </a>
@@ -107,13 +107,7 @@ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple E
         
       
             
-          <li><a href="https://github.com/djust270">My Github <img src=""/> 
-          </a></li>        
-          
-        
-      
-            
-          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          <li><a href="https://github.com/djust270">Github <img src=""/> 
           </a></li>        
           
         
@@ -129,11 +123,7 @@ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple E
       
     
       
-        <li><a href="https://github.com/djust270">My Github</a></li>
-      
-    
-      
-        <li><a href="/index.xml"></a></li>
+        <li><a href="https://github.com/djust270">Github</a></li>
       
     
   </ul>
@@ -225,9 +215,7 @@ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple E
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3>
-
-<p><a href="/post/intune-for-macos-configure-macos-vm/">
+</a></h3><p><a href="/post/intune-for-macos-configure-macos-vm/">
     In part 1
   </a>, we explored how to setup a macOS virtual machine for testing. Now lets look at actually configuring Intune.
 The first thing we need to do is get an Apple MDM push certificate.</p>
@@ -249,17 +237,13 @@ The first thing we need to do is get an Apple MDM push certificate.</p>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3>
-
-<p>The official policies supported out of the box in Intune are a bit limited currently.</p>
+</a></h3><p>The official policies supported out of the box in Intune are a bit limited currently.</p>
 <h4 id="currently-available-configuration-policies-in-intune">Currently available configuration policies in Intune: <a href="#currently-available-configuration-policies-in-intune">
   <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h4>
-
-<ul>
+</a></h4><ul>
 <li>Device Features</li>
 <li>Device Restrictions</li>
 <li>Endpoint Protection</li>
@@ -274,9 +258,7 @@ The first thing we need to do is get an Apple MDM push certificate.</p>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3>
-
-<p>For settings not available in the included policies, we can upload custom config profiles to Intune. To do this officially, you would need Apple server with Apple Profile Manager. I do not have the luxury of having access to apple server, so instead I recommend using Profile Creator over on GitHub. Simply download the latest release version and run on your test VM with macOS.</p>
+</a></h3><p>For settings not available in the included policies, we can upload custom config profiles to Intune. To do this officially, you would need Apple server with Apple Profile Manager. I do not have the luxury of having access to apple server, so instead I recommend using Profile Creator over on GitHub. Simply download the latest release version and run on your test VM with macOS.</p>
 <ul>
 <li>When you open Profile Creator for the first time, you will get a warning about the app being from an unidentified developer</li>
 </ul>
@@ -327,9 +309,7 @@ For this example, we will create a profile for software update settings.</p>
   <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
   
 </svg>
-</a></h3>
-
-<p>Now that we have the profile settings saved to an xml file, we can upload it to Intune.</p>
+</a></h3><p>Now that we have the profile settings saved to an xml file, we can upload it to Intune.</p>
 <ul>
 <li>
 <p>Go to Device &lt; Configuration Profiles &lt; Create Profile &lt; macOS &lt; Templates &lt; Custom</p>
@@ -382,26 +362,7 @@ For this example, we will create a profile for software update settings.</p>
       
         
 
-<div id="disqus_thread"></div>
-<script>
-    window.disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
 
       
     
@@ -417,25 +378,6 @@ For this example, we will create a profile for software update settings.</p>
   <div class="footer__inner">    
   </div>
   <div class="footer__right">     
-    
-    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
-width="40" height="40"
-    stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-    <polyline points="22,6 12,13 2,6"></polyline>    
-</svg>   
-    </a>     
-    
-    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-width="40" height="40"
-    stroke-linecap="round" stroke-linejoin="round">
-    <path
-        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
-    </path>
-</svg>   
-    </a>     
      
   </div>     
 </footer>
@@ -443,22 +385,8 @@ width="40" height="40"
 <script src="/assets/prism.js"></script>
 
 
-
       
     </div>
-
-    
-      
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELHH4HTZ7"></script>
-<script>
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-WELHH4HTZ7', { 'anonymize_ip': false });
-}
-</script>
 
     
   </body>
