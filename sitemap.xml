@@ -3,12 +3,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/</loc>
-    <lastmod>2024-06-17T00:00:00+00:00</lastmod>
+    <lastmod>2024-07-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/gdap-partner-access-with-powershell/</loc>
-    <lastmod>2024-06-17T00:00:00+00:00</lastmod>
+    <loc>/post/export-all-bitlocker-keys-from-entraid/</loc>
+    <lastmod>2024-07-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/</loc>
+    <lastmod>2024-07-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/gdap-partner-access-with-powershell/</loc>
     <lastmod>2024-06-17T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/intune/</loc>

@@ -9,10 +9,30 @@
     <description>Recent content on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 17 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jul 2024 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Export all Bitlocker Keys from Entra ID</title>
+      <link>/post/export-all-bitlocker-keys-from-entraid/</link>
+      <pubDate>Mon, 22 Jul 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/post/export-all-bitlocker-keys-from-entraid/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Premise In an effort to help those affected by the massive outage caused by past Friday&amp;rsquo;s Crowdstrike Falcon update debalcle, I whipped up the following script. This script will export a list of all devices that are Entra ID joined or hybrid joined and any bitlocker keys present. This uses the Microsoft Graph PowerShell SDK, and the ImportExcel module to connect to Graph, retrieve the device list and export into an Excel spreadsheet in the root of your user profile.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>GDAP Partner Access With M365 PowerShell Modules</title>
