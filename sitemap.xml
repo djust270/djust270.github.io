@@ -35,6 +35,9 @@
     <loc>/post/introducing-the-m365-report-tools-powershell-module/index/</loc>
     <lastmod>2022-10-16T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>/post/m365-report-tools-powershell-module/index/</loc>
+    <lastmod>2022-10-16T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>/tags/microsoft-graph/</loc>
     <lastmod>2022-10-16T00:00:00+00:00</lastmod>
   </url><url>
@@ -129,5 +132,8 @@
     <lastmod>2021-04-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
+  </url><url>
+    <loc>/search/</loc>
+    <priority>0.1</priority>
   </url>
 </urlset>

@@ -71,6 +71,7 @@ ga('send', 'pageview');
 
 
 <link rel="alternate" type="application/rss+xml" href="/index.xml" title="David Just" />
+<link rel="alternate" type="application/json" href="/index.json" title="David Just" />
 
 
 
@@ -104,7 +105,7 @@ ga('send', 'pageview');
         
       
             
-          <li><a href="https://github.com/djust270">My Github <img src=""/> 
+          <li><a href="/search">Search <img src=""/> 
           </a></li>        
           
         
@@ -126,7 +127,7 @@ ga('send', 'pageview');
       
     
       
-        <li><a href="https://github.com/djust270">My Github</a></li>
+        <li><a href="/search">Search</a></li>
       
     
       
@@ -179,6 +180,61 @@ ga('send', 'pageview');
   
 
   <div class="posts">
+    
+    <div class="post on-list">
+      <h1 class="post-title"><a href="/post/o365-license-report-microsoft-graph/">O365 License Report With Friendly Names Using The Microsoft Graph</a></h1>
+      <div class="post-meta">
+        
+          <span class="post-date">
+            May 22, 2022
+
+          </span>
+
+          
+        
+
+        
+          <span class="post-author">— Written by David Just</span>
+        
+
+        
+      </div>
+
+      
+        <span class="post-tags">
+          
+            <a href="/tags/o365/">#O365</a>&nbsp;
+          
+            <a href="/tags/microsoft-graph/">#Microsoft Graph</a>&nbsp;
+          
+            <a href="/tags/azure-ad/">#Azure AD</a>&nbsp;
+          
+        </span>
+      
+
+      
+        <figure class="post-cover">
+  
+    <img src="/post/o365-license-report-microsoft-graph/ConnectGraph.png" alt="O365 License Report With Friendly Names Using The Microsoft Graph"/>
+  
+
+  
+</figure>
+
+      
+
+      <div class="post-content">
+        
+          
+            In a previous article, I demonstrated how to export a license report for all users withe the &lsquo;friendly&rsquo; license names using the AzureAD PowerShell module.
+Since then, Microsoft has announced the coming retirement of the AzureAD API(and assocaiated PowerShell modules). You should be migrating all scripts over to using the Microsoft Graph PowerShell SDKHere I will provide a sample script to demonstrate how to export a license report for all users in Azure AD utilizing the Microsoft Graph.
+          
+        
+      </div>
+      
+        <div><a class="read-more button" href="/post/o365-license-report-microsoft-graph/">Read more →</a></div>
+      
+    </div>
     
     <div class="post on-list">
       <h1 class="post-title"><a href="/post/backup-and-reset-windows-user-profile/">Backup and Reset Windows User Profile</a></h1>
@@ -399,60 +455,6 @@ Navigate to endpoint.microsoft.com &lt; Devices &lt; Enroll Devices &lt; Apple E
       
     </div>
     
-    <div class="post on-list">
-      <h1 class="post-title"><a href="/post/intune-install-software-with-winget/">Intune Deploy Software with WinGet</a></h1>
-      <div class="post-meta">
-        
-          <span class="post-date">
-            March 8, 2022
-
-          </span>
-
-          
-        
-
-        
-          <span class="post-author">— Written by David Just</span>
-        
-
-        
-      </div>
-
-      
-        <span class="post-tags">
-          
-            <a href="/tags/o365/">#O365</a>&nbsp;
-          
-            <a href="/tags/intune/">#Intune</a>&nbsp;
-          
-            <a href="/tags/winget/">#WinGet</a>&nbsp;
-          
-        </span>
-      
-
-      
-        <figure class="post-cover">
-  
-    <img src="/post/intune-install-software-with-winget/winget.png" alt="Intune Deploy Software with WinGet"/>
-  
-
-  
-</figure>
-
-      
-
-      <div class="post-content">
-        
-          
-            Ever since the WinGet package manager was announced, I wanted to find ways to leverage the package manager to simplify deploying software to endpoints. After doing some research and testing, I found that WinGet was unfortunately not designed to be run in SYSTEM context. It was designed to be run under a user account. There is an open issue on GitHub currently and many admins, myself included, would really like WinGet to be designed with enterprise use in mind.
-          
-        
-      </div>
-      
-        <div><a class="read-more button" href="/post/intune-install-software-with-winget/">Read more →</a></div>
-      
-    </div>
-    
     <div class="pagination">
   <div class="pagination__buttons">
     
@@ -500,6 +502,16 @@ width="40" height="40"
     stroke-linecap="round" stroke-linejoin="round">
     <path
         d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+    
+    <a href="https://github.com/djust270" target="_blank" rel="noopener noreferrer me" title="github">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
     </path>
 </svg>   
     </a>     

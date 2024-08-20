@@ -35,5 +35,25 @@ What can it do?
         </description>
     </item>
     
+    <item>
+      <title>Introducing the M365 Report Tools PowerShell Module</title>
+      <link>/post/m365-report-tools-powershell-module/index/</link>
+      <pubDate>Sun, 16 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/post/m365-report-tools-powershell-module/index/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/m365-report-tools-powershell-module/index/m365reporttools.png&#34;/&gt;
+          
+        
+        
+        
+          The Why I often find the need to gather and extract data from various areas M365 for auditing or for project planning. I had the idea of putting together a PowerShell module containing wrapper functions for some of the most common reports I and colleagues ask for. I wanted to make the commands easy to discover and easy to use. I would like to introduce the M365.Report.Tools PowerShell module!
+What can it do?
+          
+        
+        </description>
+    </item>
+    
   </channel>
 </rss>
