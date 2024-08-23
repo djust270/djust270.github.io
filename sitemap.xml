@@ -3,30 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/</loc>
-    <lastmod>2024-07-22T00:00:00+00:00</lastmod>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/post/export-all-bitlocker-keys-from-entraid/</loc>
-    <lastmod>2024-07-22T00:00:00+00:00</lastmod>
+    <loc>/post/intune-install-software-with-winget-updated-2024/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/intune/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/o365/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/winget/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/post/export-all-bitlocker-keys-from-entraid/</loc>
     <lastmod>2024-07-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/gdap-partner-access-with-powershell/</loc>
     <lastmod>2024-06-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/intune/</loc>
-    <lastmod>2022-12-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/o365/</loc>
-    <lastmod>2022-12-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2022-12-15T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>/post/the-new-microsoft-store-experience-in-intune/</loc>
-    <lastmod>2022-12-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/winget/</loc>
     <lastmod>2022-12-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/tags/entra-id/</loc>

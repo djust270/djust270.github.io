@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Install Software With WinGet As System (UPDATE 2024) ::
+        David Just — A technology website
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Background Back in 2022, after a lot of testing, I developed a way to install any machine wide installer in SYSTEM context using WinGet. For the most part this worked great, however I noticed that if I deployed an application targeted to a device group, the application would not reliable install during autopilot / OOBE. This is because the DesktopAppInstaller UWP appxpacakage needs to be installed under a user account before WinGet is available to use."
+/>
+<meta
+  name="keywords"
+  content=""
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/post/intune-install-software-with-winget-updated-2024/" />
+
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'Page(\/post\/Intune-Install-Software-With-WinGet-Updated-2024\/index.md)', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="/img/favicon.png" />
+
+
+<link href="/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Install Software With WinGet As System (UPDATE 2024)"/>
+<meta name="twitter:description" content="Background Back in 2022, after a lot of testing, I developed a way to install any machine wide installer in SYSTEM context using WinGet. For the most part this worked great, however I noticed that if I deployed an application targeted to a device group, the application would not reliable install during autopilot / OOBE. This is because the DesktopAppInstaller UWP appxpacakage needs to be installed under a user account before WinGet is available to use."/>
+
+
+
+<meta property="og:title" content="Install Software With WinGet As System (UPDATE 2024)" />
+<meta property="og:description" content="Background Back in 2022, after a lot of testing, I developed a way to install any machine wide installer in SYSTEM context using WinGet. For the most part this worked great, however I noticed that if I deployed an application targeted to a device group, the application would not reliable install during autopilot / OOBE. This is because the DesktopAppInstaller UWP appxpacakage needs to be installed under a user account before WinGet is available to use." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/intune-install-software-with-winget-updated-2024/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-08-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-08-23T00:00:00+00:00" />
+
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark">PS C:\Users\Dave></span>
+    <span class="logo__text">Invoke-Blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+            
+          <li><a href="/about">About <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/search">Search <img src=""/> 
+          </a></li>        
+          
+        
+      
+            
+          <li><a href="/index.xml"> <img src="/rss%20%28Custom%29.png"/> 
+          </a></li>        
+          
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/search">Search</a></li>
+      
+    
+      
+        <li><a href="/index.xml"></a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Install Software With WinGet As System (UPDATE 2024)</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">      
+          August 23, 2024
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by David Just</span
+        >
+
+
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="/tags/o365/">#O365</a>&nbsp;
+        
+          <a href="/tags/intune/">#Intune</a>&nbsp;
+        
+          <a href="/tags/winget/">#WinGet</a>&nbsp;
+        
+      </span>
+    
+
+    
+      <figure class="post-cover">
+  
+    <img src="/post/intune-install-software-with-winget-updated-2024/winget_imagine.png" alt="Install Software With WinGet As System (UPDATE 2024)"/>
+  
+
+  
+</figure>
+
+    
+
+    <div class="post-content">
+      
+      <h1 id="background">Background <a href="#background">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h1>
+
+<p>Back in 2022, after a lot of testing, <a href="https://davidjust.com/post/intune-install-software-with-winget/" target="_blank">
+    I developed a way to install any machine wide installer in SYSTEM context using WinGet
+  </a>. For the most part this worked great, however I noticed that if I deployed an application targeted to a device group, the application would not reliable install during autopilot / OOBE. This is because the DesktopAppInstaller UWP appxpacakage needs to be installed under a user account before WinGet is available to use. At the time, I did include a function to download a copy of a zipped copy of the DesktopAppInstaller program folder from a blob storage account. That account no longer exists and I feel this is not the best solution.</p>
+<p>This is an update to that effort to make the process 100% reliable during autopilot before any user account is created and not rely on downloading any WinGet files.</p>
+<h1 id="the-solution">The Solution <a href="#the-solution">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h1>
+
+<p>After some testing and brainstorming, I had an epiphany. MSIXBundles are basically just compressed archives containing the file structure of the UWP app so what if we could just download the DesktopAppInstaller msixbundle and extract the contents to a known location, then directly call the WinGet executable from system context?
+To accoplish this, I made the following function to download the Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle then use the 7zip CLI utility program to extract the contents to %ProgramData%\Microsoft.DesktopAppInstaller. From there, set a script scoped variable $WinGet for winget.exe.</p>
+<h2 id="download-and-extract-winget">Download and extract winget <a href="#download-and-extract-winget">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h2>
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Download-Winget {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">&lt;#
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	.</span><span style="color:#e6db74">SYNOPSIS</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	Download Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle and extract contents with 7zip cli to %ProgramData%
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	#&gt;</span>
+</span></span><span style="display:flex;"><span>	$ProgressPreference = <span style="color:#e6db74">&#39;SilentlyContinue&#39;</span>
+</span></span><span style="display:flex;"><span>	$7zipFolder = <span style="color:#e6db74">&#34;</span>${env:WinDir}<span style="color:#e6db74">\Temp\7zip&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Downloading WinGet...&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># Create staging folder</span>
+</span></span><span style="display:flex;"><span>		New-Item -ItemType Directory -Path <span style="color:#e6db74">&#34;</span>${env:WinDir}<span style="color:#e6db74">\Temp\WinGet-Stage&#34;</span> -Force
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># Download Desktop App Installer msixbundle</span>
+</span></span><span style="display:flex;"><span>		Invoke-WebRequest -UseBasicParsing -Uri https<span style="color:#960050;background-color:#1e0010">:</span>//aka.ms/getwinget -OutFile <span style="color:#e6db74">&#34;</span>${env:WinDir}<span style="color:#e6db74">\Temp\WinGet-Stage\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Failed to download WinGet!&#34;</span>
+</span></span><span style="display:flex;"><span>		Write-Log $_.Exception.Message
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Downloading 7zip CLI executable...&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># Create temp 7zip CLI folder</span>
+</span></span><span style="display:flex;"><span>		New-Item -ItemType Directory -Path $7zipFolder -Force
+</span></span><span style="display:flex;"><span>		Invoke-WebRequest -UseBasicParsing -Uri https<span style="color:#960050;background-color:#1e0010">:</span>//www.<span style="color:#ae81ff">7</span>-zip.org/a/7zr.exe -OutFile <span style="color:#e6db74">&#34;</span>$7zipFolder<span style="color:#e6db74">\7zr.exe&#34;</span>
+</span></span><span style="display:flex;"><span>		Invoke-WebRequest -UseBasicParsing -Uri https<span style="color:#960050;background-color:#1e0010">:</span>//www.<span style="color:#ae81ff">7</span>-zip.org/a/7z2408-extra.7z -OutFile <span style="color:#e6db74">&#34;</span>$7zipFolder<span style="color:#e6db74">\7zr-extra.7z&#34;</span>
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Extracting 7zip CLI executable to </span>${7zipFolder}<span style="color:#e6db74">...&#34;</span>
+</span></span><span style="display:flex;"><span>		&amp; <span style="color:#e6db74">&#34;</span>$7zipFolder<span style="color:#e6db74">\7zr.exe&#34;</span> x <span style="color:#e6db74">&#34;</span>$7zipFolder<span style="color:#e6db74">\7zr-extra.7z&#34;</span> -o<span style="color:#e6db74">&#34;</span>$7zipFolder<span style="color:#e6db74">&#34;</span> -y
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Failed to download 7zip CLI executable!&#34;</span>
+</span></span><span style="display:flex;"><span>		Write-Log $_.Exception.Message
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Create Folder for DesktopAppInstaller inside %ProgramData%</span>
+</span></span><span style="display:flex;"><span>	New-Item -ItemType Directory -Path <span style="color:#e6db74">&#34;</span>${env:ProgramData}<span style="color:#e6db74">\Microsoft.DesktopAppInstaller&#34;</span> -Force
+</span></span><span style="display:flex;"><span>	Write-Log <span style="color:#e6db74">&#34;Extracting WinGet...&#34;</span>
+</span></span><span style="display:flex;"><span>	&amp; <span style="color:#e6db74">&#34;</span>$7zipFolder<span style="color:#e6db74">\7za.exe&#34;</span> x <span style="color:#e6db74">&#34;</span>${env:WinDir}<span style="color:#e6db74">\Temp\WinGet-Stage\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle&#34;</span> -o<span style="color:#e6db74">&#34;</span>${env:WinDir}<span style="color:#e6db74">\Temp\WinGet-Stage&#34;</span> -y
+</span></span><span style="display:flex;"><span>	&amp; <span style="color:#e6db74">&#34;</span>$7zipFolder<span style="color:#e6db74">\7za.exe&#34;</span> x <span style="color:#e6db74">&#34;</span>${env:WinDir}<span style="color:#e6db74">\Temp\WinGet-Stage\AppInstaller_x64.msix&#34;</span> -o<span style="color:#e6db74">&#34;</span>${env:ProgramData}<span style="color:#e6db74">\Microsoft.DesktopAppInstaller&#34;</span> -y
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Failed to extract WinGet!&#34;</span>
+</span></span><span style="display:flex;"><span>		Write-Log $_.Exception.Message
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (<span style="color:#f92672">-Not</span> (Test-Path <span style="color:#e6db74">&#34;</span>${env:ProgramData}<span style="color:#e6db74">\Microsoft.DesktopAppInstaller\WinGet.exe&#34;</span>)){
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Failed to extract WinGet!&#34;</span>
+</span></span><span style="display:flex;"><span>		exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	$Script:WinGet = <span style="color:#e6db74">&#34;</span>${env:ProgramData}<span style="color:#e6db74">\Microsoft.DesktopAppInstaller\WinGet.exe&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The only other requirement is making sure Visual C++ x64 2015-2022 redistributable is installed as winget has dependancies for it.</p>
+<h2 id="download-and-install-visual-c-2015-2022-x64">Download and Install Visual C++ 2015-2022 x64 <a href="#download-and-install-visual-c-2015-2022-x64">
+  <svg height="22" viewBox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg" fill= #01F9C6>
+  <path d="M0 0h24v24H0z" fill="none"></path><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76.0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71.0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71.0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76.0 5-2.24 5-5s-2.24-5-5-5z"></path>
+  
+</svg>
+</a></h2>
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> Install-VisualC {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>		$downloadurl = <span style="color:#e6db74">&#39;https://aka.ms/vs/17/release/vc_redist.x64.exe&#39;</span>
+</span></span><span style="display:flex;"><span>		$WebClient = New-Object System.Net.WebClient
+</span></span><span style="display:flex;"><span>		$WebClient.DownloadFile($downloadurl, <span style="color:#e6db74">&#34;</span>$env:Temp<span style="color:#e6db74">\vc_redist.x64.exe&#34;</span>)
+</span></span><span style="display:flex;"><span>		$WebClient.Dispose()
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Failed to download Visual C++!&#34;</span>
+</span></span><span style="display:flex;"><span>		Write-Log $_.Exception.Message
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Check if another installation is in progress, then wait for it to complete</span>
+</span></span><span style="display:flex;"><span>	$MSIExecCheck = Get-Process | Where-Object {$_.processname <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#39;msiexec&#39;</span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ($Null <span style="color:#f92672">-ne</span> $MSIExecCheck){
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;another msi installation is in progress. Waiting for process to complete...&#34;</span>
+</span></span><span style="display:flex;"><span>		Wait-Process msiexec
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Continuing installation...&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>		$Install = start-process <span style="color:#e6db74">&#34;</span>$env:temp<span style="color:#e6db74">\vc_redist.x64.exe&#34;</span> -argumentlist <span style="color:#e6db74">&#34;/q /norestart&#34;</span> -Wait -PassThru
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Installation completed with exit code </span>$($Install.ExitCode)<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> $Install.ExitCode
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>		Write-Log $_.Exception.Message
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>		remove-item <span style="color:#e6db74">&#34;</span>$env:Temp<span style="color:#e6db74">\vc_redist.x64.exe&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Failed to remove vc_redist.x64.exe after installation&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Once those tasks are done, we can simply execute Winget.exe with the appropriate arguments</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PowerShell" data-lang="PowerShell"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> WingetInstallPackage {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">param</span> (
+</span></span><span style="display:flex;"><span>	$PackageID,
+</span></span><span style="display:flex;"><span>	$PackageName,
+</span></span><span style="display:flex;"><span>	$AdditionalInstallArgs
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Check if another msi install is in progress and wait</span>
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	$MSIExecCheck = Get-Process | Where-Object {$_.processname <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#39;msiexec&#39;</span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ($Null <span style="color:#f92672">-ne</span> $MSIExecCheck){
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;another msi installation is in progress. Waiting for process to complete...&#34;</span>
+</span></span><span style="display:flex;"><span>		Wait-Process msiexec
+</span></span><span style="display:flex;"><span>		Write-Log <span style="color:#e6db74">&#34;Continuing installation...&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> ($PackageID){
+</span></span><span style="display:flex;"><span>		&amp; $Winget install --id $PackageID --source Winget --silent $AdditionalInstallArgs --accept-package-agreements --accept-source-agreements 
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">elseif</span> ($PackageName){
+</span></span><span style="display:flex;"><span>		&amp; $Winget install --name $PackageName --source Winget --silent $AdditionalInstallArgs --accept-package-agreements --accept-source-agreements
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">switch</span> ($Mode){
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#39;Install&#39;</span>{
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> ($PackageID){
+</span></span><span style="display:flex;"><span>				Write-Log -message <span style="color:#e6db74">&#34;executing </span>$Mode<span style="color:#e6db74"> on </span>$PackageID<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>				$Install = WingetInstallPackage -PackageID $PackageID -AdditionalArgs $AdditionalInstallArgs	
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">elseif</span> ($PackageName){
+</span></span><span style="display:flex;"><span>				Write-Log -message <span style="color:#e6db74">&#34;executing </span>$Mode<span style="color:#e6db74"> on </span>$PackageName<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>				$Install = WingeInstallPackage -PackageName $PackageName -AdditionalArgs $AdditionalInstallArgs		
+</span></span><span style="display:flex;"><span>				}
+</span></span><span style="display:flex;"><span>				Write-Log $Install
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#39;Uninstall&#39;</span>{
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> ($PackageID){
+</span></span><span style="display:flex;"><span>				Write-Log -message <span style="color:#e6db74">&#34;executing </span>$Mode<span style="color:#e6db74"> on </span>$PackageID<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>				$Uninstall = &amp; $Winget uninstall --id $PackageID --source WinGet --silent
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elseif</span> ($PackageName){
+</span></span><span style="display:flex;"><span>				Write-Log -message <span style="color:#e6db74">&#34;executing </span>$Mode<span style="color:#e6db74"> on </span>$PackageName<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>				$Uninstall = &amp; $Winget uninstall --name $PackageName --source WinGet --silent
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>			Write-Log $Uninstall
+</span></span><span style="display:flex;"><span>		}
+</span></span></code></pre></div><p>I added a couple other minor improvements as well. The script now supports uninstllation and logging has been moved to the IntuneManagementExtension log folder.
+I have done extensive testing and this has been rock solid for installing system-wide software through Intune both inside and outside OOBE / Autopilot.
+Try it out for yourself and let me know if you have any questions!</p>
+<p>Check out the full script: <a href="https://github.com/djust270/Intune-Scripts/blob/master/Winget-InstallPackage.ps1" target="_blank">
+    https://github.com/djust270/Intune-Scripts/blob/master/Winget-InstallPackage.ps1
+  </a>
+Or you can download the intunewin package: <a href="https://github.com/djust270/Intune-Scripts/blob/master/Winget-InstallPackage.intunewin" target="_blank">
+    https://github.com/djust270/Intune-Scripts/blob/master/Winget-InstallPackage.intunewin
+  </a></p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="/post/export-all-bitlocker-keys-from-entraid/">
+                  <span class="button__text">Export all Bitlocker Keys from Entra ID</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+<div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "davidjust" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+    
+  </div>
+  
+
+
+      </div>
+
+      
+        <footer class="footer">
+  davidjust.com © 2024     
+  <div class="footer__inner">    
+  </div>
+  <div class="footer__right">     
+    
+    <a href="mailto:david@davidjust.com" target="_blank" rel="noopener noreferrer me" title="email">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+    <polyline points="22,6 12,13 2,6"></polyline>    
+</svg>   
+    </a>     
+    
+    <a href="https://twitter.com/DavidJu14353759" target="_blank" rel="noopener noreferrer me" title="twitter">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>   
+    </a>     
+    
+    <a href="https://github.com/djust270" target="_blank" rel="noopener noreferrer me" title="github">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+width="40" height="40"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>   
+    </a>     
+     
+  </div>     
+</footer>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+    <script src="/assets/clipboard.js" ></script>
+
+
+
+      
+    </div>
+
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WELHH4HTZ7"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-WELHH4HTZ7', { 'anonymize_ip': false });
+}
+</script>
+
+    
+  </body>
+</html>

@@ -9,10 +9,29 @@
     <description>Recent content in Intune on David Just</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Dec 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/intune/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Install Software With WinGet As System (UPDATE 2024)</title>
+      <link>/post/intune-install-software-with-winget-updated-2024/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/post/intune-install-software-with-winget-updated-2024/</guid>
+      <description>
+        
+          &lt;img src=&#34;/post/intune-install-software-with-winget-updated-2024/winget_imagine.png&#34;/&gt;
+          
+        
+        
+        
+          Background Back in 2022, after a lot of testing, I developed a way to install any machine wide installer in SYSTEM context using WinGet. For the most part this worked great, however I noticed that if I deployed an application targeted to a device group, the application would not reliable install during autopilot / OOBE. This is because the DesktopAppInstaller UWP appxpacakage needs to be installed under a user account before WinGet is available to use.
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>The New Microsoft Store Experience in Intune</title>
